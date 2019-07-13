@@ -464,9 +464,7 @@ class Ui_Dialog(object):
         self.locktime_button.setObjectName("Convert Locktime")
         self.gridLayout.addWidget(self.locktime_button, 11, 5, 1, 1)
 
-        # self.txtype_combobox_1.activated.connect(tx_select_func
-        # self.txtype_combobox_1.activated.connect(partial( self.tx_select_func, 1))
-        # self.txtype_combobox_2.activated.connect(partial( self.tx_select_func, 2))
+# delete threse?
         self.txtype_combobox_1.activated.connect(lambda: tx_select_func(1))
         self.txtype_combobox_2.activated.connect(lambda: tx_select_func(2))
         self.txtype_combobox_3.activated.connect(lambda: tx_select_func(3))
@@ -484,12 +482,6 @@ class Ui_Dialog(object):
 
 
         self.sequence1_box.setText('feffffff')
-
-
-
-        self.outs=[self.scriptout1_box.text(),self.scriptout2_box.text(),self.scriptout3_box.text(),self.scriptout4_box.text(),self.scriptout5_box.text(),self.scriptout6_box.text()]
-
-
         self.inputindex1_box.setDisabled(True)
         self.inputindex1_box.setText('01000000')
         self.scriptpub1_box.setText('1976a9142c8facb21175f940311a5192c44d2ea070d07d4288ac')
@@ -569,7 +561,6 @@ class Ui_Dialog(object):
 
         self.locktime_button.clicked.connect(int_to_nlocktime)
 
-        # privkey_comboBox
         
 
         self.inputindex1_box.setText('00000000')
@@ -577,8 +568,8 @@ class Ui_Dialog(object):
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
         self.txin1_box.setText('c37db0fb2a369af946c6fa7112b422b62997176f433d60b91f3980f9fb094128')
         self.privkey1_box.setText('cR27Qj8fdXmtKM24VGMfsAxz1BNiPtf8Y9ue3EvQ338N61AvEnEV')
-        self.privkey2_box.setText('cUBhvCREE4QV5A2EcHZ4dCq4Mp6qE3hKo5cD92Ya1x4C7fXHEDna')
-        self.privkey3_box.setText('cSb2JEMRtNhxTis9roMifiHSumTPgdQUsjiNtptV7zs5AVyussvq')
+        # self.privkey2_box.setText('cUBhvCREE4QV5A2EcHZ4dCq4Mp6qE3hKo5cD92Ya1x4C7fXHEDna')
+        # self.privkey3_box.setText('cSb2JEMRtNhxTis9roMifiHSumTPgdQUsjiNtptV7zs5AVyussvq')
         self.amount1_box.setText('0.00099586')
         self.version_box.setText('02000000')
 
@@ -640,18 +631,6 @@ class Ui_Dialog(object):
         # self.scriptout5_box.setText('1976a9146417a04bffd27e19b7dd0d6a349599bbfd46e57f88ac')
 
         # self.scriptout6_box.setText('1976a914d848cfe3f6a7db4f3e14f97ef2d0519029f801da88ac')
-
-
-
-
-
-
-
-
-
-
-        
-
 
 
         self.retranslateUi(Dialog)
@@ -749,13 +728,48 @@ class Ui_Dialog(object):
         self.privkey_comboBox.setItemText(2, _translate("Txcreator", "Scalar"))
 
 
-   
+segwit_flag='0001'
+SIGHASH_ALL = 1
 
+#can these and their refrences go in the address functions file?
+OP_HASH160 = b'\xa9'
+OP_EQUAL = b'\x87'
 
+class tx_data_obj:
+
+    def __init__(self, outs, tx_selection_types, segwitprefix, legacy_prefix, tx_inputs, input_secrets, script_pubs, segwit_input_infos, select_inputs):
+        self.outs=outs
+        self.tx_selection_types=tx_selection_types
+        self.segwitprefix=segwitprefix
+        # self.segwit_txinputs1=segwit_txinputs1
+        self.legacy_prefix=legacy_prefix
+        self.tx_inputs=tx_inputs
+        self.input_secrets=input_secrets
+        self.script_pubs=script_pubs
+        # self.segwit_inputs=segwit_inputs
+        self.segwit_input_infos=segwit_input_infos
+        self.select_inputs=select_inputs
+
+    
+def tx_data():
+    outs=[ui.scriptout1_box.text(),ui.scriptout2_box.text(),ui.scriptout3_box.text(),ui.scriptout4_box.text(),ui.scriptout5_box.text(),ui.scriptout6_box.text()]
+    tx_selection_types=[ui.txtype_combobox_1.currentIndex(), ui.txtype_combobox_2.currentIndex(), ui.txtype_combobox_3.currentIndex(), ui.txtype_combobox_4.currentIndex(), ui.txtype_combobox_5.currentIndex(), ui.txtype_combobox_6.currentIndex()]
+    segwitprefix=[ui.version_box.text(),segwit_flag,tx_num_func(ui.numins_combo.currentIndex())]
+    # segwit_txinputs1=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
+    legacy_prefix=[ui.version_box.text(),tx_num_func(ui.numins_combo.currentIndex())]
+    #this is same as segwit- can merge
+    tx_inputs=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
+    input_secrets=[ui.privkey1_box.text(),ui.privkey2_box.text(),ui.privkey3_box.text(),ui.privkey4_box.text(),ui.privkey5_box.text(),ui.privkey6_box.text()]
+    script_pubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
+    segwit_input_infos=[[txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+ui.scriptpub1_box.text()+amount_to_txhex(ui.txinamount_box1.text())+ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+ui.scriptpub2_box.text()+amount_to_txhex(ui.txinamount_box2.text())+ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+ui.scriptpub3_box.text()+amount_to_txhex(ui.txinamount_box3.text())+ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+ui.scriptpub4_box.text()+amount_to_txhex(ui.txinamount_box4.text())+ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+ui.scriptpub5_box.text()+amount_to_txhex(ui.txinamount_box5.text())+ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()+ui.scriptpub6_box.text()+amount_to_txhex(ui.txinamount_box6.text())+ui.sequence6_box.text()]]
+    select_inputs=[ui.txtype_combobox_1,ui.txtype_combobox_2,ui.txtype_combobox_3,ui.txtype_combobox_4,ui.txtype_combobox_5,ui.txtype_combobox_6]
+    return tx_data_obj(outs, tx_selection_types, segwitprefix, legacy_prefix, tx_inputs, input_secrets, script_pubs, segwit_input_infos, select_inputs)
 
 
 def ok_button():
-    outs=[ui.scriptout1_box.text(),ui.scriptout2_box.text(),ui.scriptout3_box.text(),ui.scriptout4_box.text(),ui.scriptout5_box.text(),ui.scriptout6_box.text()]
+
+    gui_data=tx_data()
+    print('WORKEDDDDD?', gui_data.outs[0])
     dersigs=[]
     multisig_dersigs=[]
     witness_program=[]
@@ -765,13 +779,10 @@ def ok_button():
     multisig_indexes=[]
 
     
+    # script_pubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
 
-    #can I make this a global value?
-    script_pubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
-
-    inputs=[ui.txtype_combobox_1.currentIndex(), ui.txtype_combobox_2.currentIndex(), ui.txtype_combobox_3.currentIndex(), ui.txtype_combobox_4.currentIndex(), ui.txtype_combobox_5.currentIndex(), ui.txtype_combobox_6.currentIndex(),]
-    
-    # outs=[ui.scriptout1_box,ui.scriptout2_box,ui.scriptout3_box.text(),ui.scriptout4_box.text(),ui.scriptout5_box.text(),ui.scriptout6_box.text()]
+    tx_selections=list(gui_data.tx_selection_types)
+    print('TX SELECTS',tx_selections)
   
     if ui.outputformat_combobox.currentIndex() ==1:
         outs_list=address_to_scriptpub()
@@ -779,63 +790,51 @@ def ok_button():
 
 
     count=0
-    for item in inputs:
+    for item in tx_selections:
         print('ITEM ComBO', item)
-
 
         if item == '0':
             count+=1
             pass
 
-    # if ui.segwit_checkbox.isChecked()==True:
-
-        # redeemscript=p2sh_redeemscript(ui.scriptpub1_box.text())
-
-        # print('redeemscript=', redeemscript)
-        # ui.scriptpub1_box.setText(redeemscript)
-        # join_segwit_p2sh(0)
-        # print('okbutton')
-
-        if item == 4:
-
-                # else:
-            # count=0
-            # print('NUMINS',ui.numins_combo.currentIndex())
-
-            # print('RANGE',range(0, int(ui.numins_combo.currentIndex())+1))
-
-            result=txtype_combo_func(item,count)
-            print('RRRRRR', result)
-            witness_program.append(result)
-            dersigs.append('00')
-
-                # count+=1
-            # print('else condition')
-            print('WITNESS',count, witness_program)
-            segwit_indexs.append(count)
-            # ****  DO I NEED TO APPEND AN INDEX IN P2PKH INDEXS FOR THE 00s????
-            count+=1
-
-        # if item == p2sh_segwit:
-
-        #     result=txtype_combo_func(item,count)
-        #     witness_program.append(result)
-        #     print('P2SH WITNESS',count, witness_program)
-        #     p2sh_segwit_indexs.append(count)
-        #     count+=1
-
         if item == 1:
-            result=txtype_combo_func(item,count)
+            try:
+                result= join_info(0, count)
+            except TypeError:
+                ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                return
             dersigs.append(result)
             print('DERSIG', dersigs)
             p2pkhindexs.append(count)
             count+=1
 
-        if item == 6:
+        if item== 2:
+            pass
 
-            # final_index=len(inputs) - 1 - input_boxes[::-1].index('multisig_p2sh index here'))
-            # alos need to get a multisig true value into the sign function, spassed through the combo and join funcs
-            result=txtype_combo_func(item,count)
+        if item == 3:
+            result=join_segwit(99, count)  # add flag here for p2wsh segwit
+            witness_program.append(result)
+            print('P2SH WITNESS',count, witness_program)
+            p2sh_segwit_indexs.append(count)
+            count+=1
+
+        if item == 4:
+            result=join_segwit(1, count)
+            print('RRRRRR', result)
+            witness_program.append(result)
+            dersigs.append('00')
+            print('WITNESS',count, witness_program)
+            count+=1
+
+
+        if item == 5:
+            pass
+            #P2WSH
+
+        if item == 6:
+            tx_selections=gui_data.tx_selection_types
+            first_index=tx_selections.index(6)
+            result=join_info(count,first_index)
             if result=='00':
                 multisig_dersigs.insert(0, result)
             else:
@@ -845,11 +844,14 @@ def ok_button():
             multisig_indexes.append(count)
             count+=1
 
+        if item == 7:
+            pass
+            #p2WSH multisg
 
 
 
 
-    # outputs=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),ui.scriptout1_box.text(), amount_to_txhex(ui.amount2_box.text()),ui.scriptout2_box.text(), amount_to_txhex(ui.amount3_box.text()),ui.scriptout3_box.text(), amount_to_txhex(ui.amount4_box.text()),ui.scriptout4_box.text(), amount_to_txhex(ui.amount5_box.text()),ui.scriptout5_box.text(), amount_to_txhex(ui.amount6_box.text()),ui.scriptout6_box.text(),ui.nlocktime_box.text()]
+## change below to class reference
     try:
         outputs=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()]
     except TypeError:
@@ -858,64 +860,35 @@ def ok_button():
         print('it happened no4')
         return
 
+    tx_inputs=gui_data.tx_inputs
 
-    # if ui.txtype_comboBox.currentIndex()=='3': #if ANY of them are this
     if len(witness_program) != 0:
-
-        prefix=[ui.version_box.text(),segwit_flag,tx_num_func(ui.numins_combo.currentIndex())]
-        tx_inputs=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
-
-        ## ****  REMOVE THIS LINE- INSERT 00s in dersigs in segwit tx above
+        print('segwit detected')
+        prefix=gui_data.segwitprefix
         for txin in segwit_indexs:
             tx_inputs[txin].insert(2,'00')
 
         for txin in p2pkhindexs:
             tx_inputs[txin].insert(2, dersigs[txin])
-        for txin in p2pkhindexs:
+        for txin in p2sh_segwit_indexs:
             tx_inputs[txin].insert(2, '171600'+(script_pubs[txin])[6:-4])
-
-
-        # ****format dersigs
-        # witness_program.insert(0, len(witness_program).zfill(2))
         if len(p2pkhindexs) != 0:
             outputs.insert((len(outputs)-1),'00')
         print('WIT', witness_program)
         outputs.insert((len(outputs)-1),"".join(witness_program) )
 
-        # signed_items=[ui.version_box.text(),segwit_flag,tx_num_func(ui.numins_combo.currentIndex()),txid_endian(ui.txin1_box.text()),ui.inputindex1_box.text(),tx_redeemscript,ui.sequence1_box.text(),ui.txin2_box.text(),ui.sequence2_box.text(),ui.txin3_box.text(),ui.sequence3_box.text(),ui.txin4_box.text(),ui.sequence4_box.text(),ui.txin5_box.text(),ui.sequence5_box.text(),ui.txin6_box.text(),ui.sequence6_box.text(),tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),ui.scriptout1_box.text(), amount_to_txhex(ui.amount2_box.text()),ui.scriptout2_box.text(), amount_to_txhex(ui.amount3_box.text()),ui.scriptout3_box.text(), amount_to_txhex(ui.amount4_box.text()),ui.scriptout4_box.text(), amount_to_txhex(ui.amount5_box.text()),ui.scriptout5_box.text(), amount_to_txhex(ui.amount6_box.text()),ui.scriptout6_box.text(),'02',dersig[2:],ui.nlocktime_box.text()]
-        # signed_tx="".join(signed_items)
-        # result_list=['RAWTX=',rawtx+'\n','DERSIG=',dersig, '\n', 'SIGNED TX=', signed_tx]
-        # print(result_list)
-        # result_data=''
-        # for result in result_list:
-        #     result_data+=(result)
-        #     result_data+=('\n')
-        #     ui.output_box.setText(result_data)
-        # return result_data
-
-    if len(multisig_indexes) != 0:
-        prefix=[ui.version_box.text(),tx_num_func(ui.numins_combo.currentIndex())]
-
-        tx_inputs=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
-
-        #use spin box to get total number of blank sigs +1
+    elif len(multisig_indexes) != 0:
+        print('multisig detected')
+        prefix=gui_data.legacy_prefix
         print('NUMBER OF BLANK MULTISIG SIGS', int(ui.multisig_spinbox.value())-len(multisig_indexes))
         for item in range(0, (int(ui.multisig_spinbox.value()))-len(multisig_indexes)+1):
             multisig_dersigs.insert(0, '00')
-          
-            # multisig_indexes.insert(multisig_indexes[:0],script_pubs[multisig_indexes][-1])
-            # ABOVE WAS DRAFT- BELOW IS CORRECT?
-            # dersigs.insert(multisig_indexes[-1]+1, script_pubs[((multisig_indexes)[-1])])
 
         complete_dersig=bytes.fromhex("".join(multisig_dersigs))
         print('COMPLETE DERSIG', complete_dersig.hex())
         print('COMPLETE LEN', len(complete_dersig.hex()))
         print('LEN IN HEX FUNC', len_in_hex(complete_dersig))
-        # final_dersig=bytes([len(complete_dersig)])+complete_dersig
-        # swapped above for new function to cover varint
         final_dersig=len_in_hex(complete_dersig)+complete_dersig
-
-
         print('FINAL MULSIG SIG', final_dersig.hex())
         print('multisig index value', (multisig_indexes[0]))
         tx_inputs[(multisig_indexes[0])].insert(2, final_dersig.hex())
@@ -925,17 +898,9 @@ def ok_button():
                 tx_inputs[txin].insert(2, dersigs[txin])
             except IndexError:
                 pass
-                # ui.output_box.setText('Please Select a Transaction Type to Sign1')
-                # return
-
-
-
-    else:        
-        prefix=[ui.version_box.text(),tx_num_func(ui.numins_combo.currentIndex())]
-
-        tx_inputs=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
-
-        # outputs=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),ui.scriptout1_box.text(), amount_to_txhex(ui.amount2_box.text()),ui.scriptout2_box.text(), amount_to_txhex(ui.amount3_box.text()),ui.scriptout3_box.text(), amount_to_txhex(ui.amount4_box.text()),ui.scriptout4_box.text(), amount_to_txhex(ui.amount5_box.text()),ui.scriptout5_box.text(), amount_to_txhex(ui.amount6_box.text()),ui.scriptout6_box.text(),ui.nlocktime_box.text(),ui.hashtype_box.text()]
+    else:     
+        print('$$ LEGACY TX $$$')   
+        prefix=gui_data.legacy_prefix
 
         for txin in list(range(0, int(ui.numins_combo.currentIndex())+1)):
             print('TXIN NUMBER', txin)
@@ -992,12 +957,11 @@ def amount_to_txhex(amount):  #concatanate this abit- use list comprehension?s
 
 
 def join_info(script, index):
-    #multisig funcs
-    tx_types=[ui.txtype_combobox_1.currentIndex(), ui.txtype_combobox_2.currentIndex(), ui.txtype_combobox_3.currentIndex(), ui.txtype_combobox_4.currentIndex(), ui.txtype_combobox_5.currentIndex(), ui.txtype_combobox_6.currentIndex(),]
-    #careful here with script value accidentally cretating a multisg
+    gui_data=tx_data()
+    tx_selections=gui_data.tx_selection_types
     multisig_indexs=[]
     count=0
-    for tx in tx_types:
+    for tx in tx_selections:
         if tx==6:
             multisig_indexs.append(count)
             count+=1
@@ -1005,7 +969,7 @@ def join_info(script, index):
 
     print('MULTISIG INDEXES', multisig_indexs)
     try:
-        final_index=len(tx_types) - 1 - tx_types[::-1].index(6)
+        final_index=len(tx_selections) - 1 - tx_selections[::-1].index(6)
         if final_index == script:
             multisig =2
             print('MULTISIG FINAL VALUE DETECTED')
@@ -1018,13 +982,11 @@ def join_info(script, index):
         print('** NOT A MULTISIG ***')
 
 
-    outs=[ui.scriptout1_box.text(),ui.scriptout2_box.text(),ui.scriptout3_box.text(),ui.scriptout4_box.text(),ui.scriptout5_box.text(),ui.scriptout6_box.text()]
+    outs=gui_data.outs
     if ui.outputformat_combobox.currentIndex() ==1:
         outs_list=address_to_scriptpub()
         outs=outs_list
-    # scriptpub_indexs=[4,7,10,16,20,24]
-    scriptpubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
-    # insert_points=[ui.inputindex1_box.text(), ui.inputindex2_box.text(), ui.inputindex3_box.text(), ui.inputindex4_box.text(), ui.inputindex5_box.text(), ui.inputindex6_box.text()]
+    scriptpubs=gui_data.script_pubs
     insert_points=[ui.inputindex1_box.text, ui.inputindex2_box.text, ui.inputindex3_box.text, ui.inputindex4_box.text, ui.inputindex5_box.text, ui.inputindex6_box.text]
 
     if ui.outputformat_combobox.currentIndex()==1:
@@ -1034,8 +996,6 @@ def join_info(script, index):
 
     inputs=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
 
-    # outputs=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),ui.scriptout1_box.text(), amount_to_txhex(ui.amount2_box.text()),ui.scriptout2_box.text(), amount_to_txhex(ui.amount3_box.text()),ui.scriptout3_box.text(), amount_to_txhex(ui.amount4_box.text()),ui.scriptout4_box.text(), amount_to_txhex(ui.amount5_box.text()),ui.scriptout5_box.text(), amount_to_txhex(ui.amount6_box.text()),ui.scriptout6_box.text(),ui.nlocktime_box.text(),ui.hashtype_box.text()]
-    # outputs=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),ui.scriptout1_box.text(), amount_to_txhex(ui.amount2_box.text()),ui.scriptout2_box.text(), amount_to_txhex(ui.amount3_box.text()),ui.scriptout3_box.text(), amount_to_txhex(ui.amount4_box.text()),ui.scriptout4_box.text(), amount_to_txhex(ui.amount5_box.text()),ui.scriptout5_box.text(), amount_to_txhex(ui.amount6_box.text()),ui.scriptout6_box.text(),ui.nlocktime_box.text(),ui.hashtype_box.text()]
     outputs=[tx_num_func(ui.numouts_combo.currentIndex()),amount_to_txhex(ui.amount1_box.text())+outs[0]+amount_to_txhex(ui.amount2_box.text())+outs[1]+amount_to_txhex(ui.amount3_box.text())+outs[2]+amount_to_txhex(ui.amount4_box.text())+outs[3]+amount_to_txhex(ui.amount5_box.text())+outs[4]+amount_to_txhex(ui.amount6_box.text())+outs[5],ui.nlocktime_box.text(),ui.hashtype_box.text()]
 
     inputs[index].insert(2, scriptpubs[index])
@@ -1067,7 +1027,6 @@ def join_info(script, index):
     print('RAW TX', rawtx)
     ui.output_box.setText(rawtx)
 
-    ### both these 2 multi sig types are getting the priv key number from the script value- be careful when refactoring
     if multisig==1:
         dersig=sign_tx(rawtx, script, 1)
         print('MULTISIG VALUE 1 DERSIG GENERATED')
@@ -1083,22 +1042,16 @@ def join_info(script, index):
     return dersig
 
 
-def sign_button():
-    tx=join_info()
-    dersig=sign_tx(tx)
-
-    ui.output_box.setText(dersig)
-    return dersig
-
 def txid_endian(txid):
     input_bytes=bytes(reversed(bytes.fromhex(txid)))
     return input_bytes.hex()
 
-SIGHASH_ALL = 1
+
 
 def sign_tx(rawtx, index, multisig=0):
+    gui_data=tx_data()
 
-    script_pubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
+    script_pubs=gui_data.script_pubs
 
     print('SIGN FUNCT MULTISIG VALUE ==', multisig)
     try:
@@ -1111,7 +1064,7 @@ def sign_tx(rawtx, index, multisig=0):
     unsigned_tx_hash = hash256(unsignedtx)
     print('UTXHASH',unsigned_tx_hash.hex())
 
-    input_secrets=[ui.privkey1_box.text(),ui.privkey2_box.text(),ui.privkey3_box.text(),ui.privkey4_box.text(),ui.privkey5_box.text(),ui.privkey6_box.text()]
+    input_secrets=gui_data.input_secrets
 
     print('PRIV INDEX',ui.privkey_comboBox.currentIndex())
     selection=ui.privkey_comboBox.currentIndex()
@@ -1167,21 +1120,19 @@ def sign_tx(rawtx, index, multisig=0):
     print(dersig2.hex())
     return dersig2.hex()
 
-segwit_flag='0001'
+
 
 
 
 
 def join_segwit(script, index):
+    gui_data=tx_data()
     print('join p2sh')
-    outs=[ui.scriptout1_box.text(),ui.scriptout2_box.text(),ui.scriptout3_box.text(),ui.scriptout4_box.text(),ui.scriptout5_box.text(),ui.scriptout6_box.text()]
+    outs=gui_data.outs
     if ui.outputformat_combobox.currentIndex() ==1:
         outs_list=address_to_scriptpub()
         outs=outs_list
-
-    scriptpubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
-
-
+    scriptpubs=gui_data.script_pubs
     # redeemscript=p2sh_redeemscript(ui.scriptpub1_box.text())
     # redeemscript_hex=bytes.fromhex(redeemscript)
     # redeemscript_full=bytes([len(redeemscript_hex)])+redeemscript_hex
@@ -1189,7 +1140,7 @@ def join_segwit(script, index):
     # redeemscript_full2=bytes([len(redeemscript_full)])+redeemscript_full
     # tx_redeemscript=redeemscript_full2.hex()
     # ui.scriptpub1_box.setText(redeemscript)
-    if script== 1:
+    if script== 99:
         redeemscript=p2sh_redeemscript(scriptpubs[index])
         redeemscript_hex=bytes.fromhex(redeemscript)
         redeemscript_full=bytes([len(redeemscript_hex)])+redeemscript_hex
@@ -1199,13 +1150,8 @@ def join_segwit(script, index):
         # ui.scriptpub1_box.setText(redeemscript)
         print('\n','I NEED TO IMPLIMENT SCRIPSIG VALUE')
 
-    inputs=[ui.inputindex1_box.text(), ui.inputindex2_box.text(), ui.inputindex3_box.text(), ui.inputindex4_box.text(), ui.inputindex4_box.text(), ui.inputindex5_box.text(), ui.inputindex6_box.text()]
-    
-    input_infos=[[txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+ui.scriptpub1_box.text()+amount_to_txhex(ui.txinamount_box1.text())+ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+ui.scriptpub2_box.text()+amount_to_txhex(ui.txinamount_box2.text())+ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+ui.scriptpub3_box.text()+amount_to_txhex(ui.txinamount_box3.text())+ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+ui.scriptpub4_box.text()+amount_to_txhex(ui.txinamount_box4.text())+ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+ui.scriptpub5_box.text()+amount_to_txhex(ui.txinamount_box5.text())+ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()+ui.scriptpub6_box.text()+amount_to_txhex(ui.txinamount_box6.text())+ui.sequence6_box.text()]]
+    input_infos=gui_data.segwit_input_infos
     this_tx_input_infos="".join(input_infos[index])
-
-    # need this???? input_list=[(item) for item in input_info if item is not ""]
-    # NO NEED FOR 00 SCRIPSIGS ON OTHER INPUTS APPARENTLY?
     hash_ins=hash256(bytes.fromhex(txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()))
     hash_sequence=hash256(bytes.fromhex(ui.sequence1_box.text())+bytes.fromhex(ui.sequence2_box.text())+bytes.fromhex(ui.sequence3_box.text())+bytes.fromhex(ui.sequence4_box.text())+bytes.fromhex(ui.sequence5_box.text())+bytes.fromhex(ui.sequence6_box.text()))
     hash_outs=hash256(bytes.fromhex(amount_to_txhex(ui.amount1_box.text())+outs[0]+amount_to_txhex(ui.amount2_box.text())+outs[1]+amount_to_txhex(ui.amount3_box.text())+outs[2]+amount_to_txhex(ui.amount4_box.text())+outs[3]+amount_to_txhex(ui.amount5_box.text())+outs[4]+amount_to_txhex(ui.amount6_box.text())+outs[5]))
@@ -1251,37 +1197,38 @@ def scalar_from_hex(hexstring):
     return int(hexstring, 16)
 
 #need option for none here
-def txtype_combo_func(data, index):
-    address_data=['N/A','P2PKH','P2SH','P2SH-P2wPKH','P2WPKH','P2WSH','P2SH multisig', 'P2WSH multisig']
-    selection=address_data[data]
-    print('SELECTION=',selection)
-    if selection=='P2PKH':
-        # join_info(0, index)
-        try:
-            return join_info(0, index)
-        except TypeError:
-            ui.output_box.setText('Invalid Input- Please check your input data and try again')
-            return
-    elif selection=='p2shsegwit':
-        #Change function name below to just segwit- can it handle both with script option?
-        return join_segwit_p2sh(1, index)
+# def txtype_combo_func(data, index):
+#     gui_data=tx_data()
+#     address_data=['N/A','P2PKH','P2SH','P2SH-P2wPKH','P2WPKH','P2WSH','P2SH multisig', 'P2WSH multisig']
+#     selection=address_data[data]
+#     print('SELECTION=',selection)
+#     if selection=='P2PKH':
+#         # join_info(0, index)
+#         try:
+#             return join_info(0, index)
+#         except TypeError:
+#             ui.output_box.setText('Invalid Input- Please check your input data and try again')
+#             return
+#     elif selection=='p2shsegwit':
+#         #Change function name below to just segwit- can it handle both with script option?
+#         return join_segwit_p2sh(1, index)
 
-    elif selection=='p2sh':
-        join_info(1)
-    elif selection=='P2WPKH':
-        return join_segwit(1, index)
-    elif selection=='p2wsh':
-        output=join_segwit(1)
+#     elif selection=='p2sh':
+#         join_info(1)
+#     elif selection=='P2WPKH':
+#         return join_segwit(1, index)
+#     elif selection=='p2wsh':
+#         output=join_segwit(1)
 
-    elif selection == 'P2SH multisig':
-        tx_types=[ui.txtype_combobox_1.currentIndex(), ui.txtype_combobox_2.currentIndex(), ui.txtype_combobox_3.currentIndex(), ui.txtype_combobox_4.currentIndex(), ui.txtype_combobox_5.currentIndex(), ui.txtype_combobox_6.currentIndex(),]
-        first_index=tx_types.index(6)
-        return join_info(index, first_index)
+#     elif selection == 'P2SH multisig':
+#         #this is an object as txcombo_types
+#         # tx_types=[ui.txtype_combobox_1.currentIndex(), ui.txtype_combobox_2.currentIndex(), ui.txtype_combobox_3.currentIndex(), ui.txtype_combobox_4.currentIndex(), ui.txtype_combobox_5.currentIndex(), ui.txtype_combobox_6.currentIndex(),]
+#         tx_selections=gui_data.tx_selection_types
+#         first_index=tx_selections.index(6)
+#         return join_info(index, first_index)
 
 
 
-OP_HASH160 = b'\xa9'
-OP_EQUAL = b'\x87'
 
 
 
@@ -1302,7 +1249,8 @@ def p2sh_redeemscript(pubkey):
 
 
 def address_to_scriptpub():
-    outs=[ui.scriptout1_box.text(),ui.scriptout2_box.text(),ui.scriptout3_box.text(),ui.scriptout4_box.text(),ui.scriptout5_box.text(),ui.scriptout6_box.text()]
+    gui_data=tx_data()
+    outs=gui_data.outs
     scriptpub_list=[]
     for item in outs:
         if item[:2]=='tb':#AND bc
@@ -1311,8 +1259,6 @@ def address_to_scriptpub():
             for i in hex_chars:
                 hex_chars_list.append(bytes([i]).hex())
                 h256="".join(hex_chars_list)
-                ##put this in the address functions, not here?- clean up the line below, a bit messy- its purpose is trying to get the len in bytes, not in chars 
-            # h256len=str(int(bytes([len(h256)]).hex())/2)
             h256len=str(int((int(bytes([len(h256)]).hex())/2)))
             print('h256len', h256len)
             scriptpub_raw='00'+h256len+h256
@@ -1392,6 +1338,7 @@ def combofunc(index):
 
 
 
+# unessesary? remove along with references at line 470?
 def tx_select_func(index):
     print('SELEC ACT', index)
     inputs=[ui.txtype_combobox_1,ui.txtype_combobox_2,ui.txtype_combobox_3,ui.txtype_combobox_4,ui.txtype_combobox_5,ui.txtype_combobox_6]
@@ -1508,7 +1455,7 @@ if __name__ == "__main__":
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
-    print('DELETE ME', ui.outs)
+    # print('DELETE ME', ui.outs)
     sys.exit(app.exec_())
 
 
