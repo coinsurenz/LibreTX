@@ -8,7 +8,12 @@
 
 from ecdsa_functions import *
 from address_functions import *
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, Qt
+from PyQt5.QtGui import QPixmap
+
+
+
+import time
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -33,9 +38,9 @@ class Ui_Dialog(object):
         self.scriptout6_box.setMaximumSize(QtCore.QSize(450, 16777215))
         self.scriptout6_box.setObjectName("scriptout6_box")
         self.gridLayout.addWidget(self.scriptout6_box, 27, 3, 1, 1)
-        self.unsigned_label = QtWidgets.QLabel(Dialog)
-        self.unsigned_label.setObjectName("unsigned_label")
-        self.gridLayout.addWidget(self.unsigned_label, 20, 6, 1, 1)
+        self.signed_label = QtWidgets.QLabel(Dialog)
+        self.signed_label.setObjectName("signed_label")
+        self.gridLayout.addWidget(self.signed_label, 20, 6, 1, 1)
         self.signtx_label = QtWidgets.QLabel(Dialog)
         self.signtx_label.setObjectName("signtx_label")
         self.gridLayout.addWidget(self.signtx_label, 24, 6, 1, 1)
@@ -72,10 +77,14 @@ class Ui_Dialog(object):
         self.txinamount_box5.setMaximumSize(QtCore.QSize(87, 16777215))
         self.txinamount_box5.setObjectName("txinamount_box5")
         self.gridLayout.addWidget(self.txinamount_box5, 10, 0, 1, 1)
-        self.walletstyle_combobox = QtWidgets.QComboBox(Dialog)
-        self.walletstyle_combobox.setObjectName("walletstyle_combobox")
-        self.gridLayout.addWidget(self.walletstyle_combobox, 8, 5, 1, 1)
+
+        # LEAVE THIS- REINSTATE LATER
+        # self.walletstyle_combobox = QtWidgets.QComboBox(Dialog)
+        # self.walletstyle_combobox.setObjectName("walletstyle_combobox")
+        # self.gridLayout.addWidget(self.walletstyle_combobox, 8, 5, 1, 1)
         self.privkey_comboBox = QtWidgets.QComboBox(Dialog)
+        self.privkey_comboBox.setMinimumSize(QtCore.QSize(100, 0))
+        self.privkey_comboBox.setMaximumSize(QtCore.QSize(100, 16777215))
         self.privkey_comboBox.setObjectName("comboBox")
         self.gridLayout.addWidget(self.privkey_comboBox, 16, 5, 1, 1)
         self.txtype_combobox_1 = QtWidgets.QComboBox(Dialog)
@@ -154,9 +163,10 @@ class Ui_Dialog(object):
         self.scriptpub5_box.setMaximumSize(QtCore.QSize(450, 16777215))
         self.scriptpub5_box.setObjectName("scriptpub5_box")
         self.gridLayout.addWidget(self.scriptpub5_box, 10, 4, 1, 1)
-        self.emulatewallet_label = QtWidgets.QLabel(Dialog)
-        self.emulatewallet_label.setObjectName("emulatewallet_label")
-        self.gridLayout.addWidget(self.emulatewallet_label, 7, 5, 1, 1)
+## LEAVE THIS- WILL BE IMPLIMENTED
+        # self.emulatewallet_label = QtWidgets.QLabel(Dialog)
+        # self.emulatewallet_label.setObjectName("emulatewallet_label")
+        # self.gridLayout.addWidget(self.emulatewallet_label, 7, 5, 1, 1)
         
         # self.txtype_comboBox = QtWidgets.QComboBox(Dialog)
         # self.txtype_comboBox.setMinimumSize(QtCore.QSize(90, 0))
@@ -275,6 +285,14 @@ class Ui_Dialog(object):
         self.output_box.setMinimumSize(QtCore.QSize(1600, 300))
         self.output_box.setMaximumSize(QtCore.QSize(1600, 300))
         self.output_box.setObjectName("output_box")
+
+        out_font = QtGui.QFont()
+        out_font.setPointSize(15)
+        # out_font.setBold(True)
+        # out_font.setWeight(75)
+        out_font.setWeight(35)
+        self.output_box.setFont(out_font)
+
         self.gridLayout.addWidget(self.output_box, 33, 0, 4, 13)
         self.scriptout5_box = QtWidgets.QLineEdit(Dialog)
         self.scriptout5_box.setMinimumSize(QtCore.QSize(450, 0))
@@ -311,9 +329,11 @@ class Ui_Dialog(object):
         self.version_box.setMaximumSize(QtCore.QSize(100, 16777215))
         self.version_box.setObjectName("version_box")
         self.gridLayout.addWidget(self.version_box, 27, 5, 1, 1)
-        self.signed_button = QtWidgets.QPushButton(Dialog)
-        self.signed_button.setObjectName("pushButton")
-        self.gridLayout.addWidget(self.signed_button, 22, 6, 1, 1)
+# LEAVE THIS WILL RE INSTATE
+        # self.un_signed_button = QtWidgets.QPushButton(Dialog)
+        # self.un_signed_button.setObjectName("pushButton")
+        # self.gridLayout.addWidget(self.un_signed_button, 22, 6, 1, 1)
+        
         self.txin4_box = QtWidgets.QLineEdit(Dialog)
         self.txin4_box.setMinimumSize(QtCore.QSize(525, 0))
         self.txin4_box.setMaximumSize(QtCore.QSize(525, 16777215))
@@ -349,7 +369,7 @@ class Ui_Dialog(object):
         self.gridLayout.addWidget(self.txins_label, 5, 3, 1, 1)
         self.currentblock_box = QtWidgets.QLineEdit(Dialog)
         self.currentblock_box.setMinimumSize(QtCore.QSize(100, 0))
-        self.currentblock_box.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.currentblock_box.setMaximumSize(QtCore.QSize(100, 20))
         self.currentblock_box.setObjectName("currentblock_box")
         self.gridLayout.addWidget(self.currentblock_box, 10, 5, 1, 1)
         self.inputindex6_box = QtWidgets.QLineEdit(Dialog)
@@ -406,9 +426,12 @@ class Ui_Dialog(object):
         self.txin1_box.setMaximumSize(QtCore.QSize(525, 16777215))
         self.txin1_box.setObjectName("txin1_box")
         self.gridLayout.addWidget(self.txin1_box, 6, 3, 1, 1)
-        self.unsigned_button = QtWidgets.QPushButton(Dialog)
-        self.unsigned_button.setObjectName("unsigned_button")
-        self.gridLayout.addWidget(self.unsigned_button, 25, 6, 1, 1)
+
+        self.signed_button = QtWidgets.QPushButton(Dialog)
+        self.signed_button.setObjectName("unsigned_button")
+        self.signed_button.setMinimumSize(QtCore.QSize(85, 0))
+        self.signed_button.setMaximumSize(QtCore.QSize(85, 16777215))
+        self.gridLayout.addWidget(self.signed_button, 25, 6, 1, 1)
 
         
 
@@ -446,6 +469,8 @@ class Ui_Dialog(object):
         self.amount2_box.setObjectName("amount2_box")
         self.gridLayout.addWidget(self.amount2_box, 20, 2, 1, 1)
         self.outputformat_combobox = QtWidgets.QComboBox(Dialog)
+        self.outputformat_combobox.setMinimumSize(QtCore.QSize(0, 20))
+        self.outputformat_combobox.setMaximumSize(QtCore.QSize(100, 20))
         self.outputformat_combobox.setProperty("bitcoin_address", "")
         self.outputformat_combobox.setObjectName("outputformat_combobox")
         self.gridLayout.addWidget(self.outputformat_combobox, 6, 5, 1, 1)
@@ -461,6 +486,9 @@ class Ui_Dialog(object):
 
 
         self.locktime_button = QtWidgets.QPushButton(Dialog)
+        self.locktime_button.setMinimumSize(QtCore.QSize(0, 20))
+        self.locktime_button.setMaximumSize(QtCore.QSize(100, 20))
+
         self.locktime_button.setObjectName("Convert Locktime")
         self.gridLayout.addWidget(self.locktime_button, 11, 5, 1, 1)
 
@@ -549,7 +577,7 @@ class Ui_Dialog(object):
         self.numins_combo.addItems(['1','2','3','4','5','6'])
         self.numouts_combo.addItems(['1','2','3','4','5','6'])
         # self.signed_button.clicked.connect(join_segwit)
-        self.unsigned_button.clicked.connect(ok_button)
+        self.signed_button.clicked.connect(ok_button)
         self.hashtype_box.setText('01000000')
         # self.txtype_comboBox.addItems(['0','1','2','3'])
         self.txtype_combobox_1.addItems(['0','1','2','3','4','5','6','7'])
@@ -563,14 +591,14 @@ class Ui_Dialog(object):
 
         
 
-        self.inputindex1_box.setText('00000000')
-        self.scriptpub1_box.setText('69532102330862fb0ac7ca9d6b92b8867207a4e0d37e564558b5cdc22e5276d9a4f419f02102c83d7e9dc3e5e4cf4a11a514bb2f762bfbd74973ef264a19822a3b1ab1c4e1ff21033775f01b30564e68ea7efb554e39d76f685814fa36dee16702ec40f2175b729153ae')
+        self.inputindex1_box.setText('01000000')
+        self.scriptpub1_box.setText('171600140304ea09b3e4c461d206a22ffa9d34bee3e0c8c0')
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
-        self.txin1_box.setText('c37db0fb2a369af946c6fa7112b422b62997176f433d60b91f3980f9fb094128')
-        self.privkey1_box.setText('cR27Qj8fdXmtKM24VGMfsAxz1BNiPtf8Y9ue3EvQ338N61AvEnEV')
+        self.txin1_box.setText('d2c106cc032a8fc0baeea268f0bc6e7cc22a9fc2aaec6369b84c96c8456cfca7')
+        self.privkey1_box.setText('cRkRzhhJ4QfaPRs2jTefqSjNn5CEkAYB6wk5tvkNCADG3oQ6cohb')
         # self.privkey2_box.setText('cUBhvCREE4QV5A2EcHZ4dCq4Mp6qE3hKo5cD92Ya1x4C7fXHEDna')
         # self.privkey3_box.setText('cSb2JEMRtNhxTis9roMifiHSumTPgdQUsjiNtptV7zs5AVyussvq')
-        self.amount1_box.setText('0.00099586')
+        self.amount1_box.setText('0.000025')
         self.version_box.setText('02000000')
 
         # self.inputindex2_box.setText('01000000')
@@ -640,21 +668,24 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Tx Creator Tool"))
         self.pubouts_label.setText(_translate("Dialog", "Script pub outs"))
-        self.unsigned_label.setText(_translate("Dialog", "Create Unsigned"))
+        self.signed_button.setText(_translate("Dialog", "Create TX"))
         self.signtx_label.setText(_translate("Dialog", "Sign Tx"))
         self.sequence_label.setText(_translate("Dialog", "Sequence"))
         self.privkey_label.setText(_translate("Dialog", "Priv Keys"))
         self.inputindex_label.setText(_translate("Dialog", "Input Index"))
         self.Title_label.setText(_translate("Dialog", "Transaction Creator Tool"))
         self.hashtype_label.setText(_translate("Dialog", "Hash type"))
-        self.emulatewallet_label.setText(_translate("Dialog", "Emulate Wallet"))
+## LEAVE THIS- WILL BE IMPLIMENTED
+        # self.emulatewallet_label.setText(_translate("Dialog", "Emulate Wallet"))
         self.education_checkbox.setText(_translate("Dialog", "Education Mode"))
         self.numins_label.setText(_translate("Dialog", "Num Ins"))
         self.numouts_label.setText(_translate("Dialog", "Num Outs"))
         self.currentblock_label.setText(_translate("Dialog", "Current Block Height"))
         self.tx_type1_label.setText(_translate("Dialog", "Tx Type"))
         self.txinamounts_label.setText(_translate("Dialog", "Txin Amounts"))
-        self.signed_button.setText(_translate("Dialog", "impliment"))  #unsigned button
+        
+        # self.un_signed_button.setText(_translate("Dialog", "impliment"))  #unsigned button
+
         self.multisig_spin_label.setText(_translate("Dialog", "Multisig Total"))
         self.outputformat_label.setText(_translate("Dialog", "Output Address Format"))
         self.txins_label.setText(_translate("Dialog", "Txins TXID\'s"))
@@ -662,7 +693,7 @@ class Ui_Dialog(object):
         self.nlocktime_label.setText(_translate("Dialog", "N-locktime"))
         self.scriptpubkey_label.setText(_translate("Dialog", "Script pubkeys"))
         self.amounts_label.setText(_translate("Dialog", "Amounts"))
-        self.unsigned_button.setText(_translate("Dialog", "Create Signed"))
+        # self.signed_button.setText(_translate("Dialog", "Create Signed"))
         self.version_label.setText(_translate("Dialog", "Version"))
         self.locktime_button.setText(_translate("Dialog", "Convert L-time"))
 
@@ -734,6 +765,9 @@ SIGHASH_ALL = 1
 #can these and their refrences go in the address functions file?
 OP_HASH160 = b'\xa9'
 OP_EQUAL = b'\x87'
+EDU_MODE_OUTPUT=[]
+EDU_MODE_UNSIGNED=[]
+EDU_MODE_SIGS=[]
 
 class tx_data_obj:
 
@@ -767,7 +801,7 @@ def tx_data():
 
 
 def ok_button():
-
+    EDU_MODE_OUTPUT=[]
     gui_data=tx_data()
     print('WORKEDDDDD?', gui_data.outs[0])
     dersigs=[]
@@ -775,12 +809,14 @@ def ok_button():
     witness_program=[]
     segwit_indexs=[]
     p2sh_segwit_indexs=[]
+    ms_segwit_indexes=[]
     p2pkhindexs=[]
+    segwit_multisigs=[]
     multisig_indexes=[]
 
     
     # script_pubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
-
+    outs=gui_data.outs
     tx_selections=list(gui_data.tx_selection_types)
     print('TX SELECTS',tx_selections)
   
@@ -804,12 +840,22 @@ def ok_button():
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 return
             dersigs.append(result)
+             ## ADD THIS TO EDU MODE PRINTS
             print('DERSIG', dersigs)
             p2pkhindexs.append(count)
             count+=1
 
         if item== 2:
-            pass
+            try:
+                result= join_info(99, count)
+            except TypeError:
+                ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                return
+            dersigs.append(result)
+             ## ADD THIS TO EDU MODE PRINTS
+            print('DERSIG', dersigs)
+            p2pkhindexs.append(count)### CORRECT???
+            count+=1
 
         if item == 3:
             result=join_segwit(99, count)  # add flag here for p2wsh segwit
@@ -824,12 +870,16 @@ def ok_button():
             witness_program.append(result)
             dersigs.append('00')
             print('WITNESS',count, witness_program)
+            segwit_indexs.append(count)
             count+=1
 
 
-        if item == 5:
-            pass
-            #P2WSH
+        if item == 5: #p2wsh
+            result=join_segwit(98, count)  # add flag here for p2wsh segwit
+            witness_program.append(result)
+            print('P2SH WITNESS',count, witness_program)
+            segwit_indexs.append(count)
+            count+=1
 
         if item == 6:
             tx_selections=gui_data.tx_selection_types
@@ -845,13 +895,21 @@ def ok_button():
             count+=1
 
         if item == 7:
-            pass
+            tx_selections=gui_data.tx_selection_types
+            first_index=tx_selections.index(7)
+            result=join_segwit(count, first_index)  # add flag here for p2wsh segwit
+            witness_program.append(result)
+            dersigs.append('00')
+            print('P2WSH WITNESS',count, witness_program)
+            ms_segwit_indexes.append(count)
+            count+=1
             #p2WSH multisg
 
 
 
 
 ## change below to class reference
+    
     try:
         outputs=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()]
     except TypeError:
@@ -868,14 +926,25 @@ def ok_button():
         for txin in segwit_indexs:
             tx_inputs[txin].insert(2,'00')
 
+        for txin in ms_segwit_indexes:
+            tx_inputs[txin].insert(2,'00')
+
         for txin in p2pkhindexs:
             tx_inputs[txin].insert(2, dersigs[txin])
         for txin in p2sh_segwit_indexs:
-            tx_inputs[txin].insert(2, '171600'+(script_pubs[txin])[6:-4])
+            tx_inputs[txin].insert(2, '171600'+(gui_data.script_pubs[txin])[6:-4])
         if len(p2pkhindexs) != 0:
             outputs.insert((len(outputs)-1),'00')
+
+        if len(ms_segwit_indexes) != 0:
+            print('p2wsh activated')
+            witness_program.insert(0,'0300')#[4:]
+
         print('WIT', witness_program)
+        print('SEGWIT TX- DERSIGS', witness_program)
         outputs.insert((len(outputs)-1),"".join(witness_program) )
+
+
 
     elif len(multisig_indexes) != 0:
         print('multisig detected')
@@ -892,6 +961,9 @@ def ok_button():
         print('FINAL MULSIG SIG', final_dersig.hex())
         print('multisig index value', (multisig_indexes[0]))
         tx_inputs[(multisig_indexes[0])].insert(2, final_dersig.hex())
+
+
+
         for txin in list(range(0, int(ui.numins_combo.currentIndex())+1)):
             print('TXIN NUMBER', txin)
             try:
@@ -919,9 +991,16 @@ def ok_button():
     print('FINAL_ins',combined_inputs)
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
+     
     print('FINAL input info',input_info)
     signed_items=[(item) for item in input_info if item is not ""]
+    ## ADD THIS TO EDU MODE PRINTS
     print('FINAL INPUT LIST',signed_items)
+
+    for item in signed_items:
+        EDU_MODE_OUTPUT.append(item+'\n')
+
+
     try:
         signed_tx="".join(signed_items)
     except TypeError:
@@ -931,8 +1010,15 @@ def ok_button():
         return
 
     print(signed_tx)
+    if ui.education_checkbox.isChecked()==True:
+        title_txt='TX DATA'+'\n'
+        EDU_MODE_OUTPUT.insert(0,title_txt )
+        edu_mode_print="".join(EDU_MODE_OUTPUT)
+        ui.output_box.setText(edu_mode_print)
 
-    ui.output_box.setText(signed_tx)
+    else:
+        ui.output_box.setText(signed_tx)
+
     print('SIGNED TX', signed_tx)
     return signed_tx
 
@@ -981,6 +1067,9 @@ def join_info(script, index):
         multisig=0
         print('** NOT A MULTISIG ***')
 
+    if script==99:
+        multisig=3
+
 
     outs=gui_data.outs
     if ui.outputformat_combobox.currentIndex() ==1:
@@ -1022,6 +1111,7 @@ def join_info(script, index):
     input_info=[y for x in tx_components for y in x]
     print('input info',input_info)
     input_list=[(item) for item in input_info if item is not ""]
+    ## USE THIS AS THE FIRST EDU MODE PRINT OUT- BREAK IT DOWN INTO COMPONENTS
     print('INPUT LIST',input_list)
     rawtx="".join(input_list)
     print('RAW TX', rawtx)
@@ -1034,6 +1124,11 @@ def join_info(script, index):
     elif multisig ==2:
         dersig=sign_tx(rawtx, script, 2)
         print('MULTISIG VALUE 2 DERSIG GENERATED')
+
+    elif multisig ==3:
+        dersig=sign_tx(rawtx, index, 3)
+        print('NO MULTISIG VALUE PASSED')
+
 
     else:
         dersig=sign_tx(rawtx, index)
@@ -1062,6 +1157,7 @@ def sign_tx(rawtx, index, multisig=0):
         return
 
     unsigned_tx_hash = hash256(unsignedtx)
+    ## ADD THIS TO EDU MODE PRINTS
     print('UTXHASH',unsigned_tx_hash.hex())
 
     input_secrets=gui_data.input_secrets
@@ -1084,6 +1180,7 @@ def sign_tx(rawtx, index, multisig=0):
 
 
     print('INDEXXXX', index)
+     ## ADD THIS TO EDU MODE PRINTS
     print('INPUT SECET=', input_secret)
 
     private_key = PrivateKey(input_secret)
@@ -1108,12 +1205,22 @@ def sign_tx(rawtx, index, multisig=0):
         #figure out if then condition to conver the oppushbytes here if not needed
         dersig2=signature_bytes2+b'\x4c'+sec2
         print('MULTISIG2-FINAL && DERSIG &&', dersig2)
+
+    elif multisig==3:
+        sec2=bytes.fromhex(script_pubs[index])#does scriptpubs need to be global?, is this for every multisig or only at the end?
+        # dersig2=signature_bytes2+sec2
+        #figure out if then condition to conver the oppushbytes here if not needed
+        dersig=signature_bytes2+sec2
+        dersig2=bytes([len(dersig)])+dersig
+        print('MULTISIG2-FINAL && DERSIG &&', dersig2)
     
     else:
         sec=private_key.point.sec()
         sec2=bytes([len(sec)])+sec
         dersig=signature_bytes2+sec2
+         ## ADD THIS TO EDU MODE PRINTS
         print('NON MULTISIG- && DERSIG &&', dersig)
+         ## ADD THIS TO EDU MODE PRINTS
         print('***SEC2***', sec2.hex())
         dersig2=bytes([len(dersig)])+dersig
 
@@ -1128,6 +1235,32 @@ def sign_tx(rawtx, index, multisig=0):
 def join_segwit(script, index):
     gui_data=tx_data()
     print('join p2sh')
+    # print('SEGWIT SIGN FUNCT MULTISIG VALUE ==', multisig)
+    tx_selections=gui_data.tx_selection_types
+    multisig_indexs=[]
+    count=0
+    for tx in tx_selections:
+        if tx==7:
+            multisig_indexs.append(count)
+            count+=1
+
+
+    print('MULTISIG INDEXES', multisig_indexs)
+    try:
+        final_index=len(tx_selections) - 1 - tx_selections[::-1].index(7)
+        if final_index == script:
+            multisig =2
+            print('MULTISIG FINAL VALUE DETECTED')
+        else:
+            multisig=1
+            print('MULTISIG NON-FINAL DETECTED')
+
+    except ValueError:
+        multisig=0
+        print('** NOT A MULTISIG ***')
+
+
+
     outs=gui_data.outs
     if ui.outputformat_combobox.currentIndex() ==1:
         outs_list=address_to_scriptpub()
@@ -1164,18 +1297,96 @@ def join_segwit(script, index):
 
     input_list=[(item) for item in input_info if item is not ""]
 
+    print('SEGWIT TX SCRIPT and index Value=', script)
 
+    # if multisig==1:
+    #     dersig2 = signature_bytes2
+    #     print('MULTISIG1- && DERSIG &&', dersig2)
 
-    print(input_list)
+    # elif multisig==2:
+    #     sec2=bytes.fromhex(gui_info.script_pubs[index])#does scriptpubs need to be global?, is this for every multisig or only at the end?
+    #     # dersig2=signature_bytes2+sec2
+    #     #figure out if then condition to conver the oppushbytes here if not needed
+    #     dersig2=signature_bytes2+b'\x4c'+sec2
+    #     print('MULTISIG2-FINAL && DERSIG &&', dersig2)
+    
     rawtx="".join(input_list)
     print('RAWTX=',rawtx)
     ui.output_box.setText(rawtx)
-    dersig='02'+sign_tx(rawtx, index)[2:]
-    dersigpre='02'+sign_tx(rawtx, index)
-    dersig1=dersigpre[2:]
-    print('SEGWIT DERSIG V1=',dersig1)
-    print('SEGWIT DERSIG', dersig)
+
+    if script == 98:
+        print('P2WSH DETECTED-',input_list)
+        # rawtx="".join(input_list)
+        print('RAWTX- P2WSH=',rawtx)
+        # ui.output_box.setText(rawtx)
+        ##
+        dersig='0300'+sign_tx(rawtx, index, 2)[2:]
+        dersigpre='02'+sign_tx(rawtx, index, 2)
+        dersig1=dersigpre[2:]
+        print('P2WSH DERSIG V1=',dersig1)
+        print('P2WSH DERSIG', dersig)
+
+    if multisig==1:
+        dersig=sign_tx(rawtx, index, 1)[2:]
+        print('P2WSH MULTISIG VALUE 1 DERSIG GENERATED')
+
+    elif multisig ==2:
+        dersig=sign_tx(rawtx, script, 2)
+        print('P2WSH MULTISIG VALUE 1 DERSIG GENERATED')
+
+
+
+
+##### NEED the ='0300'+ value added here but how to make sure its at the start?? -maybe this code needs to move to the ok button?
+
+    else:
+        print('P2WPKH Detected')
+        print(input_list)
+
+        dersig='02'+sign_tx(rawtx, index)[2:]
+        dersigpre='02'+sign_tx(rawtx, index)
+        dersig1=dersigpre[2:]
+        print('SEGWIT DERSIG V1=',dersig1)
+        print('SEGWIT DERSIG', dersig)
+
+
+
+    # else:
+    #     dersig=sign_tx(rawtx, index)
+    #     print('NO MULTISIG VALUE PASSED')
+
+
+
     return dersig
+
+
+
+
+# legacy p2sh code
+#     if multisig==1:
+#         dersig2 = signature_bytes2
+#         print('MULTISIG1- && DERSIG &&', dersig2)
+
+#     elif multisig==2:
+#         sec2=bytes.fromhex(script_pubs[index])#does scriptpubs need to be global?, is this for every multisig or only at the end?
+#         # dersig2=signature_bytes2+sec2
+#         #figure out if then condition to conver the oppushbytes here if not needed
+#         dersig2=signature_bytes2+b'\x4c'+sec2
+#         print('MULTISIG2-FINAL && DERSIG &&', dersig2)
+    
+#     else:
+#         sec=private_key.point.sec()
+#         sec2=bytes([len(sec)])+sec
+#         dersig=signature_bytes2+sec2
+#          ## ADD THIS TO EDU MODE PRINTS
+#         print('NON MULTISIG- && DERSIG &&', dersig)
+#          ## ADD THIS TO EDU MODE PRINTS
+#         print('***SEC2***', sec2.hex())
+#         dersig2=bytes([len(dersig)])+dersig
+
+
+
+
 
 def scalar_from_wif(priv_key):
     num = 0
@@ -1189,6 +1400,7 @@ def scalar_from_wif(priv_key):
         raise RuntimeError('bad address: {} {}'.format(checksum, hash256(combined)[:4]))
     hex_secret_trimmed=codecs.encode(combined[1:-5], 'hex')
     hex_secret_trimmed_str=hex_secret_trimmed.decode("utf-8")
+     ## ADD THIS TO EDU MODE PRINTS
     print('HEX SECRET=',hex_secret_trimmed_str)
     return int(hex_secret_trimmed_str, 16)
 
@@ -1344,11 +1556,11 @@ def tx_select_func(index):
     inputs=[ui.txtype_combobox_1,ui.txtype_combobox_2,ui.txtype_combobox_3,ui.txtype_combobox_4,ui.txtype_combobox_5,ui.txtype_combobox_6]
     address_data=['N/A','P2PKH','P2SH','P2SH-P2wPKH','P2WPKH','P2WSH','P2SH multisig', 'P2WSH multisig']
     selection=address_data[inputs[index-1].currentIndex()]
-    print('info', inputs[index].currentIndex())
+    # print('info', inputs[index].currentIndex())
     print('selection ACT', selection)
 
 
-
+    ## refactor- delete the outpub boxes below and adjust list indess in conditions below
 
     boxes=[[ui.txinamount_box1,ui.inputindex1_box,ui.txin1_box,ui.scriptpub1_box,ui.sequence1_box,ui.amount1_box,ui.scriptout1_box,ui.privkey1_box],
             [ui.txinamount_box2,ui.inputindex2_box,ui.txin2_box,ui.scriptpub2_box,ui.sequence2_box,ui.amount2_box,ui.scriptout2_box,ui.privkey2_box],
@@ -1364,8 +1576,8 @@ def tx_select_func(index):
         i[2].setDisabled(True)
         i[3].setDisabled(True)
         i[4].setDisabled(True)
-        i[5].setDisabled(True)
-        i[6].setDisabled(True)
+        # i[5].setDisabled(True)
+        # i[6].setDisabled(True)
         i[7].setDisabled(True)
 
     elif selection=='P2PKH':
@@ -1375,8 +1587,8 @@ def tx_select_func(index):
         i[2].setDisabled(False)
         i[3].setDisabled(False)
         i[4].setDisabled(False)
-        i[5].setDisabled(False)
-        i[6].setDisabled(False)
+        # i[5].setDisabled(False)
+        # i[6].setDisabled(False)
         i[7].setDisabled(False)
     
     elif selection=='P2SH':
@@ -1386,8 +1598,8 @@ def tx_select_func(index):
         i[2].setDisabled(False)
         i[3].setDisabled(False)
         i[4].setDisabled(False)
-        i[5].setDisabled(False)
-        i[6].setDisabled(False)
+        # i[5].setDisabled(False)
+        # i[6].setDisabled(False)
         i[7].setDisabled(False)
 
     elif selection=='P2SH multisig':
@@ -1397,8 +1609,8 @@ def tx_select_func(index):
         i[2].setDisabled(False)
         i[3].setDisabled(False)
         i[4].setDisabled(False)
-        i[5].setDisabled(False)
-        i[6].setDisabled(False)
+        # i[5].setDisabled(False)
+        # i[6].setDisabled(False)
         i[7].setDisabled(False)
 
     else:
@@ -1408,8 +1620,8 @@ def tx_select_func(index):
         i[2].setDisabled(False)
         i[3].setDisabled(False)
         i[4].setDisabled(False)
-        i[5].setDisabled(False)
-        i[6].setDisabled(False)
+        # i[5].setDisabled(False)
+        # i[6].setDisabled(False)
         i[7].setDisabled(False)
     return selection
 
@@ -1451,16 +1663,70 @@ def outs_activate(total):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+
+
+    splash_pix = QPixmap('test_splash.png')
+    splash = QtWidgets.QSplashScreen(splash_pix)#, QtCore.Qt.WindowStaysOnTopHint)
+    splash.setMask(splash_pix.mask())
+    splash.show()
+    time.sleep(1)
+    app.processEvents()
+
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
+    time.sleep(1)
     Dialog.show()
-    # print('DELETE ME', ui.outs)
+
+    splash.finish(Dialog)
+    
     sys.exit(app.exec_())
+    app = QApplication(sys.argv)
 
 
 
 
+
+
+# multicolour for edu mode
+# https://stackoverflow.com/questions/24287111/changing-a-single-strings-color-within-a-qtextedit
+
+
+
+# impliment p2wsh type
+# XXXXimpliment txtype and num ins/outs blank out with combobox selection
+# impliment unsigned tx button 
+# impliment educational mode- more print out debug info- different colour highlighted sections and labeled parts
+
+
+
+# p2wsh and multisig are next 
+
+
+# TODOS-
+# unsigned tx box - impliment or remove
+# copy sams bash install script
+# fee calculator- take input amounts, takes specified sats per byte, leave last amount field blank.  does hashing of tx- calculates size in kb, enters the appropriate amount 
+# in empty fee field automatically, then rehashes with new inputs  
+# varint funct- do some more work- not 100% its working as it should- try some 255/254/253 values and see what you get
+# p2sh/ p2wsh impliment
+# fix issue with boxes blanking/un blanking at wrong times when ins/txtypes selected
+# lots of testing 
+
+        #need to manually input the scriptsig for ech multisig sig at the moment- can i also get the valeu from just one?
+        #private key order matters? has to match pub keys in redeem script apprently?- https://www.soroushjp.com/2014/12/20/bitcoin-multisig-the-hard-way-understanding-raw-multisignature-bitcoin-transactions/
+
+
+# version- brown
+# outputs-red
+# txid-blue
+# previndex-pink
+# scriptsig-yellow
+# sequence- purple
+# outputs-red
+# out amount- green
+# pubouts- orange
+# locktime- black
 
 
 
