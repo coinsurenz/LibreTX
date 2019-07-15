@@ -509,14 +509,14 @@ class Ui_Dialog(object):
         self.outputformat_combobox.addItems(['0','1'])
 
 
-        self.sequence1_box.setText('feffffff')
+        self.sequence1_box.setText('fdffffff')
         self.inputindex1_box.setDisabled(True)
-        self.inputindex1_box.setText('01000000')
-        self.scriptpub1_box.setText('1976a9142c8facb21175f940311a5192c44d2ea070d07d4288ac')
-        self.scriptout1_box.setText('34GwNmcLrMsR5CCdgmte8Jm2SzAcc2yJY4')
-        self.txin1_box.setText('df85b199e88aa4681932ab88bbfa52059a8b7ad46fdfa75ce8b03b7e859f94ab')
-        self.privkey1_box.setText('cRpPQiEio6aB65UZN3rXCwvxq9tFuEHHDUwEmyJb6arke5CNQyh3')
-        self.amount1_box.setText('0.0009')
+        # self.inputindex1_box.setText('01000000')
+        # self.scriptpub1_box.setText('1976a9142c8facb21175f940311a5192c44d2ea070d07d4288ac')
+        # self.scriptout1_box.setText('34GwNmcLrMsR5CCdgmte8Jm2SzAcc2yJY4')
+        # self.txin1_box.setText('df85b199e88aa4681932ab88bbfa52059a8b7ad46fdfa75ce8b03b7e859f94ab')
+        # self.privkey1_box.setText('cRpPQiEio6aB65UZN3rXCwvxq9tFuEHHDUwEmyJb6arke5CNQyh3')
+        # self.amount1_box.setText('0.0009')
 
         self.txinamount_box2.setDisabled(True)
         self.inputindex2_box.setDisabled(True)
@@ -573,7 +573,7 @@ class Ui_Dialog(object):
         self.sequence6_box.setDisabled(True)
 
 
-        self.nlocktime_box.setText('00000000')
+        self.nlocktime_box.setText('28f11700')
         self.numins_combo.addItems(['1','2','3','4','5','6'])
         self.numouts_combo.addItems(['1','2','3','4','5','6'])
         # self.signed_button.clicked.connect(join_segwit)
@@ -591,14 +591,14 @@ class Ui_Dialog(object):
 
         
 
-        self.inputindex1_box.setText('01000000')
-        self.scriptpub1_box.setText('171600140304ea09b3e4c461d206a22ffa9d34bee3e0c8c0')
+        self.inputindex1_box.setText('00000000')
+        self.scriptpub1_box.setText('695321023482ea4ac415018c5d2b558b0a0025215dbbb1b4a74d0bf9373a748b168b302121036e1d13f19dc0f8e4f8c1b7152ea72f8fdf478129213304287836ee65ccef9442210372aed2840eb18516a8ae2a8347a99b22267645cbd516b5b762ecf178e79cb74653ae')
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
-        self.txin1_box.setText('d2c106cc032a8fc0baeea268f0bc6e7cc22a9fc2aaec6369b84c96c8456cfca7')
-        self.privkey1_box.setText('cRkRzhhJ4QfaPRs2jTefqSjNn5CEkAYB6wk5tvkNCADG3oQ6cohb')
-        # self.privkey2_box.setText('cUBhvCREE4QV5A2EcHZ4dCq4Mp6qE3hKo5cD92Ya1x4C7fXHEDna')
-        # self.privkey3_box.setText('cSb2JEMRtNhxTis9roMifiHSumTPgdQUsjiNtptV7zs5AVyussvq')
-        self.amount1_box.setText('0.000025')
+        self.txin1_box.setText('c03a84002e892dd932542d0568427caaa441e88678ea7167001f48dfe8cf13a7')
+        self.privkey1_box.setText('cQ6PbZYizoRm7S7WeyvhfckcmaD3gcJ7M8aeSJLvu6XDXg4BbsG5')
+        self.privkey2_box.setText('cTwV7qAiUNuPc5eACrtoeBHEvEdKzCm2Fa83vnEjoGhogbAp2Q2e')
+        self.privkey3_box.setText('cW78VE4LWsXLM39qcMjNqwu5f1omKambLizQr3ivMtLR9ai9TH2E')
+        self.amount1_box.setText('0.00009832')
         self.version_box.setText('02000000')
 
         # self.inputindex2_box.setText('01000000')
@@ -895,6 +895,7 @@ def ok_button():
             count+=1
 
         if item == 7:
+            print('item7 count', count)
             tx_selections=gui_data.tx_selection_types
             first_index=tx_selections.index(7)
             result=join_segwit(count, first_index)  # add flag here for p2wsh segwit
@@ -926,8 +927,8 @@ def ok_button():
         for txin in segwit_indexs:
             tx_inputs[txin].insert(2,'00')
 
-        for txin in ms_segwit_indexes:
-            tx_inputs[txin].insert(2,'00')
+        # for txin in ms_segwit_indexes[0]:
+            
 
         for txin in p2pkhindexs:
             tx_inputs[txin].insert(2, dersigs[txin])
@@ -938,7 +939,8 @@ def ok_button():
 
         if len(ms_segwit_indexes) != 0:
             print('p2wsh activated')
-            witness_program.insert(0,'0300')#[4:]
+            tx_inputs[ms_segwit_indexes[0]].insert(2,'00')
+            witness_program.insert(0,(bytes([ui.multisig_spinbox.value()+2]).hex())+'00')
 
         print('WIT', witness_program)
         print('SEGWIT TX- DERSIGS', witness_program)
@@ -1042,8 +1044,16 @@ def amount_to_txhex(amount):  #concatanate this abit- use list comprehension?s
         return (tx_bytes.hex())
 
 
+
+def txid_endian(txid):
+    input_bytes=bytes(reversed(bytes.fromhex(txid)))
+    return input_bytes.hex()
+
+
+
 def join_info(script, index):
     gui_data=tx_data()
+    print('join LEGACY script=', script)
     tx_selections=gui_data.tx_selection_types
     multisig_indexs=[]
     count=0
@@ -1068,7 +1078,9 @@ def join_info(script, index):
         print('** NOT A MULTISIG ***')
 
     if script==99:
-        multisig=3
+        multisig=2
+
+    # if script
 
 
     outs=gui_data.outs
@@ -1118,7 +1130,7 @@ def join_info(script, index):
     ui.output_box.setText(rawtx)
 
     if multisig==1:
-        dersig=sign_tx(rawtx, script, 1)
+        dersig=sign_tx(rawtx, index, 1) #CONFIRM THIS IS SUPPOSED TO BE INDEX
         print('MULTISIG VALUE 1 DERSIG GENERATED')
 
     elif multisig ==2:
@@ -1137,104 +1149,11 @@ def join_info(script, index):
     return dersig
 
 
-def txid_endian(txid):
-    input_bytes=bytes(reversed(bytes.fromhex(txid)))
-    return input_bytes.hex()
-
-
-
-def sign_tx(rawtx, index, multisig=0):
-    gui_data=tx_data()
-
-    script_pubs=gui_data.script_pubs
-
-    print('SIGN FUNCT MULTISIG VALUE ==', multisig)
-    try:
-        unsignedtx=bytes.fromhex(rawtx)
-    except ValueError:
-        ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        print('it happened again')
-        return
-
-    unsigned_tx_hash = hash256(unsignedtx)
-    ## ADD THIS TO EDU MODE PRINTS
-    print('UTXHASH',unsigned_tx_hash.hex())
-
-    input_secrets=gui_data.input_secrets
-
-    print('PRIV INDEX',ui.privkey_comboBox.currentIndex())
-    selection=ui.privkey_comboBox.currentIndex()
-    if input_secrets[index]=='00':
-        print('EMPTY PRIVKEY AT', index)
-        return input_secrets[index]
-    if selection==0:
-         input_secret=scalar_from_wif(input_secrets[index])
-         print('sacar from wif selected')
-
-    if ui.privkey_comboBox.currentIndex()==1:
-        input_secret=scalar_from_hex(input_secrets[index])
-        print('sacar from hex selected')
-    if ui.privkey_comboBox.currentIndex()==2:
-        input_secret=int(input_secrets[index])
-        print('scalar selected')
-
-
-    print('INDEXXXX', index)
-     ## ADD THIS TO EDU MODE PRINTS
-    print('INPUT SECET=', input_secret)
-
-    private_key = PrivateKey(input_secret)
-    public_key_bytes = private_key.point.sec(compressed=True)
-    signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
-    signature_bytes =signature.der() + bytes([SIGHASH_ALL])
-    signature_bytes2=bytes([len(signature_bytes)])+signature_bytes
-
-    
-    #use this if multisig only needs to be at the end- will append scriptsig in parent function
-    # if multisig==True:
-    #     dersig=signature_bytes2
-    # else:
-    #     dersig=signature_bytes2+sec2
-    if multisig==1:
-        dersig2 = signature_bytes2
-        print('MULTISIG1- && DERSIG &&', dersig2)
-
-    elif multisig==2:
-        sec2=bytes.fromhex(script_pubs[index])#does scriptpubs need to be global?, is this for every multisig or only at the end?
-        # dersig2=signature_bytes2+sec2
-        #figure out if then condition to conver the oppushbytes here if not needed
-        dersig2=signature_bytes2+b'\x4c'+sec2
-        print('MULTISIG2-FINAL && DERSIG &&', dersig2)
-
-    elif multisig==3:
-        sec2=bytes.fromhex(script_pubs[index])#does scriptpubs need to be global?, is this for every multisig or only at the end?
-        # dersig2=signature_bytes2+sec2
-        #figure out if then condition to conver the oppushbytes here if not needed
-        dersig=signature_bytes2+sec2
-        dersig2=bytes([len(dersig)])+dersig
-        print('MULTISIG2-FINAL && DERSIG &&', dersig2)
-    
-    else:
-        sec=private_key.point.sec()
-        sec2=bytes([len(sec)])+sec
-        dersig=signature_bytes2+sec2
-         ## ADD THIS TO EDU MODE PRINTS
-        print('NON MULTISIG- && DERSIG &&', dersig)
-         ## ADD THIS TO EDU MODE PRINTS
-        print('***SEC2***', sec2.hex())
-        dersig2=bytes([len(dersig)])+dersig
-
-    print(dersig2.hex())
-    return dersig2.hex()
-
-
-
-
-
-
 def join_segwit(script, index):
     gui_data=tx_data()
-    print('join p2sh')
+    print('Sign segwit Func')
+    print('join SEGWIT script=', script)
+    print('join SEGWIT index=', index)
     # print('SEGWIT SIGN FUNCT MULTISIG VALUE ==', multisig)
     tx_selections=gui_data.tx_selection_types
     multisig_indexs=[]
@@ -1249,10 +1168,10 @@ def join_segwit(script, index):
     try:
         final_index=len(tx_selections) - 1 - tx_selections[::-1].index(7)
         if final_index == script:
-            multisig =2
+            multisig =4
             print('MULTISIG FINAL VALUE DETECTED')
         else:
-            multisig=1
+            multisig=3
             print('MULTISIG NON-FINAL DETECTED')
 
     except ValueError:
@@ -1299,16 +1218,6 @@ def join_segwit(script, index):
 
     print('SEGWIT TX SCRIPT and index Value=', script)
 
-    # if multisig==1:
-    #     dersig2 = signature_bytes2
-    #     print('MULTISIG1- && DERSIG &&', dersig2)
-
-    # elif multisig==2:
-    #     sec2=bytes.fromhex(gui_info.script_pubs[index])#does scriptpubs need to be global?, is this for every multisig or only at the end?
-    #     # dersig2=signature_bytes2+sec2
-    #     #figure out if then condition to conver the oppushbytes here if not needed
-    #     dersig2=signature_bytes2+b'\x4c'+sec2
-    #     print('MULTISIG2-FINAL && DERSIG &&', dersig2)
     
     rawtx="".join(input_list)
     print('RAWTX=',rawtx)
@@ -1326,18 +1235,13 @@ def join_segwit(script, index):
         print('P2WSH DERSIG V1=',dersig1)
         print('P2WSH DERSIG', dersig)
 
-    if multisig==1:
-        dersig=sign_tx(rawtx, index, 1)[2:]
-        print('P2WSH MULTISIG VALUE 1 DERSIG GENERATED')
+    if multisig==3:
+        dersig=sign_tx(rawtx, script, 3)[2:]
+        print('P2WSH MULTISIG VALUE 3 DERSIG GENERATED')
 
-    elif multisig ==2:
-        dersig=sign_tx(rawtx, script, 2)
-        print('P2WSH MULTISIG VALUE 1 DERSIG GENERATED')
-
-
-
-
-##### NEED the ='0300'+ value added here but how to make sure its at the start?? -maybe this code needs to move to the ok button?
+    elif multisig ==4:
+        dersig=sign_tx(rawtx, script, 4)
+        print('P2WSH MULTISIG VALUE 4 DERSIG GENERATED')
 
     else:
         print('P2WPKH Detected')
@@ -1348,41 +1252,95 @@ def join_segwit(script, index):
         dersig1=dersigpre[2:]
         print('SEGWIT DERSIG V1=',dersig1)
         print('SEGWIT DERSIG', dersig)
-
-
-
-    # else:
-    #     dersig=sign_tx(rawtx, index)
-    #     print('NO MULTISIG VALUE PASSED')
-
-
-
     return dersig
 
 
 
+def sign_tx(rawtx, index, multisig=0):
+    print('SIGN TX INDEX', index)
+    gui_data=tx_data()
 
-# legacy p2sh code
-#     if multisig==1:
-#         dersig2 = signature_bytes2
-#         print('MULTISIG1- && DERSIG &&', dersig2)
+    script_pubs=gui_data.script_pubs
 
-#     elif multisig==2:
-#         sec2=bytes.fromhex(script_pubs[index])#does scriptpubs need to be global?, is this for every multisig or only at the end?
-#         # dersig2=signature_bytes2+sec2
-#         #figure out if then condition to conver the oppushbytes here if not needed
-#         dersig2=signature_bytes2+b'\x4c'+sec2
-#         print('MULTISIG2-FINAL && DERSIG &&', dersig2)
+    print('SIGN FUNCT MULTISIG VALUE ==', multisig)
+    try:
+        unsignedtx=bytes.fromhex(rawtx)
+    except ValueError:
+        ui.output_box.setText('Invalid Input- Please check your input data and try again')
+        print('it happened again')
+        return
+
+    unsigned_tx_hash = hash256(unsignedtx)
+    ## ADD THIS TO EDU MODE PRINTS
+    print('UTXHASH',unsigned_tx_hash.hex())
+
+    input_secrets=gui_data.input_secrets
+
+    print('PRIV INDEX',ui.privkey_comboBox.currentIndex())
+    selection=ui.privkey_comboBox.currentIndex()
+    if input_secrets[index]=='00':
+        print('EMPTY PRIVKEY AT', index)
+        return input_secrets[index]
+    if selection==0:
+         input_secret=scalar_from_wif(input_secrets[index])
+         print('sacar from wif selected')
+
+    if ui.privkey_comboBox.currentIndex()==1:
+        input_secret=scalar_from_hex(input_secrets[index])
+        print('sacar from hex selected')
+    if ui.privkey_comboBox.currentIndex()==2:
+        input_secret=int(input_secrets[index])
+        print('scalar selected')
+
+
+    print('INDEXXXX', index)
+     ## ADD THIS TO EDU MODE PRINTS
+    print('INPUT SECET=', input_secret)
+
+    private_key = PrivateKey(input_secret)
+    public_key_bytes = private_key.point.sec(compressed=True)
+    signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
+    signature_bytes =signature.der() + bytes([SIGHASH_ALL])
+    signature_bytes2=bytes([len(signature_bytes)])+signature_bytes
+
     
-#     else:
-#         sec=private_key.point.sec()
-#         sec2=bytes([len(sec)])+sec
-#         dersig=signature_bytes2+sec2
-#          ## ADD THIS TO EDU MODE PRINTS
-#         print('NON MULTISIG- && DERSIG &&', dersig)
-#          ## ADD THIS TO EDU MODE PRINTS
-#         print('***SEC2***', sec2.hex())
-#         dersig2=bytes([len(dersig)])+dersig
+
+    if multisig==1:
+        dersig2 = signature_bytes2
+        print('MULTISIG1- && DERSIG &&', dersig2)
+
+    elif multisig==2:
+        sec2=bytes.fromhex(script_pubs[index])#does scriptpubs need to be global?, is this for every multisig or only at the end?
+        # dersig2=signature_bytes2+sec2
+        #figure out if then condition to conver the oppushbytes here if not needed
+        dersig2=signature_bytes2+b'\x4c'+sec2
+        print('MULTISIG2-FINAL && DERSIG &&', dersig2)
+
+    elif multisig==3:
+        dersig=signature_bytes2
+        dersig2=bytes([len(dersig)])+dersig
+        print('P2WSH NON FINAL && DERSIG &&', dersig2)
+
+
+    elif multisig==4:
+        sec2=bytes.fromhex(script_pubs[index])
+        dersig=signature_bytes2
+        dersig2=dersig+sec2
+        print('P2WSH MS-FINAL && DERSIG &&', dersig2)
+    
+    else:
+        sec=private_key.point.sec()
+        sec2=bytes([len(sec)])+sec
+        dersig=signature_bytes2+sec2
+         ## ADD THIS TO EDU MODE PRINTS
+        print('NON MULTISIG- && DERSIG &&', dersig)
+         ## ADD THIS TO EDU MODE PRINTS
+        print('***SEC2***', sec2.hex())
+        dersig2=bytes([len(dersig)])+dersig
+
+    print(dersig2.hex())
+    return dersig2.hex()
+
 
 
 
@@ -1686,47 +1644,6 @@ if __name__ == "__main__":
 
 
 
-
-
-# multicolour for edu mode
-# https://stackoverflow.com/questions/24287111/changing-a-single-strings-color-within-a-qtextedit
-
-
-
-# impliment p2wsh type
-# XXXXimpliment txtype and num ins/outs blank out with combobox selection
-# impliment unsigned tx button 
-# impliment educational mode- more print out debug info- different colour highlighted sections and labeled parts
-
-
-
-# p2wsh and multisig are next 
-
-
-# TODOS-
-# unsigned tx box - impliment or remove
-# copy sams bash install script
-# fee calculator- take input amounts, takes specified sats per byte, leave last amount field blank.  does hashing of tx- calculates size in kb, enters the appropriate amount 
-# in empty fee field automatically, then rehashes with new inputs  
-# varint funct- do some more work- not 100% its working as it should- try some 255/254/253 values and see what you get
-# p2sh/ p2wsh impliment
-# fix issue with boxes blanking/un blanking at wrong times when ins/txtypes selected
-# lots of testing 
-
-        #need to manually input the scriptsig for ech multisig sig at the moment- can i also get the valeu from just one?
-        #private key order matters? has to match pub keys in redeem script apprently?- https://www.soroushjp.com/2014/12/20/bitcoin-multisig-the-hard-way-understanding-raw-multisignature-bitcoin-transactions/
-
-
-# version- brown
-# outputs-red
-# txid-blue
-# previndex-pink
-# scriptsig-yellow
-# sequence- purple
-# outputs-red
-# out amount- green
-# pubouts- orange
-# locktime- black
 
 
 
