@@ -592,13 +592,13 @@ class Ui_Dialog(object):
         
 
         self.inputindex1_box.setText('00000000')
-        self.scriptpub1_box.setText('695321023482ea4ac415018c5d2b558b0a0025215dbbb1b4a74d0bf9373a748b168b302121036e1d13f19dc0f8e4f8c1b7152ea72f8fdf478129213304287836ee65ccef9442210372aed2840eb18516a8ae2a8347a99b22267645cbd516b5b762ecf178e79cb74653ae')
+        self.scriptpub1_box.setText('1976a9141e496e03f7c17ac4177bff2125e2a199f4b5018688ac')
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
-        self.txin1_box.setText('c03a84002e892dd932542d0568427caaa441e88678ea7167001f48dfe8cf13a7')
-        self.privkey1_box.setText('cQ6PbZYizoRm7S7WeyvhfckcmaD3gcJ7M8aeSJLvu6XDXg4BbsG5')
-        self.privkey2_box.setText('cTwV7qAiUNuPc5eACrtoeBHEvEdKzCm2Fa83vnEjoGhogbAp2Q2e')
-        self.privkey3_box.setText('cW78VE4LWsXLM39qcMjNqwu5f1omKambLizQr3ivMtLR9ai9TH2E')
-        self.amount1_box.setText('0.00009832')
+        self.txin1_box.setText('235ddc5a16629c3c7c26be35bb4f5eeba600b4d9680f5825c997e32766ee0b52')
+        self.privkey1_box.setText('cUhdxeW6Fd9dNYNWGeisBo1qvmeZi4Cg8cRzN937QmHC8Zsay9or')
+        # self.privkey2_box.setText('cTwV7qAiUNuPc5eACrtoeBHEvEdKzCm2Fa83vnEjoGhogbAp2Q2e')
+        # self.privkey3_box.setText('cW78VE4LWsXLM39qcMjNqwu5f1omKambLizQr3ivMtLR9ai9TH2E')
+        self.amount1_box.setText('0.000007')
         self.version_box.setText('02000000')
 
         # self.inputindex2_box.setText('01000000')
@@ -858,7 +858,7 @@ def ok_button():
             count+=1
 
         if item == 3:
-            result=join_segwit(99, count)  # add flag here for p2wsh segwit
+            result=join_segwit(1, count) 
             witness_program.append(result)
             print('P2SH WITNESS',count, witness_program)
             p2sh_segwit_indexs.append(count)
@@ -1185,25 +1185,12 @@ def join_segwit(script, index):
         outs_list=address_to_scriptpub()
         outs=outs_list
     scriptpubs=gui_data.script_pubs
-    # redeemscript=p2sh_redeemscript(ui.scriptpub1_box.text())
-    # redeemscript_hex=bytes.fromhex(redeemscript)
-    # redeemscript_full=bytes([len(redeemscript_hex)])+redeemscript_hex
-    # print(redeemscript_full.hex())
-    # redeemscript_full2=bytes([len(redeemscript_full)])+redeemscript_full
-    # tx_redeemscript=redeemscript_full2.hex()
-    # ui.scriptpub1_box.setText(redeemscript)
-    if script== 99:
-        redeemscript=p2sh_redeemscript(scriptpubs[index])
-        redeemscript_hex=bytes.fromhex(redeemscript)
-        redeemscript_full=bytes([len(redeemscript_hex)])+redeemscript_hex
-        print('REDEEMSCRIPT',redeemscript_full.hex())
-        redeemscript_full2=bytes([len(redeemscript_full)])+redeemscript_full
-        tx_redeemscript=redeemscript_full2.hex()
-        # ui.scriptpub1_box.setText(redeemscript)
-        print('\n','I NEED TO IMPLIMENT SCRIPSIG VALUE')
 
     input_infos=gui_data.segwit_input_infos
     this_tx_input_infos="".join(input_infos[index])
+
+    print('segwit- ins to hash=',[txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()])
+
     hash_ins=hash256(bytes.fromhex(txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()))
     hash_sequence=hash256(bytes.fromhex(ui.sequence1_box.text())+bytes.fromhex(ui.sequence2_box.text())+bytes.fromhex(ui.sequence3_box.text())+bytes.fromhex(ui.sequence4_box.text())+bytes.fromhex(ui.sequence5_box.text())+bytes.fromhex(ui.sequence6_box.text()))
     hash_outs=hash256(bytes.fromhex(amount_to_txhex(ui.amount1_box.text())+outs[0]+amount_to_txhex(ui.amount2_box.text())+outs[1]+amount_to_txhex(ui.amount3_box.text())+outs[2]+amount_to_txhex(ui.amount4_box.text())+outs[3]+amount_to_txhex(ui.amount5_box.text())+outs[4]+amount_to_txhex(ui.amount6_box.text())+outs[5]))
