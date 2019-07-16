@@ -1000,8 +1000,10 @@ def ok_button():
     print('FINAL INPUT LIST',signed_items)
 
     for item in signed_items:
-        EDU_MODE_OUTPUT.append(item+'\n')
-
+        try:
+            EDU_MODE_OUTPUT.append(item+'\n')
+        except TypeError:
+            'Line 1006- ** ERROR ***'
 
     try:
         signed_tx="".join(signed_items)
@@ -1054,6 +1056,7 @@ def txid_endian(txid):
 def join_info(script, index):
     gui_data=tx_data()
     print('join LEGACY script=', script)
+    print('join LEGACY index=', index)
     tx_selections=gui_data.tx_selection_types
     multisig_indexs=[]
     count=0
@@ -1078,7 +1081,7 @@ def join_info(script, index):
         print('** NOT A MULTISIG ***')
 
     if script==99:
-        multisig=2
+        multisig=3
 
     # if script
 
@@ -1304,8 +1307,9 @@ def sign_tx(rawtx, index, multisig=0):
         print('MULTISIG2-FINAL && DERSIG &&', dersig2)
 
     elif multisig==3:
+        sec2=bytes.fromhex(script_pubs[index])
         dersig=signature_bytes2
-        dersig2=bytes([len(dersig)])+dersig
+        dersig2=bytes([len(dersig+sec2)])+dersig+sec2
         print('P2WSH NON FINAL && DERSIG &&', dersig2)
 
 
