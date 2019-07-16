@@ -815,7 +815,6 @@ def ok_button():
     multisig_indexes=[]
 
     
-    # script_pubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
     outs=gui_data.outs
     tx_selections=list(gui_data.tx_selection_types)
     print('TX SELECTS',tx_selections)
@@ -1214,18 +1213,14 @@ def join_segwit(script, index):
     ui.output_box.setText(rawtx)
 
     if script == 98:
-        print('P2WSH DETECTED-',input_list)
-        # rawtx="".join(input_list)
-        print('RAWTX- P2WSH=',rawtx)
-        # ui.output_box.setText(rawtx)
-        ##
-        dersig='0300'+sign_tx(rawtx, index, 2)[2:]
-        dersigpre='02'+sign_tx(rawtx, index, 2)
-        dersig1=dersigpre[2:]
-        print('P2WSH DERSIG V1=',dersig1)
-        print('P2WSH DERSIG', dersig)
+        print('P2WSH SINGLE-',input_list)
+        dersig='02'+sign_tx(rawtx, index, 4)
 
-    if multisig==3:
+    elif multisig==2:
+        dersig=sign_tx(rawtx, script, 3)[2:]
+        print('P2WSH MULTISIG VALUE 2 DERSIG GENERATED')
+
+    elif multisig==3:
         dersig=sign_tx(rawtx, script, 3)[2:]
         print('P2WSH MULTISIG VALUE 3 DERSIG GENERATED')
 
@@ -1301,8 +1296,6 @@ def sign_tx(rawtx, index, multisig=0):
 
     elif multisig==2:
         sec2=bytes.fromhex(script_pubs[index])#does scriptpubs need to be global?, is this for every multisig or only at the end?
-        # dersig2=signature_bytes2+sec2
-        #figure out if then condition to conver the oppushbytes here if not needed
         dersig2=signature_bytes2+b'\x4c'+sec2
         print('MULTISIG2-FINAL && DERSIG &&', dersig2)
 
@@ -1356,42 +1349,6 @@ def scalar_from_wif(priv_key):
 
 def scalar_from_hex(hexstring):
     return int(hexstring, 16)
-
-#need option for none here
-# def txtype_combo_func(data, index):
-#     gui_data=tx_data()
-#     address_data=['N/A','P2PKH','P2SH','P2SH-P2wPKH','P2WPKH','P2WSH','P2SH multisig', 'P2WSH multisig']
-#     selection=address_data[data]
-#     print('SELECTION=',selection)
-#     if selection=='P2PKH':
-#         # join_info(0, index)
-#         try:
-#             return join_info(0, index)
-#         except TypeError:
-#             ui.output_box.setText('Invalid Input- Please check your input data and try again')
-#             return
-#     elif selection=='p2shsegwit':
-#         #Change function name below to just segwit- can it handle both with script option?
-#         return join_segwit_p2sh(1, index)
-
-#     elif selection=='p2sh':
-#         join_info(1)
-#     elif selection=='P2WPKH':
-#         return join_segwit(1, index)
-#     elif selection=='p2wsh':
-#         output=join_segwit(1)
-
-#     elif selection == 'P2SH multisig':
-#         #this is an object as txcombo_types
-#         # tx_types=[ui.txtype_combobox_1.currentIndex(), ui.txtype_combobox_2.currentIndex(), ui.txtype_combobox_3.currentIndex(), ui.txtype_combobox_4.currentIndex(), ui.txtype_combobox_5.currentIndex(), ui.txtype_combobox_6.currentIndex(),]
-#         tx_selections=gui_data.tx_selection_types
-#         first_index=tx_selections.index(6)
-#         return join_info(index, first_index)
-
-
-
-
-
 
 
 def p2sh_redeemscript(pubkey):
