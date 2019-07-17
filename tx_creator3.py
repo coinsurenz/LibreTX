@@ -592,13 +592,13 @@ class Ui_Dialog(object):
         
 
         self.inputindex1_box.setText('00000000')
-        self.scriptpub1_box.setText('1976a9141e496e03f7c17ac4177bff2125e2a199f4b5018688ac')
+        self.scriptpub1_box.setText('695221033a69d0acd6e9500844ca078fbc4d81b6c95d7967b3106e31618d5987633d41a92103775ebfa3681adf4bbc6b19d3de2d4d6b911c180be46c9aca8128d428c7a0e0a821039c96c76acfc3928c36b0ea7d9eea07341adbb3d136c533637dd8c91302b6124353ae')
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
-        self.txin1_box.setText('235ddc5a16629c3c7c26be35bb4f5eeba600b4d9680f5825c997e32766ee0b52')
-        self.privkey1_box.setText('cUhdxeW6Fd9dNYNWGeisBo1qvmeZi4Cg8cRzN937QmHC8Zsay9or')
-        # self.privkey2_box.setText('cTwV7qAiUNuPc5eACrtoeBHEvEdKzCm2Fa83vnEjoGhogbAp2Q2e')
-        # self.privkey3_box.setText('cW78VE4LWsXLM39qcMjNqwu5f1omKambLizQr3ivMtLR9ai9TH2E')
-        self.amount1_box.setText('0.000007')
+        self.txin1_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade7739')
+        self.privkey1_box.setText('cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
+        self.privkey2_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG')
+        # self.privkey3_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
+        self.amount1_box.setText('0.000002')
         self.version_box.setText('02000000')
 
         # self.inputindex2_box.setText('01000000')
@@ -832,6 +832,7 @@ def ok_button():
             count+=1
             pass
 
+#make elifs?
         if item == 1:
             try:
                 result= join_info(0, count)
@@ -1027,30 +1028,6 @@ def ok_button():
 
 
 
-def tx_num_func(data):
-    num_data=['01','02','03','04','05','06', '07', '08']
-    #replace this with num to hex func
-    selection=num_data[data]
-    return selection
-
-def amount_to_txhex(amount):  #concatanate this abit- use list comprehension?s
-    if amount == '':
-        return ''
-    else:
-        amount_flt=float(amount)
-        amount_int=int(amount_flt*100000000)
-        amount_hex=format(amount_int, 'x')
-        amount_final=amount_hex.rjust(16, '0')
-        tx_bytes=bytes(reversed(bytes.fromhex(amount_final)))
-        return (tx_bytes.hex())
-
-
-
-def txid_endian(txid):
-    input_bytes=bytes(reversed(bytes.fromhex(txid)))
-    return input_bytes.hex()
-
-
 
 def join_info(script, index):
     gui_data=tx_data()
@@ -1131,8 +1108,8 @@ def join_info(script, index):
     print('RAW TX', rawtx)
     ui.output_box.setText(rawtx)
 
-    if multisig==1:
-        dersig=sign_tx(rawtx, index, 1) #CONFIRM THIS IS SUPPOSED TO BE INDEX
+    if multisig==1:# I've changed from index to script as second arg- confimr this is right
+        dersig=sign_tx(rawtx, script, 1) #CONFIRM THIS IS SUPPOSED TO BE INDEX
         print('MULTISIG VALUE 1 DERSIG GENERATED')
 
     elif multisig ==2:
@@ -1220,8 +1197,8 @@ def join_segwit(script, index):
         dersig=sign_tx(rawtx, script, 3)[2:]
         print('P2WSH MULTISIG VALUE 2 DERSIG GENERATED')
 
-    elif multisig==3:
-        dersig=sign_tx(rawtx, script, 3)[2:]
+    elif multisig==3: #multisig value below changed from 3 to 1, then to 5- i also took out the [2:]
+        dersig=sign_tx(rawtx, script, 5)
         print('P2WSH MULTISIG VALUE 3 DERSIG GENERATED')
 
     elif multisig ==4:
@@ -1311,6 +1288,14 @@ def sign_tx(rawtx, index, multisig=0):
         dersig=signature_bytes2
         dersig2=dersig+sec2
         print('P2WSH MS-FINAL && DERSIG &&', dersig2)
+
+    elif multisig==5: #can I replace 3 with this?
+        dersig=signature_bytes2
+        # dersig2=bytes([len(dersig)])+dersig
+        dersig2=dersig
+        # dersig2=dersig+sec2
+        print('P2WSH MS-NON FINAL && DERSIG &&', dersig2)
+    
     
     else:
         sec=private_key.point.sec()
@@ -1327,6 +1312,28 @@ def sign_tx(rawtx, index, multisig=0):
 
 
 
+def tx_num_func(data):
+    num_data=['01','02','03','04','05','06', '07', '08']
+    #replace this with num to hex func
+    selection=num_data[data]
+    return selection
+
+def amount_to_txhex(amount):  #concatanate this abit- use list comprehension?s
+    if amount == '':
+        return ''
+    else:
+        amount_flt=float(amount)
+        amount_int=int(amount_flt*100000000)
+        amount_hex=format(amount_int, 'x')
+        amount_final=amount_hex.rjust(16, '0')
+        tx_bytes=bytes(reversed(bytes.fromhex(amount_final)))
+        return (tx_bytes.hex())
+
+
+
+def txid_endian(txid):
+    input_bytes=bytes(reversed(bytes.fromhex(txid)))
+    return input_bytes.hex()
 
 
 
