@@ -227,6 +227,10 @@ class Ui_Libre_Tx(object):
         self.output_box = QtWidgets.QTextBrowser(Libre_Tx)
         self.output_box.setMinimumSize(QtCore.QSize(1600, 300))
         self.output_box.setMaximumSize(QtCore.QSize(1600, 300))
+        output_font = QtGui.QFont()
+        output_font.setFamily("Sans Serif")
+        output_font.setPointSize(14)
+        self.output_box.setFont(output_font)
         self.output_box.setObjectName("output_box")
         self.gridLayout.addWidget(self.output_box, 34, 0, 4, 13)
         self.icon = QtWidgets.QLabel(Libre_Tx)
@@ -1444,13 +1448,13 @@ def outs_activate(total):
 
 def colourize(text, colour):
     colourmap={'brown': '#de8d00', 'black':'#f000000', 'red':'#ff0000' , 'blue':'#0062ff', 'pink':'#ffa3a3', 'yellow':'#a3a600', 'purple':'#00dec0', 'green':'#007d00', 'orange':'#ff8400', 'forest':'#638f6f', 'violet':'#caa6ed'}
-    return"".join("<span style=\" font-size:8pt; font-weight:600; color:"+colourmap[colour]+";\" >"+text+"</span>")
+    return"".join("<span style=\" font-size:12pt; font-weight:600; color:"+colourmap[colour]+";\" >"+text+"</span>")
 
 
 
 def education_mode(tx_type, prefix, tx_inputs, outputs2):
     outputs=[(item) for item in outputs2 if item is not ""]
-    edu_mode_output=[colourize('VERSION', 'brown'), '-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>']
+    edu_mode_output=[colourize('VERSION', 'brown'), '-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']
 
     if tx_type=='segwit':
         prefix[0]=colourize(prefix[0],'brown')
@@ -1509,7 +1513,8 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2):
 
     for item in signed_items:
         try:
-            edu_mode_output.append(item+'<br>')
+            # edu_mode_output.append(item+'<br>')
+            edu_mode_output.append(item)
         except TypeError:
             print('Line 1006- ** ERROR ***')
     try:
