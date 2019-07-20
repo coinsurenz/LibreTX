@@ -446,13 +446,13 @@ class Ui_Libre_Tx(object):
         self.numins_label.setFont(font)
         self.numins_label.setObjectName("numins_label")
         self.gridLayout.addWidget(self.numins_label, 12, 1, 1, 1)
-        self.unsigned_buttton = QtWidgets.QPushButton(Libre_Tx)
+        self.unsigned_button = QtWidgets.QPushButton(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(10)
-        self.unsigned_buttton.setFont(font)
-        self.unsigned_buttton.setObjectName("unsigned_buttton")
-        self.gridLayout.addWidget(self.unsigned_buttton, 25, 6, 1, 1)
+        self.unsigned_button.setFont(font)
+        self.unsigned_button.setObjectName("unsigned_button")
+        self.gridLayout.addWidget(self.unsigned_button, 25, 6, 1, 1)
         self.hashtype_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
@@ -633,6 +633,8 @@ class Ui_Libre_Tx(object):
         self.numouts_combo.addItems(['1','2','3','4','5','6'])
         self.signed_button.clicked.connect(ok_button)
 
+        self.unsigned_button.clicked.connect(unsigned_func)
+
         self.txtype_combobox_1.addItems(['N/A','P2PKH','P2SH','P2SH-P2wPKH','P2WPKH','P2WSH','P2SH multisig', 'P2WSH multisig'])
         self.txtype_combobox_2.addItems(['N/A','P2PKH','P2SH','P2SH-P2wPKH','P2WPKH','P2WSH','P2SH multisig', 'P2WSH multisig'])
         self.txtype_combobox_3.addItems(['N/A','P2PKH','P2SH','P2SH-P2wPKH','P2WPKH','P2WSH','P2SH multisig', 'P2WSH multisig'])
@@ -653,7 +655,7 @@ class Ui_Libre_Tx(object):
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
         self.txin1_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade7739')
         self.privkey1_box.setText('cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
-        self.privkey2_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG')
+        # self.privkey2_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG')
         # self.privkey3_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
         self.amount1_box.setText('0.000002')
         self.version_box.setText('02000000')
@@ -687,7 +689,7 @@ class Ui_Libre_Tx(object):
         self.pubouts_label.setText(_translate("Libre_Tx", "Script pub outs"))
         self.currentblock_label.setText(_translate("Libre_Tx", "Block hgt/UNIX Time"))
         self.numins_label.setText(_translate("Libre_Tx", "Num Ins"))
-        self.unsigned_buttton.setText(_translate("Libre_Tx", "Create Unsigned"))
+        self.unsigned_button.setText(_translate("Libre_Tx", "Create Unsigned"))
         self.hashtype_label.setText(_translate("Libre_Tx", "Hash type"))
         self.signtx_label.setText(_translate("Libre_Tx", "Sign Tx"))
         self.nlocktime_label.setText(_translate("Libre_Tx", "N-locktime"))
@@ -801,7 +803,7 @@ def tx_data():
     return tx_data_obj(outs, tx_selection_types, segwitprefix, legacy_prefix, tx_inputs, input_secrets, script_pubs, segwit_input_infos, select_inputs)
 
 
-def ok_button():
+def ok_button(rawtx=False):
     EDU_MODE_OUTPUT=[]
     gui_data=tx_data()
     
@@ -821,6 +823,7 @@ def ok_button():
   
     count=0
     for item in tx_selections:
+
         if item == 'N/A':
             count+=1
             pass
@@ -838,7 +841,7 @@ def ok_button():
 
         if item== 'P2SH':
             try:
-                result= join_info(99, count)
+                result= join_info('single_p2sh', count)
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 return
@@ -873,7 +876,7 @@ def ok_button():
 
         if item == 'P2WSH': 
             try:
-                result=join_segwit(98, count)  # add flag here for p2wsh segwit
+                result=join_segwit('single_p2wsh', count)  # add flag here for p2wsh segwit
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 return
@@ -976,11 +979,11 @@ def ok_button():
     ## ADD THIS TO EDU MODE PRINTS
     print('FINAL INPUT LIST',signed_items)
 
-    for item in signed_items:
-        try:
-            EDU_MODE_OUTPUT.append(item+'\n')
-        except TypeError:
-            print('Line 1006- ** ERROR ***')
+    # for item in signed_items:
+    #     try:
+    #         EDU_MODE_OUTPUT.append(item+'\n')
+    #     except TypeError:
+    #         print('Line 1006- ** ERROR ***')
     try:
         signed_tx="".join(signed_items)
     except TypeError:
@@ -988,33 +991,26 @@ def ok_button():
         print('ERROR ~ LINE 1011')
         return
     if ui.education_checkbox.isChecked()==True:
-        title_txt='TX DATA'+'\n'
-        EDU_MODE_OUTPUT.insert(0,title_txt )
-        edu_mode_print="".join(EDU_MODE_OUTPUT)
-        ui.output_box.setText(edu_mode_print)
+        education_mode('legacy',prefix, tx_inputs, outputs)
     else:
         ui.output_box.setText(signed_tx)
-    # ADD TO EDU MODE
     print('SIGNED TX', signed_tx)
     return signed_tx
 
 
 
-#### with both join and the sign functions- make variable names clearer eg multisg2, the multisig and script values
 #multisig indexes- does this acually serve a purpose?
 # combine these two join fucntions together> is it worth it?
-def join_info(script, index):
+def join_info(input_data, index):
     gui_data=tx_data()
     tx_selections=gui_data.tx_selection_types
-    # multisig_indexs=[]
-    # count=0
-    # for tx in tx_selections:
-    #     if tx=='P2SH multisig':
-    #         multisig_indexs.append(count)
-    #         count+=1
+
+    if input_data=='rawtx':
+        s_value='rawtx'
+
     try:
         final_index=len(tx_selections) - 1 - tx_selections[::-1].index('P2SH multisig')
-        if final_index == script:
+        if final_index == input_data:
             s_value ='multisig_redeemscript'
             print('MULTISIG FINAL VALUE DETECTED')
         else:
@@ -1024,7 +1020,7 @@ def join_info(script, index):
         s_value=0
         print('** NOT A MULTISIG ***')
 
-    if script==99:
+    if input_data=='single_p2sh':
         s_value='p2sh_redeemscript'
 
 
@@ -1062,28 +1058,30 @@ def join_info(script, index):
     ui.output_box.setText(rawtx)
 
     if s_value=='none':# I've changed from index to script as second arg- confimr this is right
-        dersig=sign_tx(rawtx, script, s_value) #CONFIRM THIS IS SUPPOSED TO BE INDEX
+        dersig=sign_tx(rawtx, input_data, s_value) #CONFIRM THIS IS SUPPOSED TO BE INDEX
     elif s_value =='multisig_redeemscript':
-        dersig=sign_tx(rawtx, script, s_value)
+        dersig=sign_tx(rawtx, input_data, s_value)
     elif s_value =='p2sh_redeemscript': 
         dersig=sign_tx(rawtx, index, s_value)
+    elif s_value == 'rawtx':
+        ui.output_box.setText(rawtx)
+        return rawtx
     else:
         dersig=sign_tx(rawtx, index)
+
     return dersig
 
 #multisig indexes- does this acually serve a purpose?
-def join_segwit(script, index):
+def join_segwit(input_data, index):
     gui_data=tx_data()
     tx_selections=gui_data.tx_selection_types
     multisig_indexs=[]
-    # count=0
-    # for tx in tx_selections:
-    #     if tx=='P2WSH multisig':
-    #         multisig_indexs.append(count)
-    #         count+=1
+
+
+
     try:
         final_index=len(tx_selections) - 1 - tx_selections[::-1].index('P2WSH multisig')
-        if final_index == script:
+        if final_index == input_data:
             s_value ='redeemscript'
             print('MULTISIG FINAL VALUE DETECTED')
         else:
@@ -1098,6 +1096,9 @@ def join_segwit(script, index):
         s_value='public_point'
     if tx_selections[index]=='P2WSH':
         s_value='redeemscript'
+
+    if input_data=='rawtx':
+        s_value='rawtx'
 
     outs=gui_data.outs
     scriptpubs=gui_data.script_pubs
@@ -1125,22 +1126,26 @@ def join_segwit(script, index):
     rawtx="".join(input_list)
     # ADD TO EDU MODE PRINT
     print('RAWTX=',rawtx)
-    ui.output_box.setText(rawtx)
+    # ui.output_box.setText(rawtx)
 
-    if script == 98:
+    if input_data == 'single_p2wsh':
         s_value='redeemscript'
         dersig='02'+sign_tx(rawtx, index, s_value)
 
     elif s_value=='none':
-        dersig=sign_tx(rawtx, script, s_value)
+        dersig=sign_tx(rawtx, input_data, s_value)
 
     elif s_value =='redeemscript':
-        dersig=sign_tx(rawtx, script, s_value)
+        dersig=sign_tx(rawtx, input_data, s_value)
 
     elif s_value == 'public_point':
         dersig='02'+sign_tx(rawtx, index)[2:]
         dersigpre='02'+sign_tx(rawtx, index)
         dersig1=dersigpre[2:]
+    elif s_value == 'rawtx':
+        ui.output_box.setText(rawtx)
+        return rawtx
+
     return dersig
 
 
@@ -1437,6 +1442,168 @@ def outs_activate(total):
         i[1].setDisabled(False)
 
 
+def colourize(text, colour):
+    colourmap={'brown': '#de8d00', 'black':'#f000000', 'red':'#ff0000' , 'blue':'#0062ff', 'pink':'#ffa3a3', 'yellow':'#a3a600', 'purple':'#00dec0', 'green':'#007d00', 'orange':'#ff8400', 'forest':'#638f6f', 'violet':'#caa6ed'}
+    return"".join("<span style=\" font-size:8pt; font-weight:600; color:"+colourmap[colour]+";\" >"+text+"</span>")
+
+
+
+def education_mode(tx_type, prefix, tx_inputs, outputs2):
+    outputs=[(item) for item in outputs2 if item is not ""]
+    edu_mode_output=[colourize('VERSION', 'brown'), '-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>']
+
+    if tx_type=='segwit':
+        prefix[0]=colourize(prefix[0],'brown')
+        prefix[1]=colourize(prefix[1],'black')
+        prefix[2]=colourize(prefix[2],'red')
+
+    elif tx_type=='legacy':
+
+        prefix[0]=colourize(prefix[0], 'brown')
+        prefix[1]=colourize(prefix[1], 'red')
+
+    for item in tx_inputs:
+        try:
+            item[3]=colourize(item[3], 'purple')
+            item[0]=colourize(item[0], 'blue')
+            print('FEEDBACK 0',item[0])
+            item[1]=colourize(item[1], 'pink')
+            print('FEEDBACK 1',item[1])
+            item[2]=colourize(item[2], 'yellow')
+            print('FEEDBACK 2',item[2])
+        except IndexError:
+            pass
+
+    combined_inputs=[y for x in tx_inputs for y in x if x is not ""]
+    outputs[0]=colourize(outputs[0], 'red')
+    outputs[-1]=colourize(outputs[-1], 'black')
+    counter=1
+
+    ## still to be implimented- legacy hardcoded for now
+    if tx_type=='segwit':
+        outputs[-2]=colourize(outputs[-2], 'violet')
+        outputs[-2]=colourize(outputs[-1], 'black')
+        for item in outputs[1:-2]:
+            if counter %2==0:
+                colourize(item, 'orange')
+            else:
+                colourize(item, 'green')
+
+    elif tx_type=='legacy':
+        new_list=outputs[1:-1]
+        print('NL',new_list)
+        for item in range(1, len(new_list)+1):
+            print ('outs item',item)
+            if counter %2==0:
+                outputs[item]=colourize(outputs[item], 'orange')
+                print('orange')
+            else:
+                outputs[item]=colourize(outputs[item], 'green')
+                print('green')
+            counter+=1
+
+    tx_components=[prefix, combined_inputs, outputs]
+    input_info=[y for x in tx_components for y in x]
+    signed_items=[(item) for item in input_info if item is not ""]
+    print('SINGEEED', signed_items)
+
+    for item in signed_items:
+        try:
+            edu_mode_output.append(item+'<br>')
+        except TypeError:
+            print('Line 1006- ** ERROR ***')
+    try:
+        signed_tx="".join(edu_mode_output)
+    except TypeError:
+        ui.output_box.setText('Invalid Input- Please check your input data and try again')
+        print('ERROR ~ LINE 1011')
+
+    edu_mode_print="".join(prefix+combined_inputs+outputs)
+    ui.output_box.setText(signed_tx)
+
+
+def unsigned_func():
+    pass
+    # print('unsigned actovated')
+    # gui_data=tx_data()
+    # outs=gui_data.outs
+    # tx_selections=list(gui_data.tx_selection_types)
+  
+    # count=0
+    # for item in tx_selections:
+
+    #     if item == 'N/A':
+    #         count+=1
+    #         pass
+    #     if item == 'P2PKH':
+           
+    #         print('RAW ACTIVATED')
+    #         return join_info('rawtx', count)
+
+    #     if item== 'P2SH':
+    #         try:
+    #             return join_info('rawtx', count)
+    #         except TypeError:
+    #             ui.output_box.setText('Invalid Input- Please check your input data and try again')
+    #             return
+    #         count+=1
+
+    #     if item == 'P2SH-P2wPKH':
+    #         try:
+    #             return join_segwit('rawtx', count) 
+    #         except TypeError:
+    #             ui.output_box.setText('Invalid Input- Please check your input data and try again')
+    #             return
+    #         count+=1
+
+    #     if item == 'P2WPKH':
+    #         try:
+    #             return join_segwit('rawtx', count)
+    #         except TypeError:
+    #             ui.output_box.setText('Invalid Input- Please check your input data and try again')
+    #             return
+    #         count+=1
+
+    #     if item == 'P2WSH': 
+    #         try:
+    #             result=join_segwit('rawtx', count)  # add flag here for p2wsh segwit
+    #         except TypeError:
+    #             ui.output_box.setText('Invalid Input- Please check your input data and try again')
+    #             return
+    #         count+=1
+
+        # 00 here - nessesary
+        # if item == 'P2SH multisig':     
+        #     tx_selections=gui_data.tx_selection_types
+        #     first_index=tx_selections.index('P2SH multisig')
+        #     try:
+        #         result=join_info(count,first_index)
+        #     except TypeError:
+        #         ui.output_box.setText('Invalid Input- Please check your input data and try again')
+        #         return
+        #     if result=='00':
+        #         multisig_dersigs.insert(0, result)
+        #     else:
+        #         multisig_dersigs.append(result)
+        #     print('MULTI DERSIG', multisig_dersigs)
+        #     multisig_indexes.append(count)
+        #     count+=1
+
+        # if item == 'P2WSH multisig': 
+        #     tx_selections=gui_data.tx_selection_types
+        #     first_index=tx_selections.index('P2WSH multisig')
+        #     try:
+        #         result=join_segwit(count, first_index)  # add flag here for p2wsh segwit
+        #     except TypeError:
+        #         ui.output_box.setText('Invalid Input- Please check your input data and try again')
+        #         return
+        #     witness_program.append(result)
+        #     dersigs.append('00')
+        #     print('P2WSH WITNESS',count, witness_program)
+        #     ms_segwit_indexes.append(count)
+        #     count+=1
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -1457,3 +1624,5 @@ if __name__ == "__main__":
     Libre_Tx.show()
     splash.finish(Libre_Tx)
     sys.exit(app.exec_())
+
+
