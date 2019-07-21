@@ -1518,7 +1518,20 @@ def colourize(text, colour):
 
 def education_mode(tx_type, prefix, tx_inputs, outputs2):
     outputs=[(item) for item in outputs2 if item is not ""]
+    combined_inputs=[y for x in tx_inputs for y in x if x is not ""]
+    tx_components=[prefix, combined_inputs, outputs]
+    input_info=[y for x in tx_components for y in x]
+    signed_items=[(item) for item in input_info if item is not ""]
+    tx_data=''.join(signed_items)
+    tx_size=len(bytes.fromhex(tx_data))
+    print('TX SIZE', tx_size)
+    # bytes([len(bytes.fromhex(signed_tx))])
+
+
+    print('tx data', tx_data)
     edu_mode_output=[colourize('VERSION', 'brown'),  '-', colourize('SEGWIT FLAG', 'black'),'-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']
+    size_data=colourize(('TX SIZE='+str(tx_size)+' BYTES'+ '<br>'), 'black')
+    edu_mode_output.append(size_data)
 
     if tx_type=='segwit':
         prefix[0]=colourize(prefix[0],'brown')
@@ -1576,6 +1589,12 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2):
     except TypeError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
         print('ERROR ~ LINE 1011')
+
+    # tx_data=
+    # print('signed TX', signed_tx)
+    # tx_size=len(bytes.fromhex(signed_tx))
+    # print('TX SIZE', tx_size)
+    # bytes([len(bytes.fromhex(signed_tx))])
 
     edu_mode_print="".join(prefix+combined_inputs+outputs)
     ui.output_box.setText(signed_tx)
@@ -1666,6 +1685,7 @@ def unsigned_func():
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    app.setWindowIcon(QtGui.QIcon('libre_tx_working.jpg'))
 
     splash_pix = QPixmap('test_splash.png')
     splash = QtWidgets.QSplashScreen(splash_pix)
