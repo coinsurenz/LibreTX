@@ -29,12 +29,7 @@ class Ui_Libre_Tx(object):
         self.privkey6_box.setMaximumSize(QtCore.QSize(460, 16777215))
         self.privkey6_box.setObjectName("privkey6_box")
         self.gridLayout.addWidget(self.privkey6_box, 28, 4, 1, 1)
-        self.multisig_spin_label = QtWidgets.QLabel(Libre_Tx)
-        font = QtGui.QFont()
-        font.setFamily("Sans Serif")
-        self.multisig_spin_label.setFont(font)
-        self.multisig_spin_label.setObjectName("multisig_spin_label")
-        self.gridLayout.addWidget(self.multisig_spin_label, 26, 1, 1, 1)
+
         self.scriptpub1_box = QtWidgets.QLineEdit(Libre_Tx)
         self.scriptpub1_box.setMinimumSize(QtCore.QSize(450, 0))
         self.scriptpub1_box.setMaximumSize(QtCore.QSize(450, 16777215))
@@ -50,12 +45,7 @@ class Ui_Libre_Tx(object):
         self.privkey3_box.setMaximumSize(QtCore.QSize(460, 16777215))
         self.privkey3_box.setObjectName("privkey3_box")
         self.gridLayout.addWidget(self.privkey3_box, 23, 4, 1, 1)
-        self.psbt_label = QtWidgets.QLabel(Libre_Tx)
-        font = QtGui.QFont()
-        font.setFamily("Sans Serif")
-        self.psbt_label.setFont(font)
-        self.psbt_label.setObjectName("psbt_label")
-        self.gridLayout.addWidget(self.psbt_label, 18, 6, 1, 1)
+
         self.inputindex1_box = QtWidgets.QLineEdit(Libre_Tx)
         self.inputindex1_box.setMinimumSize(QtCore.QSize(80, 0))
         self.inputindex1_box.setMaximumSize(QtCore.QSize(80, 16777215))
@@ -100,9 +90,12 @@ class Ui_Libre_Tx(object):
         self.scriptout2_box.setMaximumSize(QtCore.QSize(450, 16777215))
         self.scriptout2_box.setObjectName("scriptout2_box")
         self.gridLayout.addWidget(self.scriptout2_box, 21, 3, 1, 1)
-        self.walletstyle_combobox = QtWidgets.QComboBox(Libre_Tx)
-        self.walletstyle_combobox.setObjectName("walletstyle_combobox")
-        self.gridLayout.addWidget(self.walletstyle_combobox, 8, 5, 1, 1)
+        
+        #EMULATE WALLET BOX
+        # self.walletstyle_combobox = QtWidgets.QComboBox(Libre_Tx)
+        # self.walletstyle_combobox.setObjectName("walletstyle_combobox")
+        # self.gridLayout.addWidget(self.walletstyle_combobox, 8, 5, 1, 1)
+        
         self.scriptout3_box = QtWidgets.QLineEdit(Libre_Tx)
         self.scriptout3_box.setMinimumSize(QtCore.QSize(450, 0))
         self.scriptout3_box.setMaximumSize(QtCore.QSize(450, 16777215))
@@ -191,9 +184,19 @@ class Ui_Libre_Tx(object):
         self.txin4_box.setMaximumSize(QtCore.QSize(525, 16777215))
         self.txin4_box.setObjectName("txin4_box")
         self.gridLayout.addWidget(self.txin4_box, 9, 3, 1, 1)
-        self.multisig_spinbox = QtWidgets.QSpinBox(Libre_Tx)
-        self.multisig_spinbox.setObjectName("multisig_spinbox")
-        self.gridLayout.addWidget(self.multisig_spinbox, 28, 1, 1, 1)
+
+        # MULTISIG SPINBOX
+        # self.multisig_spinbox = QtWidgets.QSpinBox(Libre_Tx)
+        # self.multisig_spinbox.setObjectName("multisig_spinbox")
+        # self.gridLayout.addWidget(self.multisig_spinbox, 28, 1, 1, 1)
+
+        # self.multisig_spin_label = QtWidgets.QLabel(Libre_Tx)
+        # font = QtGui.QFont()
+        # font.setFamily("Sans Serif")
+        # self.multisig_spin_label.setFont(font)
+        # self.multisig_spin_label.setObjectName("multisig_spin_label")
+        # self.gridLayout.addWidget(self.multisig_spin_label, 26, 1, 1, 1)
+
         self.txinamount_box1 = QtWidgets.QLineEdit(Libre_Tx)
         self.txinamount_box1.setMinimumSize(QtCore.QSize(87, 0))
         self.txinamount_box1.setMaximumSize(QtCore.QSize(87, 16777215))
@@ -516,25 +519,38 @@ class Ui_Libre_Tx(object):
         self.amount2_box.setMaximumSize(QtCore.QSize(87, 16777215))
         self.amount2_box.setObjectName("amount2_box")
         self.gridLayout.addWidget(self.amount2_box, 21, 2, 1, 1)
-        self.psbt_button = QtWidgets.QPushButton(Libre_Tx)
-        font = QtGui.QFont()
-        font.setFamily("Sans Serif")
-        font.setPointSize(10)
-        self.psbt_button.setFont(font)
-        self.psbt_button.setObjectName("psbt_button")
-        self.gridLayout.addWidget(self.psbt_button, 21, 6, 1, 1)
+
+        # PSBT BUTTOM
+        # self.psbt_button = QtWidgets.QPushButton(Libre_Tx)
+        # font = QtGui.QFont()
+        # font.setFamily("Sans Serif")
+        # font.setPointSize(10)
+        # self.psbt_button.setFont(font)
+        # self.psbt_button.setObjectName("psbt_button")
+        # self.gridLayout.addWidget(self.psbt_button, 21, 6, 1, 1)
+
+        # self.psbt_label = QtWidgets.QLabel(Libre_Tx)
+        # font = QtGui.QFont()
+        # font.setFamily("Sans Serif")
+        # self.psbt_label.setFont(font)
+        # self.psbt_label.setObjectName("psbt_label")
+        # self.gridLayout.addWidget(self.psbt_label, 18, 6, 1, 1)
+        
         self.nlocktime_box = QtWidgets.QLineEdit(Libre_Tx)
         self.nlocktime_box.setMinimumSize(QtCore.QSize(100, 0))
         self.nlocktime_box.setMaximumSize(QtCore.QSize(100, 16777215))
         self.nlocktime_box.setObjectName("nlocktime_box")
         self.gridLayout.addWidget(self.nlocktime_box, 21, 5, 1, 1)
-        self.emulatewallet_label = QtWidgets.QLabel(Libre_Tx)
-        font = QtGui.QFont()
-        font.setFamily("Sans Serif")
-        font.setPointSize(10)
-        self.emulatewallet_label.setFont(font)
-        self.emulatewallet_label.setObjectName("emulatewallet_label")
-        self.gridLayout.addWidget(self.emulatewallet_label, 7, 5, 1, 1)
+        
+        #EMULATE WALLET
+        # self.emulatewallet_label = QtWidgets.QLabel(Libre_Tx)
+        # font = QtGui.QFont()
+        # font.setFamily("Sans Serif")
+        # font.setPointSize(10)
+        # self.emulatewallet_label.setFont(font)
+        # self.emulatewallet_label.setObjectName("emulatewallet_label")
+        # self.gridLayout.addWidget(self.emulatewallet_label, 7, 5, 1, 1)
+
         self.inputindex3_box = QtWidgets.QLineEdit(Libre_Tx)
         self.inputindex3_box.setMinimumSize(QtCore.QSize(80, 0))
         self.inputindex3_box.setMaximumSize(QtCore.QSize(80, 16777215))
@@ -657,14 +673,45 @@ class Ui_Libre_Tx(object):
         self.inputindex1_box.setText('00000000')
         self.scriptpub1_box.setText('695221033a69d0acd6e9500844ca078fbc4d81b6c95d7967b3106e31618d5987633d41a92103775ebfa3681adf4bbc6b19d3de2d4d6b911c180be46c9aca8128d428c7a0e0a821039c96c76acfc3928c36b0ea7d9eea07341adbb3d136c533637dd8c91302b6124353ae')
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
+
+        self.inputindex2_box.setText('00000000')
+        self.scriptpub2_box.setText('5555ffeeffaa')
+
+        self.scriptpub3_box.setText('5555ffeeffaa')
+
+        self.scriptpub4_box.setText('5555ffeeffaa')
+
+        self.scriptpub5_box.setText('6655ffeeffbb')
+
+        # self.scriptpub6_box.setText('6655ffeeffbb')
+
+        self.inputindex3_box.setText('03000000')
+        self.inputindex4_box.setText('04000000')
+        self.scriptpub4_box.setText('695221033a69d0acd6e9500844ca078fbc4d81b6c95d7967b3106e31618d5987633d41a92103775ebfa3681adf4bbc6b19d3de2d4d6b911c180be46c9aca8128d428c7a0e0a821039c96c76acfc3928c36b0ea7d9eea07341adbb3d136c533637dd8c91302b6124353ae')
+
+        self.inputindex5_box.setText('05000000')
+
         self.txin1_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade7739')
+        self.txin3_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a1')
+        self.txin2_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a1')
+        self.txin4_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a2')
+        self.txin5_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a5')
+
         self.privkey1_box.setText('cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
-        # self.privkey2_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG')
-        # self.privkey3_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
+        self.privkey2_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG, cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
+        self.privkey3_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
+        self.privkey4_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua, cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
+        self.privkey5_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG')
+        # self.privkey6_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
         self.amount1_box.setText('0.000002')
         self.version_box.setText('02000000')
 
         self.sequence1_box.setText('fdffffff')
+
+        self.sequence2_box.setText('fcffffff')
+        self.sequence3_box.setText('fbffffff')
+        self.sequence4_box.setText('feffffff')
+        self.sequence5_box.setText('ffffffff')
 
 
 
@@ -674,8 +721,8 @@ class Ui_Libre_Tx(object):
     def retranslateUi(self, Libre_Tx):
         _translate = QtCore.QCoreApplication.translate
         Libre_Tx.setWindowTitle(_translate("Libre_Tx", "Libre Tx"))
-        self.multisig_spin_label.setText(_translate("Libre_Tx", "Multisig Total"))
-        self.psbt_label.setText(_translate("Libre_Tx", "Create PSBT"))
+        # self.multisig_spin_label.setText(_translate("Libre_Tx", "Multisig Total"))
+        # self.psbt_label.setText(_translate("Libre_Tx", "Create PSBT"))
         self.txinamounts_label.setText(_translate("Libre_Tx", "Txin Amounts"))
         self.scriptpubkey_label.setText(_translate("Libre_Tx", "Script pubkeys"))
         self.outputformat_label.setText(_translate("Libre_Tx", "Output Address Format"))
@@ -698,8 +745,8 @@ class Ui_Libre_Tx(object):
         self.signtx_label.setText(_translate("Libre_Tx", "Sign Tx"))
         self.nlocktime_label.setText(_translate("Libre_Tx", "N-locktime"))
         self.numouts_label.setText(_translate("Libre_Tx", "Num Outs"))
-        self.psbt_button.setText(_translate("Libre_Tx", "Create PSBT"))
-        self.emulatewallet_label.setText(_translate("Libre_Tx", "Emulate Wallet"))
+        # self.psbt_button.setText(_translate("Libre_Tx", "Create PSBT"))
+        # self.emulatewallet_label.setText(_translate("Libre_Tx", "Emulate Wallet"))
         self.education_checkbox.setText(_translate("Libre_Tx", "Edu Mode"))
         self.version_label.setText(_translate("Libre_Tx", "Version"))
 
@@ -778,7 +825,7 @@ EDU_MODE_SIGS=[]
 
 class tx_data_obj:
 
-    def __init__(self, outs, tx_selection_types, segwitprefix, legacy_prefix, tx_inputs, input_secrets, script_pubs, segwit_input_infos, select_inputs):
+    def __init__(self, outs, tx_selection_types, segwitprefix, legacy_prefix, tx_inputs, input_secrets, script_pubs, segwit_input_infos, select_inputs, num_ins_by_index):
         self.outs=outs
         self.tx_selection_types=tx_selection_types
         self.segwitprefix=segwitprefix
@@ -788,6 +835,7 @@ class tx_data_obj:
         self.script_pubs=script_pubs
         self.segwit_input_infos=segwit_input_infos
         self.select_inputs=select_inputs
+        self.num_ins_by_index=num_ins_by_index
 
     
 def tx_data():
@@ -804,13 +852,15 @@ def tx_data():
     script_pubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
     segwit_input_infos=[[txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+ui.scriptpub1_box.text()+amount_to_txhex(ui.txinamount_box1.text())+ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+ui.scriptpub2_box.text()+amount_to_txhex(ui.txinamount_box2.text())+ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+ui.scriptpub3_box.text()+amount_to_txhex(ui.txinamount_box3.text())+ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+ui.scriptpub4_box.text()+amount_to_txhex(ui.txinamount_box4.text())+ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+ui.scriptpub5_box.text()+amount_to_txhex(ui.txinamount_box5.text())+ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()+ui.scriptpub6_box.text()+amount_to_txhex(ui.txinamount_box6.text())+ui.sequence6_box.text()]]
     select_inputs=[ui.txtype_combobox_1,ui.txtype_combobox_2,ui.txtype_combobox_3,ui.txtype_combobox_4,ui.txtype_combobox_5,ui.txtype_combobox_6]
-    return tx_data_obj(outs, tx_selection_types, segwitprefix, legacy_prefix, tx_inputs, input_secrets, script_pubs, segwit_input_infos, select_inputs)
+    num_ins_by_index=[ui.inputindex1_box.text(),ui.inputindex2_box.text(),ui.inputindex3_box.text(),ui.inputindex4_box.text(),ui.inputindex5_box.text(),ui.inputindex6_box.text()]
+    return tx_data_obj(outs, tx_selection_types, segwitprefix, legacy_prefix, tx_inputs, input_secrets, script_pubs, segwit_input_infos, select_inputs, num_ins_by_index)
 
 
 def ok_button(rawtx=False):
     EDU_MODE_OUTPUT=[]
     gui_data=tx_data()
     
+    #do I need these now?
     dersigs=[]
     multisig_dersigs=[]
     witness_program=[]
@@ -821,173 +871,177 @@ def ok_button(rawtx=False):
     segwit_multisigs=[]
     multisig_indexes=[]
 
+    #refactor this name
+    all_inputs=[]
 
     outs=gui_data.outs
-    tx_selections=list(gui_data.tx_selection_types)
-  
+    tx_selections_raw=list(gui_data.tx_selection_types)
+    tx_selections=[item for item in tx_selections_raw if item != 'N/A']
     count=0
     for item in tx_selections:
+        print('**** NEW ITEM ******', item)
 
-        if item == 'N/A':
-            count+=1
-            pass
         if item == 'P2PKH':
             try:
                 result= join_info(0, count)
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 881')
                 return
             dersigs.append(result)
-             ## ADD THIS TO EDU MODE PRINTS
+
+            #deletebelow
             print('DERSIG', dersigs)
             p2pkhindexs.append(count)
+
+            data= gui_data.tx_inputs[count] 
+            data.insert(2,result)
+            all_inputs.append(data)
             count+=1
 
-        if item== 'P2SH':
+        elif item== 'P2SH':
             try:
                 result= join_info('single_p2sh', count)
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 899')
                 return
             dersigs.append(result)
-             ## ADD THIS TO EDU MODE PRINTS
+             ## delete below
             print('DERSIG', dersigs)
-            p2pkhindexs.append(count)### CORRECT???
+            p2pkhindexs.append(count)
+            
+            data= gui_data.tx_inputs[count] 
+            data.insert(2,result)
+            all_inputs.append(data)
             count+=1
 
-        if item == 'P2SH-P2wPKH':
+        elif item == 'P2SH-P2wPKH':
             try:
-                result=join_segwit(1, count) 
+                result=join_segwit(1, count) #change the 1 to something
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 917')
                 return
             witness_program.append(result)
+            #delete below
             print('P2SH WITNESS',count, witness_program)
             p2sh_segwit_indexs.append(count)
+            
+            data= gui_data.tx_inputs[count] 
+            data.insert(2,'171600'+(gui_data.script_pubs[txin])[6:-4])
+            all_inputs.append(data)
             count+=1
 
-        if item == 'P2WPKH':
+        elif item == 'P2WPKH':
             try:
-                result=join_segwit(1, count)
+                result=join_segwit(1, count) #change the 1 to something
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 934')
                 return
-            witness_program.append(result)
-            dersigs.append('00')
+
+            # delete 
             print('WITNESS',count, witness_program)
             segwit_indexs.append(count)
+
+            witness_program.append(result)
+            data= gui_data.tx_inputs[count] 
+            data.insert(2,'00')
+            all_inputs.append(data)
             count+=1
 
-        if item == 'P2WSH': 
+        elif item == 'P2WSH': 
             try:
-                result=join_segwit('single_p2wsh', count)  # add flag here for p2wsh segwit
+                result=join_segwit('single_p2wsh', count)
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 951')
                 return
             witness_program.append(result)
-            print('P2SH WITNESS',count, witness_program)
+            
+            #delete
             segwit_indexs.append(count)
+            print('P2SH WITNESS',count, witness_program)
+
+            data= gui_data.tx_inputs[count] 
+            data.insert(2,'00')
+            all_inputs.append(data)
             count+=1
 
-        # 00 here - nessesary
-        if item == 'P2SH multisig':     
-            tx_selections=gui_data.tx_selection_types
-            first_index=tx_selections.index('P2SH multisig')
+        elif item == 'P2SH multisig':
             try:
-                result=join_info(count,first_index)
+                result= join_info('final_multisig', count)
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 881')
                 return
-            if result=='00':
-                multisig_dersigs.insert(0, result)
-            else:
-                multisig_dersigs.append(result)
-            print('MULTI DERSIG', multisig_dersigs)
-            multisig_indexes.append(count)
+
+            #delete?
+            print('DERSIG', dersigs)
+            dersigs.append(result)
+            p2pkhindexs.append(count)
+            
+            data= gui_data.tx_inputs[count] 
+            data.insert(2,result)
+            all_inputs.append(data)
             count+=1
 
-        if item == 'P2WSH multisig': 
-            tx_selections=gui_data.tx_selection_types
-            first_index=tx_selections.index('P2WSH multisig')
+        elif item == 'P2WSH multisig': 
             try:
-                result=join_segwit(count, first_index)  # add flag here for p2wsh segwit
+                result= join_segwit('P2WSH_multisig', count)
+                split_keys=gui_data.input_secrets[count].split(',')
+                wit_items=str(len(split_keys)+2).zfill(2)
+                end_result=wit_items+'00'+result
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 881')
                 return
-            witness_program.append(result)
-            dersigs.append('00')
-            print('P2WSH WITNESS',count, witness_program)
-            ms_segwit_indexes.append(count)
+
+            witness_program.append(end_result)
+            
+            #delete this?
+            print('WIT PROG', witness_program)
+
+            data= gui_data.tx_inputs[count] 
+            data.insert(2,'00')
+            all_inputs.append(data)            
             count+=1
+
 ## change below to class reference- can I do it- i need the -outs- variables and they need to be converted if applicable first
     # can these be simplified at all?
+
     try:
         outputs=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()]
     except TypeError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again4')
         print('ERROR ~ LINE 918')
         return
-    tx_inputs=gui_data.tx_inputs
+
     if len(witness_program) != 0:
+        # deltete
         print('segwit detected')
         prefix=gui_data.segwitprefix
-        for txin in segwit_indexs:
-            tx_inputs[txin].insert(2,'00')
-        for txin in p2pkhindexs:
-            tx_inputs[txin].insert(2, dersigs[txin])
-        for txin in p2sh_segwit_indexs:
-            tx_inputs[txin].insert(2, '171600'+(gui_data.script_pubs[txin])[6:-4])
-        if len(p2pkhindexs) != 0:
-            outputs.insert((len(outputs)-1),'00')
-        if len(ms_segwit_indexes) != 0:
-            tx_inputs[ms_segwit_indexes[0]].insert(2,'00')
-            witness_program.insert(0,(bytes([len(ms_segwit_indexes)+2]).hex())+'00')
+        # delete
         print('WIT', witness_program)
         print('SEGWIT TX- DERSIGS', witness_program)
+        
         outputs.insert((len(outputs)-1),"".join(witness_program) )
-        # using and elif--- does the above function cover all instances- eg what if I have a segwit in and a multisig legacy in?
-    elif len(multisig_indexes) != 0:
-        print('multisig detected')
-        prefix=gui_data.legacy_prefix
-        # print('NUMBER OF BLANK MULTISIG SIGS', int(ui.multisig_spinbox.value())-len(multisig_indexes))
-        for item in range(0, (int(ui.multisig_spinbox.value()))-len(multisig_indexes)+1):
-            multisig_dersigs.insert(0, '00')
 
-        complete_dersig=bytes.fromhex("".join(multisig_dersigs))
-        print('COMPLETE DERSIG', complete_dersig.hex())
-        final_dersig=len_in_hex(complete_dersig)+complete_dersig
-        print('FINAL MULSIG SIG', final_dersig.hex())
-        tx_inputs[(multisig_indexes[0])].insert(2, final_dersig.hex())
 
-        for txin in list(range(0, int(ui.numins_combo.currentIndex())+1)):
-            print('TXIN NUMBER', txin)
-            try:
-                tx_inputs[txin].insert(2, dersigs[txin])
-            except IndexError:
-                pass
+    #ok to delete?
+    # elif len(multisig_indexes) != 0:
+    #     print('multisig detected')
+    #     prefix=gui_data.legacy_prefix
     else:     
         print('$$ LEGACY TX')   
         prefix=gui_data.legacy_prefix
-        for txin in list(range(0, int(ui.numins_combo.currentIndex())+1)):
-            try:
-                tx_inputs[txin].insert(2, dersigs[txin])
-            except IndexError:
-                ui.output_box.setText('Please Select a Transaction Type to Sign1')
-                return
-    combined_inputs=[y for x in tx_inputs for y in x]
-    # print('FINAL_ins',combined_inputs)
+    
+    combined_inputs=[y for x in all_inputs for y in x]
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
-    # print('FINAL input info',input_info)
     signed_items=[(item) for item in input_info if item is not ""]
-    ## ADD THIS TO EDU MODE PRINTS
-    print('FINAL INPUT LIST',signed_items)
 
-    # for item in signed_items:
-    #     try:
-    #         EDU_MODE_OUTPUT.append(item+'\n')
-    #     except TypeError:
-    #         print('Line 1006- ** ERROR ***')
     try:
         signed_tx="".join(signed_items)
     except TypeError:
@@ -995,38 +1049,29 @@ def ok_button(rawtx=False):
         print('ERROR ~ LINE 1011')
         return
     if ui.education_checkbox.isChecked()==True:
-        education_mode('legacy',prefix, tx_inputs, outputs)
+        if len(witness_program) != 0:
+            education_mode('segwit',prefix, all_inputs, outputs)
+        elif len(witness_program) == 0:
+            education_mode('legacy',prefix, all_inputs, outputs)
     else:
         ui.output_box.setText(signed_tx)
-    print('SIGNED TX', signed_tx)
+    # print('SIGNED TX', signed_tx)
     return signed_tx
 
 
-
-#multisig indexes- does this acually serve a purpose?
-# combine these two join fucntions together> is it worth it?
 def join_info(input_data, index):
     gui_data=tx_data()
     tx_selections=gui_data.tx_selection_types
 
     if input_data=='rawtx':
         s_value='rawtx'
+    elif input_data=='final_multisig':
+        s_value ='multisig_redeemscript'
 
-    try:
-        final_index=len(tx_selections) - 1 - tx_selections[::-1].index('P2SH multisig')
-        if final_index == input_data:
-            s_value ='multisig_redeemscript'
-            print('MULTISIG FINAL VALUE DETECTED')
-        else:
-            s_value='none'
-            print('MULTISIG NON-FINAL DETECTED')
-    except ValueError:
-        s_value=0
-        print('** NOT A MULTISIG ***')
-
-    if input_data=='single_p2sh':
+    elif input_data=='single_p2sh':
         s_value='p2sh_redeemscript'
-
+    else:
+        s_value='public_point'  # make this"pubkey?
 
     outs=gui_data.outs
     scriptpubs=gui_data.script_pubs
@@ -1048,10 +1093,8 @@ def join_info(input_data, index):
         
 
     combined_inputs=[y for x in inputs for y in x]
-    print('Combined ins',combined_inputs)
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
-    # print('input info',input_info)
     input_list=[(item) for item in input_info if item is not ""]
     ## USE THIS AS THE FIRST EDU MODE PRINT OUT- BREAK IT DOWN INTO COMPONENTS
     print('INPUT LIST',input_list)
@@ -1061,10 +1104,10 @@ def join_info(input_data, index):
     print('RAW TX', rawtx)
     ui.output_box.setText(rawtx)
 
-    if s_value=='none':# I've changed from index to script as second arg- confimr this is right
-        dersig=sign_tx(rawtx, input_data, s_value) #CONFIRM THIS IS SUPPOSED TO BE INDEX
+    if s_value=='none':
+        dersig=sign_tx(rawtx, index, s_value)
     elif s_value =='multisig_redeemscript':
-        dersig=sign_tx(rawtx, input_data, s_value)
+        dersig=sign_tx(rawtx, index, s_value)
     elif s_value =='p2sh_redeemscript': 
         dersig=sign_tx(rawtx, index, s_value)
     elif s_value == 'rawtx':
@@ -1075,34 +1118,23 @@ def join_info(input_data, index):
 
     return dersig
 
-#multisig indexes- does this acually serve a purpose?
+
 def join_segwit(input_data, index):
     gui_data=tx_data()
     tx_selections=gui_data.tx_selection_types
-    multisig_indexs=[]
-
-
-
-    try:
-        final_index=len(tx_selections) - 1 - tx_selections[::-1].index('P2WSH multisig')
-        if final_index == input_data:
-            s_value ='redeemscript'
-            print('MULTISIG FINAL VALUE DETECTED')
-        else:
-            s_value ='none'
-            print('MULTISIG NON-FINAL DETECTED')
-    except ValueError:
-        pass
-
-    if tx_selections[index]=='P2SH-P2wPKH':
-        s_value='public_point'
-    if tx_selections[index]=='P2WPKH':
-        s_value='public_point'
-    if tx_selections[index]=='P2WSH':
-        s_value='redeemscript'
 
     if input_data=='rawtx':
         s_value='rawtx'
+    elif input_data=='P2SH-P2wPKH': 
+        s_value='public_point'
+
+    elif input_data in ('P2WSH', 'P2WSH_multisig'):
+        s_value ='redeemscript'
+
+    elif input_data=='P2WPKH':
+        s_value='public_point'
+    else:
+        s_value='public_point' 
 
     outs=gui_data.outs
     scriptpubs=gui_data.script_pubs
@@ -1130,17 +1162,16 @@ def join_segwit(input_data, index):
     rawtx="".join(input_list)
     # ADD TO EDU MODE PRINT
     print('RAWTX=',rawtx)
-    # ui.output_box.setText(rawtx)
 
     if input_data == 'single_p2wsh':
         s_value='redeemscript'
         dersig='02'+sign_tx(rawtx, index, s_value)
 
     elif s_value=='none':
-        dersig=sign_tx(rawtx, input_data, s_value)
+        dersig=sign_tx(rawtx, index, s_value)
 
     elif s_value =='redeemscript':
-        dersig=sign_tx(rawtx, input_data, s_value)
+        dersig=sign_tx(rawtx, index, s_value)
 
     elif s_value == 'public_point':
         dersig='02'+sign_tx(rawtx, index)[2:]
@@ -1168,23 +1199,46 @@ def sign_tx(rawtx, index, s_value='public_point'):
     print('UTXHASH',unsigned_tx_hash.hex())
     input_secrets=gui_data.input_secrets
 
-    #first option- does it serve a purpose, should I use elifs here?
-    selection=ui.privkey_comboBox.currentIndex()
-    # if input_secrets[index]=='00':
-    #     return input_secrets[index]
-    if selection==0:
-         input_secret=scalar_from_wif(input_secrets[index])
+    if gui_data.tx_selection_types[index] in ('P2SH multisig', 'P2WSH multisig'):
+        signature_list=[]
+        split_keys=input_secrets[index].split(',')
+        keys_sans_whitespace=[item.strip(" ") for item in split_keys]
+        for key in keys_sans_whitespace:
+            selection=ui.privkey_comboBox.currentIndex()
+            if selection==0:
+                 input_secret=scalar_from_wif(key)
 
-    if ui.privkey_comboBox.currentIndex()==1:
-        input_secret=scalar_from_hex(input_secrets[index])
+            if ui.privkey_comboBox.currentIndex()==1:
+                input_secret=scalar_from_hex(key)
 
-    if ui.privkey_comboBox.currentIndex()==2:
-        input_secret=int(input_secrets[index])
-    private_key = PrivateKey(input_secret)
-    public_key_bytes = private_key.point.sec(compressed=True)
-    signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
-    signature_bytes =signature.der() + bytes([SIGHASH_ALL])
-    signature_bytes2=bytes([len(signature_bytes)])+signature_bytes
+            if ui.privkey_comboBox.currentIndex()==2:
+                input_secret=int(key)
+            private_key = PrivateKey(input_secret)
+            public_key_bytes = private_key.point.sec(compressed=True)
+            signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
+            signature_bytes =signature.der() + bytes([SIGHASH_ALL])
+            signature_bytes_and_length=bytes([len(signature_bytes)])+signature_bytes
+            signature_list.append(signature_bytes_and_length.hex())
+        signature_joined="".join(signature_list)
+        signature_bytes2=bytes.fromhex(signature_joined)
+
+    else:
+
+        selection=ui.privkey_comboBox.currentIndex()
+        if selection==0:
+             input_secret=scalar_from_wif(input_secrets[index])
+
+        if ui.privkey_comboBox.currentIndex()==1:
+            input_secret=scalar_from_hex(input_secrets[index])
+
+        if ui.privkey_comboBox.currentIndex()==2:
+            input_secret=int(input_secrets[index])
+        private_key = PrivateKey(input_secret)
+        public_key_bytes = private_key.point.sec(compressed=True)
+        signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
+        signature_bytes =signature.der() + bytes([SIGHASH_ALL])
+        signature_bytes2=bytes([len(signature_bytes)])+signature_bytes
+
     if s_value=='none':
         dersig_full = signature_bytes2
         print('MULTISIG1- && DERSIG &&', dersig_full)
@@ -1194,14 +1248,18 @@ def sign_tx(rawtx, index, s_value='public_point'):
         final_index=len(tx_selections) - 1 - tx_selections[::-1].index('P2SH multisig')
         print('P2SH FINAL INDEX', final_index)
         if final_index>1:
-            dersig_full=signature_bytes2+b'\x4c'+sec2
+            dersig_pre=signature_bytes2+b'\x4c'+sec2
+            dersig_full=len_in_hex(dersig_pre)+dersig_pre
         else:
-            dersig_full=signature_bytes2+sec2
+            dersig_pre=signature_bytes+sec2
+            dersig_full=len_in_hex(dersig_pre)+dersig_pre
+
     elif s_value=='p2sh_redeemscript':
         sec2=bytes.fromhex(script_pubs[index])
         dersig=signature_bytes2
         dersig_full=bytes([len(dersig+sec2)])+dersig+sec2
     elif s_value=='redeemscript':
+        print('redeemscript s value')
         sec2=bytes.fromhex(script_pubs[index])
         dersig=signature_bytes2
         dersig_full=dersig+sec2
@@ -1209,9 +1267,7 @@ def sign_tx(rawtx, index, s_value='public_point'):
         sec=private_key.point.sec()
         sec2=bytes([len(sec)])+sec
         dersig=signature_bytes2+sec2
-         ## ADD THIS TO EDU MODE PRINTS
-        # print('NON MULTISIG- && DERSIG &&', dersig)
-         ## ADD THIS TO EDU MODE PRINTS
+
         print('***SEC2***', sec2.hex())
         dersig_full=bytes([len(dersig)])+dersig
     print('DERSIG FULL',dersig_full.hex())
@@ -1249,14 +1305,18 @@ def scalar_from_wif(priv_key):
         num *= 58
         num += BASE58.index(c)
     hex_secret=hex(num)[2:]
-    combined = bytes.fromhex(hex_secret)
+    try:
+        combined = bytes.fromhex(hex_secret)
+    except ValueError:
+        ui.output_box.setText('Invalid Input- Please check your input data and try again')
+        print('ERROR ~ LINE 1310')
+        return
+
     checksum = combined[-4:]
     if hash256(combined[:-4])[:4] != checksum:
         raise RuntimeError('bad address: {} {}'.format(checksum, hash256(combined)[:4]))
     hex_secret_trimmed=codecs.encode(combined[1:-5], 'hex')
     hex_secret_trimmed_str=hex_secret_trimmed.decode("utf-8")
-     ## ADD THIS TO EDU MODE PRINTS
-    print('HEX SECRET=',hex_secret_trimmed_str)
     return int(hex_secret_trimmed_str, 16)
 
 #move this to address functions?
@@ -1301,6 +1361,7 @@ def address_to_scriptpub(outs):
                 scriptpub='1976a914'+decode_base58(item).hex()+'88ac'
             except ValueError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 1464')
                 return
 
         if item[:1]=='n':
@@ -1308,6 +1369,7 @@ def address_to_scriptpub(outs):
                 scriptpub='1976a914'+decode_base58(item).hex()+'88ac'
             except ValueError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 1472')
                 return
 
         if item[:1]=='1':
@@ -1315,6 +1377,7 @@ def address_to_scriptpub(outs):
                 scriptpub='1976a914'+decode_base58(item).hex()+'88ac'
             except ValueError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
+                print('error line 1480')
                 return
         if item=='':
             scriptpub=''
@@ -1329,6 +1392,7 @@ def int_to_nlocktime():
         block=int(ui.currentblock_box.text())
     except ValueError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
+        print('error line 1494')
         return
 
     block_hex=bytes(reversed(block.to_bytes(4, 'big')))
@@ -1454,7 +1518,7 @@ def colourize(text, colour):
 
 def education_mode(tx_type, prefix, tx_inputs, outputs2):
     outputs=[(item) for item in outputs2 if item is not ""]
-    edu_mode_output=[colourize('VERSION', 'brown'), '-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']
+    edu_mode_output=[colourize('VERSION', 'brown'),  '-', colourize('SEGWIT FLAG', 'black'),'-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']
 
     if tx_type=='segwit':
         prefix[0]=colourize(prefix[0],'brown')
@@ -1470,11 +1534,8 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2):
         try:
             item[3]=colourize(item[3], 'purple')
             item[0]=colourize(item[0], 'blue')
-            print('FEEDBACK 0',item[0])
             item[1]=colourize(item[1], 'pink')
-            print('FEEDBACK 1',item[1])
             item[2]=colourize(item[2], 'yellow')
-            print('FEEDBACK 2',item[2])
         except IndexError:
             pass
 
@@ -1482,38 +1543,31 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2):
     outputs[0]=colourize(outputs[0], 'red')
     outputs[-1]=colourize(outputs[-1], 'black')
     counter=1
-
-    ## still to be implimented- legacy hardcoded for now
     if tx_type=='segwit':
         outputs[-2]=colourize(outputs[-2], 'violet')
-        outputs[-2]=colourize(outputs[-1], 'black')
-        for item in outputs[1:-2]:
+        outputs[-1]=colourize(outputs[-1], 'black')
+        new_list=outputs[1:-2]
+        for item in range(1, len(new_list)+1):
             if counter %2==0:
-                colourize(item, 'orange')
+                outputs[item]=colourize(outputs[item], 'orange')
             else:
-                colourize(item, 'green')
+                outputs[item]=colourize(outputs[item], 'green')
+            counter+=1
 
     elif tx_type=='legacy':
         new_list=outputs[1:-1]
-        print('NL',new_list)
         for item in range(1, len(new_list)+1):
-            print ('outs item',item)
             if counter %2==0:
                 outputs[item]=colourize(outputs[item], 'orange')
-                print('orange')
             else:
                 outputs[item]=colourize(outputs[item], 'green')
-                print('green')
             counter+=1
 
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
     signed_items=[(item) for item in input_info if item is not ""]
-    print('SINGEEED', signed_items)
-
     for item in signed_items:
         try:
-            # edu_mode_output.append(item+'<br>')
             edu_mode_output.append(item)
         except TypeError:
             print('Line 1006- ** ERROR ***')
