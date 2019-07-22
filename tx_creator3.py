@@ -671,44 +671,46 @@ class Ui_Libre_Tx(object):
         self.nlocktime_box.setText('28f11700')
 
         self.inputindex1_box.setText('00000000')
-        self.scriptpub1_box.setText('695221033a69d0acd6e9500844ca078fbc4d81b6c95d7967b3106e31618d5987633d41a92103775ebfa3681adf4bbc6b19d3de2d4d6b911c180be46c9aca8128d428c7a0e0a821039c96c76acfc3928c36b0ea7d9eea07341adbb3d136c533637dd8c91302b6124353ae')
+        # self.scriptpub1_box.setText('695221033a69d0acd6e9500844ca078fbc4d81b6c95d7967b3106e31618d5987633d41a92103775ebfa3681adf4bbc6b19d3de2d4d6b911c180be46c9aca8128d428c7a0e0a821039c96c76acfc3928c36b0ea7d9eea07341adbb3d136c533637dd8c91302b6124353ae')
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
+        self.scriptout2_box.setText('nmtPKmnGRtrC9DX3rexLhiftqfTTrCUfaeP')
 
         self.inputindex2_box.setText('00000000')
-        self.scriptpub2_box.setText('5555ffeeffaa')
+        # self.scriptpub2_box.setText('5555ffeeffaa')
 
-        self.scriptpub3_box.setText('5555ffeeffaa')
+        # self.scriptpub3_box.setText('5555ffeeffaa')
 
-        self.scriptpub4_box.setText('5555ffeeffaa')
+        # self.scriptpub4_box.setText('5555ffeeffaa')
 
-        self.scriptpub5_box.setText('6655ffeeffbb')
+        # self.scriptpub5_box.setText('6655ffeeffbb')
 
         # self.scriptpub6_box.setText('6655ffeeffbb')
 
-        self.inputindex3_box.setText('03000000')
-        self.inputindex4_box.setText('04000000')
-        self.scriptpub4_box.setText('695221033a69d0acd6e9500844ca078fbc4d81b6c95d7967b3106e31618d5987633d41a92103775ebfa3681adf4bbc6b19d3de2d4d6b911c180be46c9aca8128d428c7a0e0a821039c96c76acfc3928c36b0ea7d9eea07341adbb3d136c533637dd8c91302b6124353ae')
+        self.inputindex3_box.setText('00000000')
+        self.inputindex4_box.setText('00000000')
+        # self.scriptpub4_box.setText('695221033a69d0acd6e9500844ca078fbc4d81b6c95d7967b3106e31618d5987633d41a92103775ebfa3681adf4bbc6b19d3de2d4d6b911c180be46c9aca8128d428c7a0e0a821039c96c76acfc3928c36b0ea7d9eea07341adbb3d136c533637dd8c91302b6124353ae')
 
-        self.inputindex5_box.setText('05000000')
+        self.inputindex5_box.setText('00000000')
 
-        self.txin1_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade7739')
-        self.txin3_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a1')
-        self.txin2_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a1')
-        self.txin4_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a2')
-        self.txin5_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a5')
+        # self.txin1_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade7739')
+        # self.txin3_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a1')
+        # self.txin2_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a1')
+        # self.txin4_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a2')
+        # self.txin5_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a5')
 
-        self.privkey1_box.setText('cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
-        self.privkey2_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG, cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
-        self.privkey3_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
-        self.privkey4_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua, cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
-        self.privkey5_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG')
+        # self.privkey1_box.setText('cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
+        # self.privkey2_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG, cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
+        # self.privkey3_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
+        # self.privkey4_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua, cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
+        # self.privkey5_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG')
         # self.privkey6_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
-        self.amount1_box.setText('0.000002')
+        self.amount1_box.setText('0.00001')
+        self.amount2_box.setText('0.00001')
         self.version_box.setText('02000000')
 
         self.sequence1_box.setText('fdffffff')
 
-        self.sequence2_box.setText('fcffffff')
+        self.sequence2_box.setText('feffffff')
         self.sequence3_box.setText('fbffffff')
         self.sequence4_box.setText('feffffff')
         self.sequence5_box.setText('ffffffff')
@@ -929,7 +931,7 @@ def ok_button(rawtx=False):
             p2sh_segwit_indexs.append(count)
             
             data= gui_data.tx_inputs[count] 
-            data.insert(2,'171600'+(gui_data.script_pubs[txin])[6:-4])
+            data.insert(2,'171600'+(gui_data.script_pubs[count])[6:-4])
             all_inputs.append(data)
             count+=1
 
