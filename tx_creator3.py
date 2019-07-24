@@ -671,16 +671,17 @@ class Ui_Libre_Tx(object):
         self.nlocktime_box.setText('28f11700')
 
         self.inputindex1_box.setText('00000000')
-        # self.scriptpub1_box.setText('695221033a69d0acd6e9500844ca078fbc4d81b6c95d7967b3106e31618d5987633d41a92103775ebfa3681adf4bbc6b19d3de2d4d6b911c180be46c9aca8128d428c7a0e0a821039c96c76acfc3928c36b0ea7d9eea07341adbb3d136c533637dd8c91302b6124353ae')
+        
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
-        self.scriptout2_box.setText('nmtPKmnGRtrC9DX3rexLhiftqfTTrCUfaeP')
+        self.scriptout2_box.setText('mtPKmnGRtrC9DX3rexLhiftqfTTrCUfaeP')
 
         self.inputindex2_box.setText('00000000')
-        # self.scriptpub2_box.setText('5555ffeeffaa')
+        self.scriptpub1_box.setText('23210242ede46551498cd6c6277aa9c4a2f3a2cc31423b8cd5e6be32250b4677c21b38ac')
+        self.scriptpub2_box.setText('1976a914c91de48ada9e54e33f621c080ac238bc435c930f88ac')
 
-        # self.scriptpub3_box.setText('5555ffeeffaa')
+        self.scriptpub3_box.setText('232103dd5a965a5d5ed09da86251624f253ba1d308105b201b1b97b38cd91028343ebbac')
 
-        # self.scriptpub4_box.setText('5555ffeeffaa')
+        self.scriptpub4_box.setText('1976a914c91de48ada9e54e33f621c080ac238bc435c930f88ac')
 
         # self.scriptpub5_box.setText('6655ffeeffbb')
 
@@ -692,16 +693,16 @@ class Ui_Libre_Tx(object):
 
         self.inputindex5_box.setText('00000000')
 
-        # self.txin1_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade7739')
-        # self.txin3_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a1')
-        # self.txin2_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a1')
-        # self.txin4_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a2')
-        # self.txin5_box.setText('f2dbe3f179eb7d52e094ec417c062c163612bd28082a47275e2bb4194ade77a5')
+        self.txin1_box.setText('13c3cb488e346cd782b1458a8e9a4b05cf68ad756c6953adcc462689eacf5ac8')
+        self.txin3_box.setText('2be34976670afe4a700a2f7ace92225b391cd8fd186a89ee5ccc2042806f2ea6')
+        self.txin2_box.setText('032350a1fd35bbd0cbb9a24ea4ec5a2b5d6c991c1ad8962d27ae1e5871b3d9a6')
+        self.txin4_box.setText('97ddae123dd06b491e8806ea49bef36c7c18e80dc739b2f11daed802a3c5cda1')
+        self.txin5_box.setText('6aea449f8e5856d8b872826a39d9dc162f6ea7f5a4573e5ccd728d649a25607f')
 
-        # self.privkey1_box.setText('cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
-        # self.privkey2_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG, cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
-        # self.privkey3_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
-        # self.privkey4_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua, cVGBPvF5SgvcCqur3iEbPCjycgWkzN29r3RMdFPdWGxDGdTTkYJh')
+        self.privkey1_box.setText('cNDaSFTQpiVuqjDwSRdSDeVvHLsFrQkpsphqr2vmcJHPfet9MssU')
+        self.privkey2_box.setText('cTXfkz2bTQ6P2MDvBHgES1QrJCU93rLNPi1v1EcW8Lt3YZCoFMb5')
+        self.privkey3_box.setText('cSWeJ1RrDXgiZr6LyB9NrBJFZwajnmDtu8iw5x38ps2S4oWmbmi3')
+        self.privkey4_box.setText('cTXfkz2bTQ6P2MDvBHgES1QrJCU93rLNPi1v1EcW8Lt3YZCoFMb5')
         # self.privkey5_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG')
         # self.privkey6_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
         self.amount1_box.setText('0.00001')
@@ -714,6 +715,8 @@ class Ui_Libre_Tx(object):
         self.sequence3_box.setText('fbffffff')
         self.sequence4_box.setText('feffffff')
         self.sequence5_box.setText('ffffffff')
+
+
 
 
 
@@ -879,6 +882,8 @@ def ok_button(rawtx=False):
     outs=gui_data.outs
     tx_selections_raw=list(gui_data.tx_selection_types)
     tx_selections=[item for item in tx_selections_raw if item != 'N/A']
+    is_segwit=[i for i in tx_selections if i in ('P2SH-P2wPKH','P2WPKH', 'P2WSH', 'P2WSH multisig')]
+
     count=0
     for item in tx_selections:
         print('**** NEW ITEM ******', item)
@@ -899,6 +904,10 @@ def ok_button(rawtx=False):
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
             all_inputs.append(data)
+            print(' -- TX SELECTIONS --', tx_selections)
+            if is_segwit:
+                print('^^ IS SEGWIT ^^')
+                witness_program.append('00')
             count+=1
 
         elif item== 'P2SH':
@@ -916,6 +925,9 @@ def ok_button(rawtx=False):
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
             all_inputs.append(data)
+            if is_segwit:
+                print('^^ IS SEGWIT ^^')
+                witness_program.append('00')
             count+=1
 
         elif item == 'P2SH-P2wPKH':
@@ -976,7 +988,7 @@ def ok_button(rawtx=False):
                 result= join_info('final_multisig', count)
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 881')
+                print('error line 985')
                 return
 
             #delete?
@@ -987,17 +999,20 @@ def ok_button(rawtx=False):
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
             all_inputs.append(data)
+            if is_segwit:
+                print('^^ IS SEGWIT ^^')
+                witness_program.append('00')
             count+=1
 
         elif item == 'P2WSH multisig': 
             try:
                 result= join_segwit('P2WSH_multisig', count)
                 split_keys=gui_data.input_secrets[count].split(',')
-                wit_items=str(len(split_keys)+2).zfill(2)
+                wit_items=(len(split_keys)+2).to_bytes(1, byteorder='little').hex()
                 end_result=wit_items+'00'+result
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 881')
+                print('error line 1009')
                 return
 
             witness_program.append(end_result)
@@ -1147,10 +1162,13 @@ def join_segwit(input_data, index):
     print('segwit- ins to hash=',[txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()])
 
     # can these be class levels variables
-    hash_ins=hash256(bytes.fromhex(txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()))
-    hash_sequence=hash256(bytes.fromhex(ui.sequence1_box.text())+bytes.fromhex(ui.sequence2_box.text())+bytes.fromhex(ui.sequence3_box.text())+bytes.fromhex(ui.sequence4_box.text())+bytes.fromhex(ui.sequence5_box.text())+bytes.fromhex(ui.sequence6_box.text()))
+
     try:
         hash_outs=hash256(bytes.fromhex(amount_to_txhex(ui.amount1_box.text())+outs[0]+amount_to_txhex(ui.amount2_box.text())+outs[1]+amount_to_txhex(ui.amount3_box.text())+outs[2]+amount_to_txhex(ui.amount4_box.text())+outs[3]+amount_to_txhex(ui.amount5_box.text())+outs[4]+amount_to_txhex(ui.amount6_box.text())+outs[5]))
+        
+        hash_ins=hash256(bytes.fromhex(txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()))
+    
+        hash_sequence=hash256(bytes.fromhex(ui.sequence1_box.text())+bytes.fromhex(ui.sequence2_box.text())+bytes.fromhex(ui.sequence3_box.text())+bytes.fromhex(ui.sequence4_box.text())+bytes.fromhex(ui.sequence5_box.text())+bytes.fromhex(ui.sequence6_box.text()))
     except ValueError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
         print('ERROR ~ LINE 1178')
@@ -1194,7 +1212,7 @@ def sign_tx(rawtx, index, s_value='public_point'):
         unsignedtx=bytes.fromhex(rawtx)
     except ValueError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        print('ERROR ~ LINE 1234')
+        print('ERROR ~ LINE 1206')
         return
     unsigned_tx_hash = hash256(unsignedtx)
     ## ADD THIS TO EDU MODE PRINTS
@@ -1250,10 +1268,10 @@ def sign_tx(rawtx, index, s_value='public_point'):
         final_index=len(tx_selections) - 1 - tx_selections[::-1].index('P2SH multisig')
         print('P2SH FINAL INDEX', final_index)
         if final_index>1:
-            dersig_pre=signature_bytes2+b'\x4c'+sec2
+            dersig_pre=b'\x00'+signature_bytes2+b'\x4c'+sec2
             dersig_full=len_in_hex(dersig_pre)+dersig_pre
         else:
-            dersig_pre=signature_bytes+sec2
+            dersig_pre=b'\x00'+signature_bytes+sec2
             dersig_full=len_in_hex(dersig_pre)+dersig_pre
 
     elif s_value=='p2sh_redeemscript':
