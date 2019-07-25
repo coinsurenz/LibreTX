@@ -19,8 +19,8 @@ class Ui_Libre_Tx(object):
     def setupUi(self, Libre_Tx):
         Libre_Tx.setObjectName("Libre_Tx")
         Libre_Tx.resize(1618, 862)
-        Libre_Tx.setMinimumSize(QtCore.QSize(1618, 862))
-        Libre_Tx.setMaximumSize(QtCore.QSize(1618, 886))
+        Libre_Tx.setMinimumSize(QtCore.QSize(1668, 862))
+        Libre_Tx.setMaximumSize(QtCore.QSize(1668, 886))
         Libre_Tx.setProperty("script_pubkey", "")
         self.gridLayout = QtWidgets.QGridLayout(Libre_Tx)
         self.gridLayout.setObjectName("gridLayout")
@@ -237,9 +237,9 @@ class Ui_Libre_Tx(object):
         self.output_box.setObjectName("output_box")
         self.gridLayout.addWidget(self.output_box, 34, 0, 4, 13)
         self.icon = QtWidgets.QLabel(Libre_Tx)
-        self.icon.setMaximumSize(QtCore.QSize(100, 100))
+        self.icon.setMaximumSize(QtCore.QSize(150, 150))
         self.icon.setText("")
-        self.icon.setPixmap(QtGui.QPixmap(":/images/libre_tx_working.jpg"))
+        self.icon.setPixmap(QtGui.QPixmap(":/images/libre_tx_working4.png"))
         self.icon.setScaledContents(True)
         self.icon.setObjectName("icon")
         self.gridLayout.addWidget(self.icon, 6, 6, 7, 1)
@@ -674,47 +674,49 @@ class Ui_Libre_Tx(object):
         
         self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
         self.scriptout2_box.setText('mtPKmnGRtrC9DX3rexLhiftqfTTrCUfaeP')
+        # self.scriptout3_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
+        # self.scriptout4_box.setText('mtPKmnGRtrC9DX3rexLhiftqfTTrCUfaeP')
 
-        self.inputindex2_box.setText('00000000')
-        self.scriptpub1_box.setText('23210242ede46551498cd6c6277aa9c4a2f3a2cc31423b8cd5e6be32250b4677c21b38ac')
-        self.scriptpub2_box.setText('1976a914c91de48ada9e54e33f621c080ac238bc435c930f88ac')
+        # self.inputindex2_box.setText('00000000')
+        # self.scriptpub1_box.setText('fddf01572103dd5a965a5d5ed09da86251624f253ba1d308105b201b1b97b38cd91028343ebb210242ede46551498cd6c6277aa9c4a2f3a2cc31423b8cd5e6be32250b4677c21b3821033ef27279d38332f0d5da62d3579a3f3b0d3bcfdff091cc4a8eb3ba9f4850f3b62103ea32dd2838ffca7e1dcda2df0b2c11e02ce55e79b5eda8bd1c55c1b82c8d4bfd210365cbe2fad8aee632a319fde4b83e6c12c56a9a8ec80a2066f1fd255e50d9726c21023d70a603635df162fc54a79a595d949376f1030a45cd8c462166960cca709b6721033e4fbcf4808d40a0aa3f36454d3a2fb215db47622a5ae7aab6b7a94b779a01a22103938859de4d527ee14819ad21bbac61e6729b709f7ea7f173335028320d1433c221030954ce64c64137257dd62b7b9afaf08a7edc3cb027b9795a7f3f75cc0f1f99bc21027ce598aa72d619e47687912250f819d762b5a5e3c366e940effdc3646e04c4302103ab9ae58ebc8567ccf97e491cc47f058814c12ebf5cc98dab16831f5852a412072102c25682628f1d8b77733dc6044dc2f60b5a102cee0a45f9be0f530ed12eb48d072103c5bc3e5bbca85d359477441718614027ddf55bd1ca4afc3614aaf8feacd30311210327f027d5534784871be8aef4a8cbeb2078fd34aa344ab2d606b07927701fea2d5eae')
+        # self.scriptpub2_box.setText('232103dd5a965a5d5ed09da86251624f253ba1d308105b201b1b97b38cd91028343ebbac')
 
-        self.scriptpub3_box.setText('232103dd5a965a5d5ed09da86251624f253ba1d308105b201b1b97b38cd91028343ebbac')
+        # self.scriptpub3_box.setText('2321033ef27279d38332f0d5da62d3579a3f3b0d3bcfdff091cc4a8eb3ba9f4850f3b6ac')
 
-        self.scriptpub4_box.setText('1976a914c91de48ada9e54e33f621c080ac238bc435c930f88ac')
+        # self.scriptpub4_box.setText('fdbd01552103dd5a965a5d5ed09da86251624f253ba1d308105b201b1b97b38cd91028343ebb210242ede46551498cd6c6277aa9c4a2f3a2cc31423b8cd5e6be32250b4677c21b3821033ef27279d38332f0d5da62d3579a3f3b0d3bcfdff091cc4a8eb3ba9f4850f3b62103ea32dd2838ffca7e1dcda2df0b2c11e02ce55e79b5eda8bd1c55c1b82c8d4bfd210365cbe2fad8aee632a319fde4b83e6c12c56a9a8ec80a2066f1fd255e50d9726c21023d70a603635df162fc54a79a595d949376f1030a45cd8c462166960cca709b6721033e4fbcf4808d40a0aa3f36454d3a2fb215db47622a5ae7aab6b7a94b779a01a22103938859de4d527ee14819ad21bbac61e6729b709f7ea7f173335028320d1433c221030954ce64c64137257dd62b7b9afaf08a7edc3cb027b9795a7f3f75cc0f1f99bc21027ce598aa72d619e47687912250f819d762b5a5e3c366e940effdc3646e04c4302103ab9ae58ebc8567ccf97e491cc47f058814c12ebf5cc98dab16831f5852a412072102c25682628f1d8b77733dc6044dc2f60b5a102cee0a45f9be0f530ed12eb48d072103c5bc3e5bbca85d359477441718614027ddf55bd1ca4afc3614aaf8feacd303115dae')#p2sh
 
-        # self.scriptpub5_box.setText('6655ffeeffbb')
+        # self.scriptpub5_box.setText('1976a9142d71465d2dd3d755b601c2a13b9ad1c53a9d636b88ac')
 
         # self.scriptpub6_box.setText('6655ffeeffbb')
 
-        self.inputindex3_box.setText('00000000')
-        self.inputindex4_box.setText('00000000')
+        # self.inputindex3_box.setText('00000000')
+        # self.inputindex4_box.setText('00000000')
         # self.scriptpub4_box.setText('695221033a69d0acd6e9500844ca078fbc4d81b6c95d7967b3106e31618d5987633d41a92103775ebfa3681adf4bbc6b19d3de2d4d6b911c180be46c9aca8128d428c7a0e0a821039c96c76acfc3928c36b0ea7d9eea07341adbb3d136c533637dd8c91302b6124353ae')
 
-        self.inputindex5_box.setText('00000000')
+        # self.inputindex5_box.setText('00000000')
 
-        self.txin1_box.setText('13c3cb488e346cd782b1458a8e9a4b05cf68ad756c6953adcc462689eacf5ac8')
-        self.txin3_box.setText('2be34976670afe4a700a2f7ace92225b391cd8fd186a89ee5ccc2042806f2ea6')
-        self.txin2_box.setText('032350a1fd35bbd0cbb9a24ea4ec5a2b5d6c991c1ad8962d27ae1e5871b3d9a6')
-        self.txin4_box.setText('97ddae123dd06b491e8806ea49bef36c7c18e80dc739b2f11daed802a3c5cda1')
-        self.txin5_box.setText('6aea449f8e5856d8b872826a39d9dc162f6ea7f5a4573e5ccd728d649a25607f')
+        # self.txin1_box.setText('a3bc4070f0e980098ecdbda5640b17b93137febc2f00446dcb6e0a35f6f6682e')#p2wsh ms
+        # self.txin2_box.setText('527fa91b9e633cb7327c016067ac43e96a7fe1d863b334c80ec0f3aa963e5425') #p2sh
+        # self.txin3_box.setText('8f4e093b1387fbe2271d9736e1457a6089701b049fccc16a4cb5f90d8393b318')#p2wsh
+        # self.txin4_box.setText('5a1c0e665244869eddaf3f95a5bf6b2cd0d4ab043c334311c0a9fe7f2bf523f7')#p2sh ms
+        # self.txin5_box.setText('58481f30c425233b2b61d8064489b88af7657048dcd5a5cff4b1c9b454be53df')#p2pkh
 
-        self.privkey1_box.setText('cNDaSFTQpiVuqjDwSRdSDeVvHLsFrQkpsphqr2vmcJHPfet9MssU')
-        self.privkey2_box.setText('cTXfkz2bTQ6P2MDvBHgES1QrJCU93rLNPi1v1EcW8Lt3YZCoFMb5')
-        self.privkey3_box.setText('cSWeJ1RrDXgiZr6LyB9NrBJFZwajnmDtu8iw5x38ps2S4oWmbmi3')
-        self.privkey4_box.setText('cTXfkz2bTQ6P2MDvBHgES1QrJCU93rLNPi1v1EcW8Lt3YZCoFMb5')
-        # self.privkey5_box.setText('cPViG6CgGk3jikHioCkjRPymeY97NKxdVr4SEXjfgawWsB1uT3BG')
-        # self.privkey6_box.setText('cPVmuQC4yR9a6pmMmHaTsPSzmadpb68zfbosdQ4GhFjRgtDNg8ua')
+        # self.privkey1_box.setText('cNDaSFTQpiVuqjDwSRdSDeVvHLsFrQkpsphqr2vmcJHPfet9MssU, cTXfkz2bTQ6P2MDvBHgES1QrJCU93rLNPi1v1EcW8Lt3YZCoFMb5, cTpPAQbyMuoFffDSpEW1MfD299KwR2Tjw2YYzve1WzjFRNgpBEHA, cN7uX6LH9bBBTTNSP9ap8kgcqG1ziL2BBhW9w8B8wiYua2AhnXjU, cMvxCciV2uWkvWjZvjYwm2hX4pfG1VmQxWNXn6E2V9NqNGPmexGy, cP7EHQrb1Q7cYBRaLwBXsEFDwbXnxhSqAXTMNmuRQ1HeSDa1G4de, cSTzt354Ajq5fQqg7X1ukbH1CNLF46T8pmcBoZZNr1cncfqnAKD7')
+        # self.privkey2_box.setText('cSWeJ1RrDXgiZr6LyB9NrBJFZwajnmDtu8iw5x38ps2S4oWmbmi3')
+        # self.privkey3_box.setText('cTXfkz2bTQ6P2MDvBHgES1QrJCU93rLNPi1v1EcW8Lt3YZCoFMb5')
+        # self.privkey4_box.setText('cP7EHQrb1Q7cYBRaLwBXsEFDwbXnxhSqAXTMNmuRQ1HeSDa1G4de, cSTzt354Ajq5fQqg7X1ukbH1CNLF46T8pmcBoZZNr1cncfqnAKD7, cVvQqayDFjp7HCAvvnvUFzc1rH73VBfvo5YW8ZydLorXTmGGb6pA, cRY1odJp9ZHnwoah9gKJShy1FqToyzmwFrPL29Hxbwc1j74Sk9hE, cQKeyaw1JpQsuM4dbuozvzqsmzZGr2F5wiNrCnZGNGWeXufrEjXi')
+        # self.privkey5_box.setText('cSWeJ1RrDXgiZr6LyB9NrBJFZwajnmDtu8iw5x38ps2S4oWmbmi3')
+        self.privkey6_box.setText('')
         self.amount1_box.setText('0.00001')
         self.amount2_box.setText('0.00001')
         self.version_box.setText('02000000')
 
         self.sequence1_box.setText('fdffffff')
 
-        self.sequence2_box.setText('feffffff')
-        self.sequence3_box.setText('fbffffff')
-        self.sequence4_box.setText('feffffff')
-        self.sequence5_box.setText('ffffffff')
+        # self.sequence2_box.setText('feffffff')
+        # self.sequence3_box.setText('fbffffff')
+        # self.sequence4_box.setText('feffffff')
+        # self.sequence5_box.setText('ffffffff')
 
 
 
@@ -1009,6 +1011,7 @@ def ok_button(rawtx=False):
                 result= join_segwit('P2WSH_multisig', count)
                 split_keys=gui_data.input_secrets[count].split(',')
                 wit_items=(len(split_keys)+2).to_bytes(1, byteorder='little').hex()
+                ## do these as two separate entries so can create diff colour codes in printout - just append to wintess?
                 end_result=wit_items+'00'+result
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
@@ -1185,6 +1188,7 @@ def join_segwit(input_data, index):
 
     if input_data == 'single_p2wsh':
         s_value='redeemscript'
+         ## do these as two separate entries so can create diff colour codes in printout - just append to wintess?
         dersig='02'+sign_tx(rawtx, index, s_value)
 
     elif s_value=='none':
@@ -1194,6 +1198,7 @@ def join_segwit(input_data, index):
         dersig=sign_tx(rawtx, index, s_value)
 
     elif s_value == 'public_point':
+         ## do these as two separate entries so can create diff colour codes in printout - just append to wintess?
         dersig='02'+sign_tx(rawtx, index)[2:]
         dersigpre='02'+sign_tx(rawtx, index)
         dersig1=dersigpre[2:]
@@ -1224,6 +1229,7 @@ def sign_tx(rawtx, index, s_value='public_point'):
         split_keys=input_secrets[index].split(',')
         keys_sans_whitespace=[item.strip(" ") for item in split_keys]
         for key in keys_sans_whitespace:
+            print('MS KEY', key)
             selection=ui.privkey_comboBox.currentIndex()
             if selection==0:
                  input_secret=scalar_from_wif(key)
@@ -1238,8 +1244,10 @@ def sign_tx(rawtx, index, s_value='public_point'):
             signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
             signature_bytes =signature.der() + bytes([SIGHASH_ALL])
             signature_bytes_and_length=bytes([len(signature_bytes)])+signature_bytes
+            print('SIG BYTES N LEN',signature_bytes_and_length.hex() )
             signature_list.append(signature_bytes_and_length.hex())
         signature_joined="".join(signature_list)
+        print('SIG JOINED', signature_joined)
         signature_bytes2=bytes.fromhex(signature_joined)
 
     else:
@@ -1265,10 +1273,22 @@ def sign_tx(rawtx, index, s_value='public_point'):
     elif s_value=="multisig_redeemscript":
         sec2=bytes.fromhex(script_pubs[index])
         tx_selections=list(gui_data.tx_selection_types)
-        final_index=len(tx_selections) - 1 - tx_selections[::-1].index('P2SH multisig')
-        print('P2SH FINAL INDEX', final_index)
-        if final_index>1:
-            dersig_pre=b'\x00'+signature_bytes2+b'\x4c'+sec2
+        # final_index=len(tx_selections) - 1 - tx_selections[::-1].index('P2SH multisig')
+        # print('P2SH FINAL INDEX', final_index)
+        # if final_index>1:
+
+
+        if len(sec2.hex())>133070:
+            dersig_pre=b'\x00'+signature_bytes2+b'\x4E'+sec2[1:]
+            dersig_full=len_in_hex(dersig_pre)+dersig_pre
+        elif len(sec2.hex())>510:
+            dersig_pre=b'\x00'+signature_bytes2+b'\x4D'+sec2[1:]
+            dersig_full=len_in_hex(dersig_pre)+dersig_pre
+        elif len(sec2.hex())>504:
+            dersig_pre=b'\x00'+signature_bytes2+b'\x4C'+sec2[1:]
+            dersig_full=len_in_hex(dersig_pre)+dersig_pre
+        elif len(sec2.hex())>152:
+            dersig_pre=b'\x00'+signature_bytes2+b'\x4C'+sec2
             dersig_full=len_in_hex(dersig_pre)+dersig_pre
         else:
             dersig_pre=b'\x00'+signature_bytes+sec2
@@ -1705,7 +1725,7 @@ def unsigned_func():
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    app.setWindowIcon(QtGui.QIcon('libre_tx_working.jpg'))
+    app.setWindowIcon(QtGui.QIcon('libre_tx_working2.jpg'))
 
     splash_pix = QPixmap('test_splash.png')
     splash = QtWidgets.QSplashScreen(splash_pix)
