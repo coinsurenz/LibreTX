@@ -1569,7 +1569,6 @@ def colourize(text, colour):
     return"".join("<span style=\" font-size:12pt; font-weight:600; color:"+colourmap[colour]+";\" >"+text+"</span>")
 
 
-
 def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_values=None):
     outputs=[(item) for item in outputs2 if item is not ""]
     combined_inputs=[y for x in tx_inputs for y in x if x is not ""]
@@ -1583,8 +1582,11 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
     # bytes([len(bytes.fromhex(signed_tx))])
 
 
-    print('tx size', tx_data)
+    print('tx size', tx_size)
     edu_mode_output=[colourize('VERSION', 'brown'),  '-', colourize('SEGWIT FLAG', 'black'),'-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']
+    tx_id=bytes(reversed(hash256(bytes.fromhex(tx_data)))).hex()
+    tx_id_output=colourize(('TX ID='+str(tx_id)+'<br>'), 'black')
+    edu_mode_output.append(tx_id_output)
     size_data=colourize(('TX SIZE='+str(tx_size)+' BYTES'+ '<br>'), 'black')
     edu_mode_output.append(size_data)
     if tx_type=='segwit':
@@ -1592,6 +1594,8 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
         print('tx weight', tx_weight)
         weight_data=colourize(('TX WEIGHT='+str(tx_weight)+' BYTES'+ '<br>'), 'black')
         edu_mode_output.append(weight_data)
+        
+
 
     if tx_type=='segwit':
         prefix[0]=colourize(prefix[0],'brown')
