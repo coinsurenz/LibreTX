@@ -583,7 +583,7 @@ class Ui_Libre_Tx(object):
         self.txtype_combobox_5.activated.connect(lambda: tx_select_func(5))
         self.txtype_combobox_6.activated.connect(lambda: tx_select_func(6))
 
-        self.numins_combo.activated.connect(lambda: ins_activate(self.numins_combo.currentIndex()+1))
+        # self.numins_combo.activated.connect(lambda: ins_activate(self.numins_combo.currentIndex()+1))
         self.numouts_combo.activated.connect(lambda: outs_activate(self.numouts_combo.currentIndex()+1))
 
 
@@ -758,6 +758,8 @@ class Ui_Libre_Tx(object):
         self.version_label.setText(_translate("Libre_Tx", "Version"))
 
 
+
+### can all these be the default values above, instead of 1, 2 etc 
         self.txtype_combobox_1.setItemText(0, _translate("Txcreator", "N/A"))
         self.txtype_combobox_1.setItemText(1, _translate("Txcreator", "P2PKH"))
         self.txtype_combobox_1.setItemText(2, _translate("Txcreator", "P2SH"))
@@ -812,8 +814,9 @@ class Ui_Libre_Tx(object):
         self.txtype_combobox_6.setItemText(6, _translate("Txcreator", "P2SH multisig"))
         self.txtype_combobox_6.setItemText(7, _translate("Txcreator", "P2WSH multisig"))
 
-        self.outputformat_combobox.setItemText(0, _translate("Txcreator", "Scriptpub"))
-        self.outputformat_combobox.setItemText(1, _translate("Txcreator", "Address"))
+
+        self.outputformat_combobox.setItemText(0, _translate("Txcreator", "Address"))
+        self.outputformat_combobox.setItemText(1, _translate("Txcreator", "Scriptpub"))
 
         self.privkey_comboBox.setItemText(0, _translate("Txcreator", "WIF"))
         self.privkey_comboBox.setItemText(1, _translate("Txcreator", "Hex"))
@@ -847,7 +850,7 @@ class tx_data_obj:
     
 def tx_data():
     outs=[ui.scriptout1_box.text(),ui.scriptout2_box.text(),ui.scriptout3_box.text(),ui.scriptout4_box.text(),ui.scriptout5_box.text(),ui.scriptout6_box.text()] 
-    if ui.outputformat_combobox.currentIndex() ==1: 
+    if ui.outputformat_combobox.currentIndex() ==0: 
         outs_list=address_to_scriptpub(outs)
         outs=outs_list
     tx_selection_types=[ui.txtype_combobox_1.currentText(), ui.txtype_combobox_2.currentText(), ui.txtype_combobox_3.currentText(), ui.txtype_combobox_4.currentText(), ui.txtype_combobox_5.currentText(), ui.txtype_combobox_6.currentText()]
@@ -866,17 +869,18 @@ def tx_data():
 def ok_button(rawtx=False):
     EDU_MODE_OUTPUT=[]
     gui_data=tx_data()
-    
+
+    ## NEWW    
     #do I need these now?
-    dersigs=[]
-    multisig_dersigs=[]
+    # dersigs=[]
+    # multisig_dersigs=[]
     witness_program=[]
-    segwit_indexs=[]
-    p2sh_segwit_indexs=[]
-    ms_segwit_indexes=[]
-    p2pkhindexs=[]
-    segwit_multisigs=[]
-    multisig_indexes=[]
+    # segwit_indexs=[]
+    # p2sh_segwit_indexs=[]
+    # ms_segwit_indexes=[]
+    # p2pkhindexs=[]
+    # segwit_multisigs=[]
+    # multisig_indexes=[]
 
     #refactor this name
     all_inputs=[]
@@ -897,18 +901,13 @@ def ok_button(rawtx=False):
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 881')
                 return
-            dersigs.append(result)
-
-            #deletebelow
-            print('DERSIG', dersigs)
-            p2pkhindexs.append(count)
-
+            #NEWW
+            # dersigs.append(result)
+            
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
             all_inputs.append(data)
-            print(' -- TX SELECTIONS --', tx_selections)
             if is_segwit:
-                print('^^ IS SEGWIT ^^')
                 witness_program.append('00')
             count+=1
 
@@ -919,16 +918,11 @@ def ok_button(rawtx=False):
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 899')
                 return
-            dersigs.append(result)
-             ## delete below
-            print('DERSIG', dersigs)
-            p2pkhindexs.append(count)
-            
+            # dersigs.append(result)            
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
             all_inputs.append(data)
             if is_segwit:
-                print('^^ IS SEGWIT ^^')
                 witness_program.append('00')
             count+=1
 
@@ -940,10 +934,6 @@ def ok_button(rawtx=False):
                 print('error line 917')
                 return
             witness_program.append(result)
-            #delete below
-            print('P2SH WITNESS',count, witness_program)
-            p2sh_segwit_indexs.append(count)
-            
             data= gui_data.tx_inputs[count] 
             data.insert(2,'171600'+(gui_data.script_pubs[count])[6:-4])
             all_inputs.append(data)
@@ -956,11 +946,6 @@ def ok_button(rawtx=False):
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 934')
                 return
-
-            # delete 
-            print('WITNESS',count, witness_program)
-            segwit_indexs.append(count)
-
             witness_program.append(result)
             data= gui_data.tx_inputs[count] 
             data.insert(2,'00')
@@ -975,11 +960,6 @@ def ok_button(rawtx=False):
                 print('error line 951')
                 return
             witness_program.append(result)
-            
-            #delete
-            segwit_indexs.append(count)
-            print('P2SH WITNESS',count, witness_program)
-
             data= gui_data.tx_inputs[count] 
             data.insert(2,'00')
             all_inputs.append(data)
@@ -992,17 +972,10 @@ def ok_button(rawtx=False):
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 985')
                 return
-
-            #delete?
-            print('DERSIG', dersigs)
-            dersigs.append(result)
-            p2pkhindexs.append(count)
-            
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
             all_inputs.append(data)
             if is_segwit:
-                print('^^ IS SEGWIT ^^')
                 witness_program.append('00')
             count+=1
 
@@ -1017,12 +990,7 @@ def ok_button(rawtx=False):
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 1009')
                 return
-
             witness_program.append(end_result)
-            
-            #delete this?
-            print('WIT PROG', witness_program)
-
             data= gui_data.tx_inputs[count] 
             data.insert(2,'00')
             all_inputs.append(data)            
@@ -1039,23 +1007,16 @@ def ok_button(rawtx=False):
         return
 
     if len(witness_program) != 0:
-        # deltete
-        print('segwit detected')
         prefix=gui_data.segwitprefix
         # delete
-        print('WIT', witness_program)
-        print('SEGWIT TX- DERSIGS', witness_program)
-
         #can this just be outputs, or does the next line mean this is nessesary?
-        sz4_outs1=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()]
-        sz4_outs="".join(sz4_outs1)
+        # sz4_outs1=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()]
+        # sz4_outs="".join(sz4_outs1)
+        sz4_outs="".join([tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()])
         outputs.insert((len(outputs)-1),"".join(witness_program) )
 
 
-    #ok to delete?
-    # elif len(multisig_indexes) != 0:
-    #     print('multisig detected')
-    #     prefix=gui_data.legacy_prefix
+#NEWW
     else:     
         print('$$ LEGACY TX')   
         prefix=gui_data.legacy_prefix
@@ -1064,7 +1025,7 @@ def ok_button(rawtx=False):
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
     signed_items=[(item) for item in input_info if item is not ""]
-
+## can the line above be the input for joined items below?
     try:
         signed_tx="".join(signed_items)
     except TypeError:
@@ -1086,7 +1047,6 @@ def ok_button(rawtx=False):
 
     else:
         ui.output_box.setText(signed_tx)
-    # print('SIGNED TX', signed_tx)
     return signed_tx
 
 
@@ -1097,6 +1057,7 @@ def join_info(input_data, index):
     gui_data=tx_data()
     tx_selections=gui_data.tx_selection_types
 
+# can these just be passed straight to the end without these lines?
     if input_data=='rawtx':
         s_value='rawtx'
     elif input_data=='final_multisig':
@@ -1111,13 +1072,17 @@ def join_info(input_data, index):
     scriptpubs=gui_data.script_pubs
     insert_points=[ui.inputindex1_box.text, ui.inputindex2_box.text, ui.inputindex3_box.text, ui.inputindex4_box.text, ui.inputindex5_box.text, ui.inputindex6_box.text]
     
+    #NEWW
     # can these be changes to gui.data.prefix etc?
-    prefix=[ui.version_box.text(),tx_num_func(ui.numins_combo.currentIndex())]
-    inputs=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
-    
+    # prefix=[ui.version_box.text(),tx_num_func(ui.numins_combo.currentIndex())]
+    # inputs=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
+    prefix=gui_data.legacy_prefix
+    inputs=gui_data.tx_inputs
+
     #same witht his but has the -outs- issue as above
     outputs=[tx_num_func(ui.numouts_combo.currentIndex()),amount_to_txhex(ui.amount1_box.text())+outs[0]+amount_to_txhex(ui.amount2_box.text())+outs[1]+amount_to_txhex(ui.amount3_box.text())+outs[2]+amount_to_txhex(ui.amount4_box.text())+outs[3]+amount_to_txhex(ui.amount5_box.text())+outs[4]+amount_to_txhex(ui.amount6_box.text())+outs[5],ui.nlocktime_box.text(),ui.hashtype_box.text()]
     inputs[index].insert(2, scriptpubs[index])
+
     #can this be a class level variable?
     
     num_ins=list(range(0, int(ui.numins_combo.currentIndex()+1)))
@@ -1157,6 +1122,7 @@ def join_segwit(input_data, index):
     gui_data=tx_data()
     tx_selections=gui_data.tx_selection_types
 
+# can these just be passed straight to the end without these lines?
     if input_data=='rawtx':
         s_value='rawtx'
     elif input_data=='P2SH-P2wPKH': 
@@ -1177,9 +1143,6 @@ def join_segwit(input_data, index):
 
     # ADD BELOW TO EDU MODE
     print('segwit- ins to hash=',[txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()])
-
-    # can these be class levels variables
-
     try:
         hash_outs=hash256(bytes.fromhex(amount_to_txhex(ui.amount1_box.text())+outs[0]+amount_to_txhex(ui.amount2_box.text())+outs[1]+amount_to_txhex(ui.amount3_box.text())+outs[2]+amount_to_txhex(ui.amount4_box.text())+outs[3]+amount_to_txhex(ui.amount5_box.text())+outs[4]+amount_to_txhex(ui.amount6_box.text())+outs[5]))
         
@@ -1190,27 +1153,20 @@ def join_segwit(input_data, index):
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
         print('ERROR ~ LINE 1178')
         return
-
-
-
     input_info=[ui.version_box.text(), hash_ins.hex(),hash_sequence.hex(),this_tx_input_infos, hash_outs.hex(),ui.nlocktime_box.text(), ui.hashtype_box.text()]
     input_list=[(item) for item in input_info if item is not ""]
     
     rawtx="".join(input_list)
     # ADD TO EDU MODE PRINT
     print('RAWTX=',rawtx)
-
     if input_data == 'single_p2wsh':
         s_value='redeemscript'
          ## do these as two separate entries so can create diff colour codes in printout - just append to wintess?
         dersig='02'+sign_tx(rawtx, index, s_value)
-
     elif s_value=='none':
         dersig=sign_tx(rawtx, index, s_value)
-
     elif s_value =='redeemscript':
         dersig=sign_tx(rawtx, index, s_value)
-
     elif s_value == 'public_point':
          ## do these as two separate entries so can create diff colour codes in printout - just append to wintess?
         dersig='02'+sign_tx(rawtx, index)[2:]
@@ -1219,7 +1175,6 @@ def join_segwit(input_data, index):
     elif s_value == 'rawtx':
         ui.output_box.setText(rawtx)
         return rawtx
-
     return dersig
 
 
@@ -1237,7 +1192,6 @@ def sign_tx(rawtx, index, s_value='public_point'):
     ## ADD THIS TO EDU MODE PRINTS
     print('UTXHASH',unsigned_tx_hash.hex())
     input_secrets=gui_data.input_secrets
-
     if gui_data.tx_selection_types[index] in ('P2SH multisig', 'P2WSH multisig'):
         signature_list=[]
         split_keys=input_secrets[index].split(',')
@@ -1247,10 +1201,8 @@ def sign_tx(rawtx, index, s_value='public_point'):
             selection=ui.privkey_comboBox.currentIndex()
             if selection==0:
                  input_secret=scalar_from_wif(key)
-
             if ui.privkey_comboBox.currentIndex()==1:
                 input_secret=scalar_from_hex(key)
-
             if ui.privkey_comboBox.currentIndex()==2:
                 input_secret=int(key)
             private_key = PrivateKey(input_secret)
@@ -1262,73 +1214,60 @@ def sign_tx(rawtx, index, s_value='public_point'):
             signature_list.append(signature_bytes_and_length.hex())
         signature_joined="".join(signature_list)
         print('SIG JOINED', signature_joined)
-        signature_bytes2=bytes.fromhex(signature_joined)
+        signature_bytes=bytes.fromhex(signature_joined)
 
     else:
-
         selection=ui.privkey_comboBox.currentIndex()
         if selection==0:
              input_secret=scalar_from_wif(input_secrets[index])
-
         if ui.privkey_comboBox.currentIndex()==1:
             input_secret=scalar_from_hex(input_secrets[index])
-
         if ui.privkey_comboBox.currentIndex()==2:
             input_secret=int(input_secrets[index])
         private_key = PrivateKey(input_secret)
         public_key_bytes = private_key.point.sec(compressed=True)
         signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
-        signature_bytes =signature.der() + bytes([SIGHASH_ALL])
-        signature_bytes2=bytes([len(signature_bytes)])+signature_bytes
+        der_sig=signature.der() + bytes([SIGHASH_ALL])
+        signature_bytes=bytes([len(der_sig)])+der_sig
 
     if s_value=='none':
-        dersig_full = signature_bytes2
-        print('MULTISIG1- && DERSIG &&', dersig_full)
+        dersig_full = signature_bytes
     elif s_value=="multisig_redeemscript":
-        sec2=bytes.fromhex(script_pubs[index])
+        dersig_s=bytes.fromhex(script_pubs[index])
         tx_selections=list(gui_data.tx_selection_types)
-        # final_index=len(tx_selections) - 1 - tx_selections[::-1].index('P2SH multisig')
-        # print('P2SH FINAL INDEX', final_index)
-        # if final_index>1:
-
-
-        if len(sec2.hex())>133070:
-            dersig_pre=b'\x00'+signature_bytes2+b'\x4E'+sec2[1:]
+        if len(dersig_s.hex())>133070:
+            dersig_pre=b'\x00'+signature_bytes+b'\x4E'+dersig_s[1:]
             dersig_full=len_in_hex(dersig_pre)+dersig_pre
-        elif len(sec2.hex())>510:
-            dersig_pre=b'\x00'+signature_bytes2+b'\x4D'+sec2[1:]
+        elif len(dersig_s.hex())>510:
+            dersig_pre=b'\x00'+signature_bytes+b'\x4D'+dersig_s[1:]
             dersig_full=len_in_hex(dersig_pre)+dersig_pre
-        elif len(sec2.hex())>504:
-            dersig_pre=b'\x00'+signature_bytes2+b'\x4C'+sec2[1:]
+        elif len(dersig_s.hex())>504:
+            dersig_pre=b'\x00'+signature_bytes+b'\x4C'+dersig_s[1:]
             dersig_full=len_in_hex(dersig_pre)+dersig_pre
-        elif len(sec2.hex())>152:
-            dersig_pre=b'\x00'+signature_bytes2+b'\x4C'+sec2
+        elif len(dersig_s.hex())>152:
+            dersig_pre=b'\x00'+signature_bytes+b'\x4C'+dersig_s
             dersig_full=len_in_hex(dersig_pre)+dersig_pre
         else:
-            dersig_pre=b'\x00'+signature_bytes2+sec2
+            dersig_pre=b'\x00'+signature_bytes+dersig_s
             dersig_full=len_in_hex(dersig_pre)+dersig_pre
-
     elif s_value=='p2sh_redeemscript':
-        sec2=bytes.fromhex(script_pubs[index])
-        dersig=signature_bytes2
-        dersig_full=bytes([len(dersig+sec2)])+dersig+sec2
+        dersig_s=bytes.fromhex(script_pubs[index])
+        dersig_full=bytes([len(signature_bytes+dersig_s)])+signature_bytes+dersig_s
     elif s_value=='redeemscript':
-        print('redeemscript s value')
-        sec2=bytes.fromhex(script_pubs[index])
-        dersig=signature_bytes2
-        dersig_full=dersig+sec2
+        dersig_s=bytes.fromhex(script_pubs[index])
+        dersig_full=signature_bytes+dersig_s
     elif s_value== 'public_point':
-        sec=private_key.point.sec()
-        sec2=bytes([len(sec)])+sec
-        dersig=signature_bytes2+sec2
-
-        print('***SEC2***', sec2.hex())
+        dersig_point=private_key.point.sec()
+        dersig_s=bytes([len(dersig_point)])+dersig_point
+        dersig=signature_bytes+dersig_s
+        #append to print out?
+        print('***DERSIG S***', dersig_s.hex())
         dersig_full=bytes([len(dersig)])+dersig
     print('DERSIG FULL',dersig_full.hex())
     return dersig_full.hex()
 
 
-
+#can I remove/append this?
 def tx_num_func(data):
     num_data=['01','02','03','04','05','06', '07', '08']
     selection=num_data[data]
@@ -1378,6 +1317,7 @@ def scalar_from_hex(hexstring):
     return int(hexstring, 16)
 
 
+#all these - change to ' if item in x etcto cover both
 #move this to address functions?
 def address_to_scriptpub(outs):
     scriptpub_list=[]
@@ -1448,9 +1388,7 @@ def int_to_nlocktime():
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
         print('error line 1494')
         return
-
     block_hex=bytes(reversed(block.to_bytes(4, 'big')))
-    print(block_hex)
     ui.nlocktime_box.setText(block_hex.hex())
     return block_hex
 
@@ -1530,25 +1468,26 @@ def tx_select_func(index):
         i[7].setDisabled(False)
     return selection
 
-def ins_activate(total):
-    boxes=[[ui.txinamount_box1,ui.inputindex1_box,ui.txin1_box,ui.scriptpub1_box,ui.sequence1_box,ui.privkey1_box],
-        [ui.txinamount_box2,ui.inputindex2_box,ui.txin2_box,ui.scriptpub2_box,ui.sequence2_box,ui.privkey2_box],
-        [ui.txinamount_box3,ui.inputindex3_box,ui.txin3_box,ui.scriptpub3_box,ui.sequence3_box,ui.privkey3_box],
-        [ui.txinamount_box4,ui.inputindex4_box,ui.txin4_box,ui.scriptpub4_box,ui.sequence4_box,ui.privkey4_box],
-        [ui.txinamount_box5,ui.inputindex5_box,ui.txin5_box,ui.scriptpub5_box,ui.sequence5_box,ui.privkey5_box],
-        [ui.txinamount_box6,ui.inputindex6_box,ui.txin6_box,ui.scriptpub6_box,ui.sequence6_box,ui.privkey6_box]]
-    for outlist in boxes:
-        for item in outlist:
-            item.setDisabled(True)
-    outs_list=range(0,total)
-    for out in outs_list:
-        i=boxes[out]
-        i[0].setDisabled(False)
-        i[1].setDisabled(False)
-        i[2].setDisabled(False)
-        i[3].setDisabled(False)
-        i[4].setDisabled(False)
-        i[5].setDisabled(False)
+# removed so only tx selection will select a box- better?
+# def ins_activate(total):
+#     boxes=[[ui.txinamount_box1,ui.inputindex1_box,ui.txin1_box,ui.scriptpub1_box,ui.sequence1_box,ui.privkey1_box],
+#         [ui.txinamount_box2,ui.inputindex2_box,ui.txin2_box,ui.scriptpub2_box,ui.sequence2_box,ui.privkey2_box],
+#         [ui.txinamount_box3,ui.inputindex3_box,ui.txin3_box,ui.scriptpub3_box,ui.sequence3_box,ui.privkey3_box],
+#         [ui.txinamount_box4,ui.inputindex4_box,ui.txin4_box,ui.scriptpub4_box,ui.sequence4_box,ui.privkey4_box],
+#         [ui.txinamount_box5,ui.inputindex5_box,ui.txin5_box,ui.scriptpub5_box,ui.sequence5_box,ui.privkey5_box],
+#         [ui.txinamount_box6,ui.inputindex6_box,ui.txin6_box,ui.scriptpub6_box,ui.sequence6_box,ui.privkey6_box]]
+#     for outlist in boxes:
+#         for item in outlist:
+#             item.setDisabled(True)
+#     outs_list=range(0,total)
+#     for out in outs_list:
+#         i=boxes[out]
+#         i[0].setDisabled(False)
+#         i[1].setDisabled(False)
+#         i[2].setDisabled(False)
+#         i[3].setDisabled(False)
+#         i[4].setDisabled(False)
+#         i[5].setDisabled(False)
 
 
 def outs_activate(total):
@@ -1664,12 +1603,6 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
     except TypeError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
         print('ERROR ~ LINE 1011')
-
-    # tx_data=
-    # print('signed TX', signed_tx)
-    # tx_size=len(bytes.fromhex(signed_tx))
-    # print('TX SIZE', tx_size)
-    # bytes([len(bytes.fromhex(signed_tx))])
 
     edu_mode_print="".join(prefix+combined_inputs+outputs)
     ui.output_box.setText(signed_tx)
