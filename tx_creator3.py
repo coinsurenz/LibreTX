@@ -1584,17 +1584,28 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
 
     print('tx size', tx_size)
     edu_mode_output=[colourize('VERSION', 'brown'),  '-', colourize('SEGWIT FLAG', 'black'),'-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']
-    tx_id=bytes(reversed(hash256(bytes.fromhex(tx_data)))).hex()
-    tx_id_output=colourize(('TX ID='+str(tx_id)+'<br>'), 'black')
-    edu_mode_output.append(tx_id_output)
-    size_data=colourize(('TX SIZE='+str(tx_size)+' BYTES'+ '<br>'), 'black')
-    edu_mode_output.append(size_data)
+    
+    
+    
     if tx_type=='segwit':
+        tx_id=bytes(reversed(hash256(bytes.fromhex(sz4_values)))).hex()
+        tx_id_output=colourize(('TX ID='+str(tx_id)+'<br>'), 'black')
+        edu_mode_output.append(tx_id_output)
+        size_data=colourize(('TX SIZE='+str(tx_size)+' BYTES'+ '<br>'), 'black')
+        edu_mode_output.append(size_data)
         tx_weight=(len(bytes.fromhex(sz4_values))*4)+len(bytes.fromhex(sz1_values))
         print('tx weight', tx_weight)
         weight_data=colourize(('TX WEIGHT='+str(tx_weight)+' BYTES'+ '<br>'), 'black')
         edu_mode_output.append(weight_data)
-        
+        virt_size=colourize(('VIRTUAL SIZE='+str(int(tx_weight/4))+' BYTES'+ '<br>'), 'black')
+        edu_mode_output.append(virt_size)
+    else:
+        tx_id=bytes(reversed(hash256(bytes.fromhex(tx_data)))).hex()
+        tx_id_output=colourize(('TX ID='+str(tx_id)+'<br>'), 'black')
+        edu_mode_output.append(tx_id_output)
+        size_data=colourize(('TX SIZE='+str(tx_size)+' BYTES'+ '<br>'), 'black')
+        edu_mode_output.append(size_data)
+
 
 
     if tx_type=='segwit':
