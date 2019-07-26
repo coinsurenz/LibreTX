@@ -57,6 +57,7 @@ class Ui_Libre_Tx(object):
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(10)
+        font.setBold(True)
         self.txinamounts_label.setFont(font)
         self.txinamounts_label.setObjectName("txinamounts_label")
         self.gridLayout.addWidget(self.txinamounts_label, 5, 0, 1, 1)
@@ -66,6 +67,7 @@ class Ui_Libre_Tx(object):
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setItalic(False)
+        font.setBold(True)
         self.scriptpubkey_label.setFont(font)
         self.scriptpubkey_label.setObjectName("scriptpubkey_label")
         self.gridLayout.addWidget(self.scriptpubkey_label, 5, 4, 1, 1)
@@ -77,6 +79,7 @@ class Ui_Libre_Tx(object):
         font.setPointSize(9)
         font.setBold(False)
         font.setWeight(50)
+        font.setBold(True)
         self.outputformat_label.setFont(font)
         self.outputformat_label.setObjectName("outputformat_label")
         self.gridLayout.addWidget(self.outputformat_label, 5, 5, 1, 1)
@@ -90,11 +93,6 @@ class Ui_Libre_Tx(object):
         self.scriptout2_box.setMaximumSize(QtCore.QSize(450, 16777215))
         self.scriptout2_box.setObjectName("scriptout2_box")
         self.gridLayout.addWidget(self.scriptout2_box, 21, 3, 1, 1)
-        
-        #EMULATE WALLET BOX
-        # self.walletstyle_combobox = QtWidgets.QComboBox(Libre_Tx)
-        # self.walletstyle_combobox.setObjectName("walletstyle_combobox")
-        # self.gridLayout.addWidget(self.walletstyle_combobox, 8, 5, 1, 1)
         
         self.scriptout3_box = QtWidgets.QLineEdit(Libre_Tx)
         self.scriptout3_box.setMinimumSize(QtCore.QSize(450, 0))
@@ -163,7 +161,8 @@ class Ui_Libre_Tx(object):
         self.privkeyformat_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
-        font.setPointSize(11)
+        font.setPointSize(10)
+        font.setBold(True)
         self.privkeyformat_label.setFont(font)
         self.privkeyformat_label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.privkeyformat_label.setObjectName("privkeyformat_label")
@@ -176,6 +175,7 @@ class Ui_Libre_Tx(object):
         self.unsigned_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.unsigned_label.setFont(font)
         self.unsigned_label.setObjectName("unsigned_label")
         self.gridLayout.addWidget(self.unsigned_label, 23, 6, 1, 1)
@@ -184,18 +184,6 @@ class Ui_Libre_Tx(object):
         self.txin4_box.setMaximumSize(QtCore.QSize(525, 16777215))
         self.txin4_box.setObjectName("txin4_box")
         self.gridLayout.addWidget(self.txin4_box, 9, 3, 1, 1)
-
-        # MULTISIG SPINBOX
-        # self.multisig_spinbox = QtWidgets.QSpinBox(Libre_Tx)
-        # self.multisig_spinbox.setObjectName("multisig_spinbox")
-        # self.gridLayout.addWidget(self.multisig_spinbox, 28, 1, 1, 1)
-
-        # self.multisig_spin_label = QtWidgets.QLabel(Libre_Tx)
-        # font = QtGui.QFont()
-        # font.setFamily("Sans Serif")
-        # self.multisig_spin_label.setFont(font)
-        # self.multisig_spin_label.setObjectName("multisig_spin_label")
-        # self.gridLayout.addWidget(self.multisig_spin_label, 26, 1, 1, 1)
 
         self.txinamount_box1 = QtWidgets.QLineEdit(Libre_Tx)
         self.txinamount_box1.setMinimumSize(QtCore.QSize(87, 0))
@@ -233,13 +221,14 @@ class Ui_Libre_Tx(object):
         output_font = QtGui.QFont()
         output_font.setFamily("Sans Serif")
         output_font.setPointSize(14)
+        font.setBold(True)
         self.output_box.setFont(output_font)
         self.output_box.setObjectName("output_box")
         self.gridLayout.addWidget(self.output_box, 34, 0, 4, 13)
         self.icon = QtWidgets.QLabel(Libre_Tx)
-        self.icon.setMaximumSize(QtCore.QSize(150, 150))
+        self.icon.setMaximumSize(QtCore.QSize(150, 195))
         self.icon.setText("")
-        self.icon.setPixmap(QtGui.QPixmap(":/images/libre_tx_working4.png"))
+        self.icon.setPixmap(QtGui.QPixmap(":/images/libre_tx_working5.png"))
         self.icon.setScaledContents(True)
         self.icon.setObjectName("icon")
         self.gridLayout.addWidget(self.icon, 6, 6, 7, 1)
@@ -249,6 +238,7 @@ class Ui_Libre_Tx(object):
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(10)
+        font.setBold(True)
         self.tx_type1_label.setFont(font)
         self.tx_type1_label.setObjectName("tx_type1_label")
         self.gridLayout.addWidget(self.tx_type1_label, 5, 1, 1, 1)
@@ -261,6 +251,7 @@ class Ui_Libre_Tx(object):
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(10)
+        font.setBold(True)
         self.sequence_label.setFont(font)
         self.sequence_label.setObjectName("sequence_label")
         self.gridLayout.addWidget(self.sequence_label, 12, 0, 1, 1)
@@ -303,6 +294,7 @@ class Ui_Libre_Tx(object):
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(10)
+        font.setBold(True)
         self.locktime_button.setFont(font)
         self.locktime_button.setObjectName("locktime_button")
         self.gridLayout.addWidget(self.locktime_button, 11, 5, 1, 1)
@@ -315,6 +307,7 @@ class Ui_Libre_Tx(object):
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(10)
+        font.setBold(True)
         self.amounts_label.setFont(font)
         self.amounts_label.setObjectName("amounts_label")
         self.gridLayout.addWidget(self.amounts_label, 12, 2, 1, 1)
@@ -340,12 +333,14 @@ class Ui_Libre_Tx(object):
         self.txins_label.setMaximumSize(QtCore.QSize(16777215, 20))
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.txins_label.setFont(font)
         self.txins_label.setObjectName("txins_label")
         self.gridLayout.addWidget(self.txins_label, 5, 3, 1, 1)
         self.privkey_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.privkey_label.setFont(font)
         self.privkey_label.setObjectName("privkey_label")
         self.gridLayout.addWidget(self.privkey_label, 12, 4, 1, 1)
@@ -365,6 +360,7 @@ class Ui_Libre_Tx(object):
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(10)
+        font.setBold(True)
         self.inputindex_label.setFont(font)
         self.inputindex_label.setObjectName("inputindex_label")
         self.gridLayout.addWidget(self.inputindex_label, 5, 2, 1, 1)
@@ -377,6 +373,7 @@ class Ui_Libre_Tx(object):
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(10)
+        font.setBold(True)
         self.signed_button.setFont(font)
         self.signed_button.setObjectName("Signed_button")
         self.gridLayout.addWidget(self.signed_button, 28, 6, 1, 1)
@@ -399,6 +396,7 @@ class Ui_Libre_Tx(object):
         self.pubouts_label.setMinimumSize(QtCore.QSize(100, 0))
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.pubouts_label.setFont(font)
         self.pubouts_label.setObjectName("pubouts_label")
         self.gridLayout.addWidget(self.pubouts_label, 12, 3, 1, 1)
@@ -431,6 +429,7 @@ class Ui_Libre_Tx(object):
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
         font.setPointSize(10)
+        font.setBold(True)
         self.currentblock_label.setFont(font)
         self.currentblock_label.setObjectName("currentblock_label")
         self.gridLayout.addWidget(self.currentblock_label, 9, 5, 1, 1)
@@ -450,37 +449,36 @@ class Ui_Libre_Tx(object):
         self.numins_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.numins_label.setFont(font)
         self.numins_label.setObjectName("numins_label")
         self.gridLayout.addWidget(self.numins_label, 12, 1, 1, 1)
-        self.unsigned_button = QtWidgets.QPushButton(Libre_Tx)
-        font = QtGui.QFont()
-        font.setFamily("Sans Serif")
-        font.setPointSize(10)
-        self.unsigned_button.setFont(font)
-        self.unsigned_button.setObjectName("unsigned_button")
-        self.gridLayout.addWidget(self.unsigned_button, 25, 6, 1, 1)
+
         self.hashtype_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.hashtype_label.setFont(font)
         self.hashtype_label.setObjectName("hashtype_label")
         self.gridLayout.addWidget(self.hashtype_label, 23, 5, 1, 1)
         self.signtx_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.signtx_label.setFont(font)
         self.signtx_label.setObjectName("signtx_label")
         self.gridLayout.addWidget(self.signtx_label, 26, 6, 1, 1)
         self.nlocktime_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.nlocktime_label.setFont(font)
         self.nlocktime_label.setObjectName("nlocktime_label")
         self.gridLayout.addWidget(self.nlocktime_label, 18, 5, 1, 1)
         self.numouts_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.numouts_label.setFont(font)
         self.numouts_label.setObjectName("numouts_label")
         self.gridLayout.addWidget(self.numouts_label, 21, 1, 1, 1)
@@ -519,53 +517,23 @@ class Ui_Libre_Tx(object):
         self.amount2_box.setMaximumSize(QtCore.QSize(87, 16777215))
         self.amount2_box.setObjectName("amount2_box")
         self.gridLayout.addWidget(self.amount2_box, 21, 2, 1, 1)
-
-        # PSBT BUTTOM
-        # self.psbt_button = QtWidgets.QPushButton(Libre_Tx)
-        # font = QtGui.QFont()
-        # font.setFamily("Sans Serif")
-        # font.setPointSize(10)
-        # self.psbt_button.setFont(font)
-        # self.psbt_button.setObjectName("psbt_button")
-        # self.gridLayout.addWidget(self.psbt_button, 21, 6, 1, 1)
-
-        # self.psbt_label = QtWidgets.QLabel(Libre_Tx)
-        # font = QtGui.QFont()
-        # font.setFamily("Sans Serif")
-        # self.psbt_label.setFont(font)
-        # self.psbt_label.setObjectName("psbt_label")
-        # self.gridLayout.addWidget(self.psbt_label, 18, 6, 1, 1)
         
         self.nlocktime_box = QtWidgets.QLineEdit(Libre_Tx)
         self.nlocktime_box.setMinimumSize(QtCore.QSize(100, 0))
         self.nlocktime_box.setMaximumSize(QtCore.QSize(100, 16777215))
         self.nlocktime_box.setObjectName("nlocktime_box")
         self.gridLayout.addWidget(self.nlocktime_box, 21, 5, 1, 1)
-        
-        #EMULATE WALLET
-        # self.emulatewallet_label = QtWidgets.QLabel(Libre_Tx)
-        # font = QtGui.QFont()
-        # font.setFamily("Sans Serif")
-        # font.setPointSize(10)
-        # self.emulatewallet_label.setFont(font)
-        # self.emulatewallet_label.setObjectName("emulatewallet_label")
-        # self.gridLayout.addWidget(self.emulatewallet_label, 7, 5, 1, 1)
 
         self.inputindex3_box = QtWidgets.QLineEdit(Libre_Tx)
         self.inputindex3_box.setMinimumSize(QtCore.QSize(80, 0))
         self.inputindex3_box.setMaximumSize(QtCore.QSize(80, 16777215))
         self.inputindex3_box.setObjectName("inputindex3_box")
         self.gridLayout.addWidget(self.inputindex3_box, 8, 2, 1, 1)
-        self.education_checkbox = QtWidgets.QCheckBox(Libre_Tx)
-        font = QtGui.QFont()
-        font.setFamily("Sans Serif")
-        font.setPointSize(10)
-        self.education_checkbox.setFont(font)
-        self.education_checkbox.setObjectName("education_checkbox")
-        self.gridLayout.addWidget(self.education_checkbox, 25, 1, 1, 1)
+
         self.version_label = QtWidgets.QLabel(Libre_Tx)
         font = QtGui.QFont()
         font.setFamily("Sans Serif")
+        font.setBold(True)
         self.version_label.setFont(font)
         self.version_label.setObjectName("version_label")
         self.gridLayout.addWidget(self.version_label, 26, 5, 1, 1)
@@ -582,16 +550,20 @@ class Ui_Libre_Tx(object):
         self.txtype_combobox_4.activated.connect(lambda: tx_select_func(4))
         self.txtype_combobox_5.activated.connect(lambda: tx_select_func(5))
         self.txtype_combobox_6.activated.connect(lambda: tx_select_func(6))
-
-        # self.numins_combo.activated.connect(lambda: ins_activate(self.numins_combo.currentIndex()+1))
         self.numouts_combo.activated.connect(lambda: outs_activate(self.numouts_combo.currentIndex()+1))
 
 
         
-
-
-
+        self.txinamount_box1.setDisabled(True)
         self.inputindex1_box.setDisabled(True)
+        self.scriptpub1_box.setDisabled(True)
+        self.scriptout1_box.setDisabled(True)
+        self.txin1_box.setDisabled(True)
+        self.privkey1_box.setDisabled(True)
+        self.amount1_box.setDisabled(True)
+        self.sequence1_box.setDisabled(True)
+
+
 
         self.txinamount_box2.setDisabled(True)
         self.inputindex2_box.setDisabled(True)
@@ -652,8 +624,6 @@ class Ui_Libre_Tx(object):
         self.numins_combo.addItems(['1','2','3','4','5','6'])
         self.numouts_combo.addItems(['1','2','3','4','5','6'])
         self.signed_button.clicked.connect(ok_button)
-
-        self.unsigned_button.clicked.connect(unsigned_func)
 
         self.txtype_combobox_1.addItems(['N/A','P2PKH','P2SH','P2SH-P2wPKH','P2WPKH','P2WSH','P2SH multisig', 'P2WSH multisig'])
         self.txtype_combobox_2.addItems(['N/A','P2PKH','P2SH','P2SH-P2wPKH','P2WPKH','P2WSH','P2SH multisig', 'P2WSH multisig'])
@@ -728,13 +698,10 @@ class Ui_Libre_Tx(object):
     def retranslateUi(self, Libre_Tx):
         _translate = QtCore.QCoreApplication.translate
         Libre_Tx.setWindowTitle(_translate("Libre_Tx", "Libre Tx"))
-        # self.multisig_spin_label.setText(_translate("Libre_Tx", "Multisig Total"))
-        # self.psbt_label.setText(_translate("Libre_Tx", "Create PSBT"))
         self.txinamounts_label.setText(_translate("Libre_Tx", "Txin Amounts"))
         self.scriptpubkey_label.setText(_translate("Libre_Tx", "Script pubkeys"))
         self.outputformat_label.setText(_translate("Libre_Tx", "Output Address Format"))
         self.privkeyformat_label.setText(_translate("Libre_Tx", "Priv Key Format"))
-        self.unsigned_label.setText(_translate("Libre_Tx", "Create Unsigned"))
         self.tx_type1_label.setText(_translate("Libre_Tx", "Tx Type"))
         self.sequence_label.setText(_translate("Libre_Tx", "Sequence"))
         self.locktime_button.setText(_translate("Libre_Tx", "Convert L-Time"))
@@ -747,14 +714,10 @@ class Ui_Libre_Tx(object):
         self.pubouts_label.setText(_translate("Libre_Tx", "Script pub outs"))
         self.currentblock_label.setText(_translate("Libre_Tx", "Block hgt/UNIX Time"))
         self.numins_label.setText(_translate("Libre_Tx", "Num Ins"))
-        self.unsigned_button.setText(_translate("Libre_Tx", "Create Unsigned"))
         self.hashtype_label.setText(_translate("Libre_Tx", "Hash type"))
         self.signtx_label.setText(_translate("Libre_Tx", "Sign Tx"))
         self.nlocktime_label.setText(_translate("Libre_Tx", "N-locktime"))
         self.numouts_label.setText(_translate("Libre_Tx", "Num Outs"))
-        # self.psbt_button.setText(_translate("Libre_Tx", "Create PSBT"))
-        # self.emulatewallet_label.setText(_translate("Libre_Tx", "Emulate Wallet"))
-        self.education_checkbox.setText(_translate("Libre_Tx", "Edu Mode"))
         self.version_label.setText(_translate("Libre_Tx", "Version"))
 
 
@@ -829,9 +792,6 @@ SIGHASH_ALL = 1
 #can these and their refrences go in the address functions file?
 OP_HASH160 = b'\xa9'
 OP_EQUAL = b'\x87'
-EDU_MODE_OUTPUT=[]
-EDU_MODE_UNSIGNED=[]
-EDU_MODE_SIGS=[]
 
 class tx_data_obj:
 
@@ -867,13 +827,8 @@ def tx_data():
 
 
 def ok_button(rawtx=False):
-    EDU_MODE_OUTPUT=[]
     gui_data=tx_data()
-
-
     witness_program=[]
-
-    #refactor this name
     all_inputs=[]
 
     outs=gui_data.outs
@@ -892,8 +847,7 @@ def ok_button(rawtx=False):
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 881')
                 return
-            #NEWW
-            # dersigs.append(result)
+
             
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
@@ -908,8 +862,7 @@ def ok_button(rawtx=False):
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 899')
-                return
-            # dersigs.append(result)            
+                return          
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
             all_inputs.append(data)
@@ -986,10 +939,6 @@ def ok_button(rawtx=False):
             data.insert(2,'00')
             all_inputs.append(data)            
             count+=1
-
-## change below to class reference- can I do it- i need the -outs- variables and they need to be converted if applicable first
-    # can these be simplified at all?
-
     try:
         outputs=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()]
     except TypeError:
@@ -999,15 +948,9 @@ def ok_button(rawtx=False):
 
     if len(witness_program) != 0:
         prefix=gui_data.segwitprefix
-        # delete
-        #can this just be outputs, or does the next line mean this is nessesary?
-        # sz4_outs1=[tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()]
-        # sz4_outs="".join(sz4_outs1)
+
         sz4_outs="".join([tx_num_func(ui.numouts_combo.currentIndex()), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()])
         outputs.insert((len(outputs)-1),"".join(witness_program) )
-
-
-#NEWW
     else:     
         print('$$ LEGACY TX')   
         prefix=gui_data.legacy_prefix
@@ -1023,21 +966,17 @@ def ok_button(rawtx=False):
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
         print('ERROR ~ LINE 1011')
         return
-    if ui.education_checkbox.isChecked()==True:
-        if len(witness_program) != 0:
+    if len(witness_program) != 0:
 
-            sz4_items=[gui_data.segwitprefix[0]+ gui_data.segwitprefix[2]+"".join(combined_inputs)+sz4_outs]
-            sz1_items=gui_data.segwitprefix[1]+"".join(witness_program)
-            sz4_values="".join(sz4_items)
-            sz1_values="".join(sz1_items)
+        sz4_items=[gui_data.segwitprefix[0]+ gui_data.segwitprefix[2]+"".join(combined_inputs)+sz4_outs]
+        sz1_items=gui_data.segwitprefix[1]+"".join(witness_program)
+        sz4_values="".join(sz4_items)
+        sz1_values="".join(sz1_items)
 
-            education_mode('segwit',prefix, all_inputs, outputs,sz4_values, sz1_values)
+        education_mode('segwit',prefix, all_inputs, outputs,sz4_values, sz1_values)
 
-        elif len(witness_program) == 0:
-            education_mode('legacy',prefix, all_inputs, outputs)
-
-    else:
-        ui.output_box.setText(signed_tx)
+    elif len(witness_program) == 0:
+        education_mode('legacy',prefix, all_inputs, outputs)
     return signed_tx
 
 
@@ -1062,26 +1001,14 @@ def join_info(input_data, index):
     outs=gui_data.outs
     scriptpubs=gui_data.script_pubs
     insert_points=[ui.inputindex1_box.text, ui.inputindex2_box.text, ui.inputindex3_box.text, ui.inputindex4_box.text, ui.inputindex5_box.text, ui.inputindex6_box.text]
-    
-    #NEWW
-    # can these be changes to gui.data.prefix etc?
-    # prefix=[ui.version_box.text(),tx_num_func(ui.numins_combo.currentIndex())]
-    # inputs=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
     prefix=gui_data.legacy_prefix
     inputs=gui_data.tx_inputs
-
-    #same witht his but has the -outs- issue as above
     outputs=[tx_num_func(ui.numouts_combo.currentIndex()),amount_to_txhex(ui.amount1_box.text())+outs[0]+amount_to_txhex(ui.amount2_box.text())+outs[1]+amount_to_txhex(ui.amount3_box.text())+outs[2]+amount_to_txhex(ui.amount4_box.text())+outs[3]+amount_to_txhex(ui.amount5_box.text())+outs[4]+amount_to_txhex(ui.amount6_box.text())+outs[5],ui.nlocktime_box.text(),ui.hashtype_box.text()]
     inputs[index].insert(2, scriptpubs[index])
-
-    #can this be a class level variable?
-    
     num_ins=list(range(0, int(ui.numins_combo.currentIndex()+1)))
     other_indexes=[value for value in num_ins if value != index]
     for num in other_indexes:
         inputs[num].insert(2, '00')
-        
-
     combined_inputs=[y for x in inputs for y in x]
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
@@ -1093,7 +1020,6 @@ def join_info(input_data, index):
     ## ADD TO EDU MODE PRINT
     print('RAW TX', rawtx)
     ui.output_box.setText(rawtx)
-
     if s_value=='none':
         dersig=sign_tx(rawtx, index, s_value)
     elif s_value =='multisig_redeemscript':
@@ -1105,7 +1031,6 @@ def join_info(input_data, index):
         return rawtx
     else:
         dersig=sign_tx(rawtx, index)
-
     return dersig
 
 
@@ -1126,7 +1051,6 @@ def join_segwit(input_data, index):
         s_value='public_point'
     else:
         s_value='public_point' 
-
     outs=gui_data.outs
     scriptpubs=gui_data.script_pubs
     input_infos=gui_data.segwit_input_infos
@@ -1146,7 +1070,6 @@ def join_segwit(input_data, index):
         return
     input_info=[ui.version_box.text(), hash_ins.hex(),hash_sequence.hex(),this_tx_input_infos, hash_outs.hex(),ui.nlocktime_box.text(), ui.hashtype_box.text()]
     input_list=[(item) for item in input_info if item is not ""]
-    
     rawtx="".join(input_list)
     # ADD TO EDU MODE PRINT
     print('RAWTX=',rawtx)
@@ -1169,7 +1092,6 @@ def join_segwit(input_data, index):
     return dersig
 
 
-
 def sign_tx(rawtx, index, s_value='public_point'):
     gui_data=tx_data()
     script_pubs=gui_data.script_pubs
@@ -1188,7 +1110,6 @@ def sign_tx(rawtx, index, s_value='public_point'):
         split_keys=input_secrets[index].split(',')
         keys_sans_whitespace=[item.strip(" ") for item in split_keys]
         for key in keys_sans_whitespace:
-            print('MS KEY', key)
             selection=ui.privkey_comboBox.currentIndex()
             if selection==0:
                  input_secret=scalar_from_wif(key)
@@ -1201,12 +1122,9 @@ def sign_tx(rawtx, index, s_value='public_point'):
             signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
             signature_bytes =signature.der() + bytes([SIGHASH_ALL])
             signature_bytes_and_length=bytes([len(signature_bytes)])+signature_bytes
-            print('SIG BYTES N LEN',signature_bytes_and_length.hex() )
             signature_list.append(signature_bytes_and_length.hex())
         signature_joined="".join(signature_list)
-        print('SIG JOINED', signature_joined)
         signature_bytes=bytes.fromhex(signature_joined)
-
     else:
         selection=ui.privkey_comboBox.currentIndex()
         if selection==0:
@@ -1220,7 +1138,6 @@ def sign_tx(rawtx, index, s_value='public_point'):
         signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
         der_sig=signature.der() + bytes([SIGHASH_ALL])
         signature_bytes=bytes([len(der_sig)])+der_sig
-
     if s_value=='none':
         dersig_full = signature_bytes
     elif s_value=="multisig_redeemscript":
@@ -1459,28 +1376,6 @@ def tx_select_func(index):
         i[7].setDisabled(False)
     return selection
 
-# removed so only tx selection will select a box- better?
-# def ins_activate(total):
-#     boxes=[[ui.txinamount_box1,ui.inputindex1_box,ui.txin1_box,ui.scriptpub1_box,ui.sequence1_box,ui.privkey1_box],
-#         [ui.txinamount_box2,ui.inputindex2_box,ui.txin2_box,ui.scriptpub2_box,ui.sequence2_box,ui.privkey2_box],
-#         [ui.txinamount_box3,ui.inputindex3_box,ui.txin3_box,ui.scriptpub3_box,ui.sequence3_box,ui.privkey3_box],
-#         [ui.txinamount_box4,ui.inputindex4_box,ui.txin4_box,ui.scriptpub4_box,ui.sequence4_box,ui.privkey4_box],
-#         [ui.txinamount_box5,ui.inputindex5_box,ui.txin5_box,ui.scriptpub5_box,ui.sequence5_box,ui.privkey5_box],
-#         [ui.txinamount_box6,ui.inputindex6_box,ui.txin6_box,ui.scriptpub6_box,ui.sequence6_box,ui.privkey6_box]]
-#     for outlist in boxes:
-#         for item in outlist:
-#             item.setDisabled(True)
-#     outs_list=range(0,total)
-#     for out in outs_list:
-#         i=boxes[out]
-#         i[0].setDisabled(False)
-#         i[1].setDisabled(False)
-#         i[2].setDisabled(False)
-#         i[3].setDisabled(False)
-#         i[4].setDisabled(False)
-#         i[5].setDisabled(False)
-
-
 def outs_activate(total):
     boxes=[[ui.amount1_box,ui.scriptout1_box],[ui.amount2_box,ui.scriptout2_box],[ui.amount3_box,ui.scriptout3_box],[ui.amount4_box,ui.scriptout4_box],
             [ui.amount5_box,ui.scriptout5_box],[ui.amount6_box,ui.scriptout6_box]]
@@ -1507,15 +1402,7 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
     signed_items=[(item) for item in input_info if item is not ""]
     tx_data=''.join(signed_items)
     tx_size=len(bytes.fromhex(tx_data))
-    print('TX SIZE', tx_size)
-
-    # bytes([len(bytes.fromhex(signed_tx))])
-
-
-    print('tx size', tx_size)
     edu_mode_output=[colourize('VERSION', 'brown'),  '-', colourize('SEGWIT FLAG', 'black'),'-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']
-    
-    
     
     if tx_type=='segwit':
         tx_id=bytes(reversed(hash256(bytes.fromhex(sz4_values)))).hex()
@@ -1536,18 +1423,14 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
         size_data=colourize(('TX SIZE='+str(tx_size)+' BYTES'+ '<br>'), 'black')
         edu_mode_output.append(size_data)
 
-
-
     if tx_type=='segwit':
         prefix[0]=colourize(prefix[0],'brown')
         prefix[1]=colourize(prefix[1],'black')
         prefix[2]=colourize(prefix[2],'red')
 
     elif tx_type=='legacy':
-
         prefix[0]=colourize(prefix[0], 'brown')
         prefix[1]=colourize(prefix[1], 'red')
-
     for item in tx_inputs:
         try:
             item[3]=colourize(item[3], 'purple')
@@ -1556,7 +1439,6 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
             item[2]=colourize(item[2], 'yellow')
         except IndexError:
             pass
-
     combined_inputs=[y for x in tx_inputs for y in x if x is not ""]
     outputs[0]=colourize(outputs[0], 'red')
     outputs[-1]=colourize(outputs[-1], 'black')
@@ -1571,7 +1453,6 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
             else:
                 outputs[item]=colourize(outputs[item], 'green')
             counter+=1
-
     elif tx_type=='legacy':
         new_list=outputs[1:-1]
         for item in range(1, len(new_list)+1):
@@ -1580,7 +1461,6 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
             else:
                 outputs[item]=colourize(outputs[item], 'green')
             counter+=1
-
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
     signed_items=[(item) for item in input_info if item is not ""]
@@ -1597,89 +1477,6 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
 
     edu_mode_print="".join(prefix+combined_inputs+outputs)
     ui.output_box.setText(signed_tx)
-
-
-def unsigned_func():
-    pass
-    # print('unsigned actovated')
-    # gui_data=tx_data()
-    # outs=gui_data.outs
-    # tx_selections=list(gui_data.tx_selection_types)
-  
-    # count=0
-    # for item in tx_selections:
-
-    #     if item == 'N/A':
-    #         count+=1
-    #         pass
-    #     if item == 'P2PKH':
-           
-    #         print('RAW ACTIVATED')
-    #         return join_info('rawtx', count)
-
-    #     if item== 'P2SH':
-    #         try:
-    #             return join_info('rawtx', count)
-    #         except TypeError:
-    #             ui.output_box.setText('Invalid Input- Please check your input data and try again')
-    #             return
-    #         count+=1
-
-    #     if item == 'P2SH-P2wPKH':
-    #         try:
-    #             return join_segwit('rawtx', count) 
-    #         except TypeError:
-    #             ui.output_box.setText('Invalid Input- Please check your input data and try again')
-    #             return
-    #         count+=1
-
-    #     if item == 'P2WPKH':
-    #         try:
-    #             return join_segwit('rawtx', count)
-    #         except TypeError:
-    #             ui.output_box.setText('Invalid Input- Please check your input data and try again')
-    #             return
-    #         count+=1
-
-    #     if item == 'P2WSH': 
-    #         try:
-    #             result=join_segwit('rawtx', count)  # add flag here for p2wsh segwit
-    #         except TypeError:
-    #             ui.output_box.setText('Invalid Input- Please check your input data and try again')
-    #             return
-    #         count+=1
-
-        # 00 here - nessesary
-        # if item == 'P2SH multisig':     
-        #     tx_selections=gui_data.tx_selection_types
-        #     first_index=tx_selections.index('P2SH multisig')
-        #     try:
-        #         result=join_info(count,first_index)
-        #     except TypeError:
-        #         ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        #         return
-        #     if result=='00':
-        #         multisig_dersigs.insert(0, result)
-        #     else:
-        #         multisig_dersigs.append(result)
-        #     print('MULTI DERSIG', multisig_dersigs)
-        #     multisig_indexes.append(count)
-        #     count+=1
-
-        # if item == 'P2WSH multisig': 
-        #     tx_selections=gui_data.tx_selection_types
-        #     first_index=tx_selections.index('P2WSH multisig')
-        #     try:
-        #         result=join_segwit(count, first_index)  # add flag here for p2wsh segwit
-        #     except TypeError:
-        #         ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        #         return
-        #     witness_program.append(result)
-        #     dersigs.append('00')
-        #     print('P2WSH WITNESS',count, witness_program)
-        #     ms_segwit_indexes.append(count)
-        #     count+=1
-
 
 if __name__ == "__main__":
     import sys
