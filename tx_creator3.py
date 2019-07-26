@@ -870,17 +870,8 @@ def ok_button(rawtx=False):
     EDU_MODE_OUTPUT=[]
     gui_data=tx_data()
 
-    ## NEWW    
-    #do I need these now?
-    # dersigs=[]
-    # multisig_dersigs=[]
+
     witness_program=[]
-    # segwit_indexs=[]
-    # p2sh_segwit_indexs=[]
-    # ms_segwit_indexes=[]
-    # p2pkhindexs=[]
-    # segwit_multisigs=[]
-    # multisig_indexes=[]
 
     #refactor this name
     all_inputs=[]
