@@ -631,17 +631,17 @@ class Ui_Libre_Tx(object):
 
         self.hashtype_box.setText('01000000')
 
-        self.nlocktime_box.setText('28f11700')
+        # self.nlocktime_box.setText('28f11700')
 
-        self.inputindex1_box.setText('00000000')
+        # self.inputindex1_box.setText('00000000')
         
-        self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
+        # self.scriptout1_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
         # self.scriptout2_box.setText('mtPKmnGRtrC9DX3rexLhiftqfTTrCUfaeP')
         # self.scriptout3_box.setText('n2ZzdQWjqP8tFizWG7vn8uja6bf2BkhZkn')
         # self.scriptout4_box.setText('mtPKmnGRtrC9DX3rexLhiftqfTTrCUfaeP')
 
         # self.inputindex2_box.setText('00000000')
-        self.scriptpub1_box.setText('fddf01572103dd5a965a5d5ed09da86251624f253ba1d308105b201b1b97b38cd91028343ebb210242ede46551498cd6c6277aa9c4a2f3a2cc31423b8cd5e6be32250b4677c21b3821033ef27279d38332f0d5da62d3579a3f3b0d3bcfdff091cc4a8eb3ba9f4850f3b62103ea32dd2838ffca7e1dcda2df0b2c11e02ce55e79b5eda8bd1c55c1b82c8d4bfd210365cbe2fad8aee632a319fde4b83e6c12c56a9a8ec80a2066f1fd255e50d9726c21023d70a603635df162fc54a79a595d949376f1030a45cd8c462166960cca709b6721033e4fbcf4808d40a0aa3f36454d3a2fb215db47622a5ae7aab6b7a94b779a01a22103938859de4d527ee14819ad21bbac61e6729b709f7ea7f173335028320d1433c221030954ce64c64137257dd62b7b9afaf08a7edc3cb027b9795a7f3f75cc0f1f99bc21027ce598aa72d619e47687912250f819d762b5a5e3c366e940effdc3646e04c4302103ab9ae58ebc8567ccf97e491cc47f058814c12ebf5cc98dab16831f5852a412072102c25682628f1d8b77733dc6044dc2f60b5a102cee0a45f9be0f530ed12eb48d072103c5bc3e5bbca85d359477441718614027ddf55bd1ca4afc3614aaf8feacd30311210327f027d5534784871be8aef4a8cbeb2078fd34aa344ab2d606b07927701fea2d5eae')
+        # self.scriptpub1_box.setText('fddf01572103dd5a965a5d5ed09da86251624f253ba1d308105b201b1b97b38cd91028343ebb210242ede46551498cd6c6277aa9c4a2f3a2cc31423b8cd5e6be32250b4677c21b3821033ef27279d38332f0d5da62d3579a3f3b0d3bcfdff091cc4a8eb3ba9f4850f3b62103ea32dd2838ffca7e1dcda2df0b2c11e02ce55e79b5eda8bd1c55c1b82c8d4bfd210365cbe2fad8aee632a319fde4b83e6c12c56a9a8ec80a2066f1fd255e50d9726c21023d70a603635df162fc54a79a595d949376f1030a45cd8c462166960cca709b6721033e4fbcf4808d40a0aa3f36454d3a2fb215db47622a5ae7aab6b7a94b779a01a22103938859de4d527ee14819ad21bbac61e6729b709f7ea7f173335028320d1433c221030954ce64c64137257dd62b7b9afaf08a7edc3cb027b9795a7f3f75cc0f1f99bc21027ce598aa72d619e47687912250f819d762b5a5e3c366e940effdc3646e04c4302103ab9ae58ebc8567ccf97e491cc47f058814c12ebf5cc98dab16831f5852a412072102c25682628f1d8b77733dc6044dc2f60b5a102cee0a45f9be0f530ed12eb48d072103c5bc3e5bbca85d359477441718614027ddf55bd1ca4afc3614aaf8feacd30311210327f027d5534784871be8aef4a8cbeb2078fd34aa344ab2d606b07927701fea2d5eae')
         # self.scriptpub2_box.setText('232103dd5a965a5d5ed09da86251624f253ba1d308105b201b1b97b38cd91028343ebbac')
 
         # self.scriptpub3_box.setText('2321033ef27279d38332f0d5da62d3579a3f3b0d3bcfdff091cc4a8eb3ba9f4850f3b6ac')
@@ -658,19 +658,19 @@ class Ui_Libre_Tx(object):
 
         # self.inputindex5_box.setText('00000000')
 
-        self.txin1_box.setText('a3bc4070f0e980098ecdbda5640b17b93137febc2f00446dcb6e0a35f6f6682e')#p2wsh ms
+        # self.txin1_box.setText('a3bc4070f0e980098ecdbda5640b17b93137febc2f00446dcb6e0a35f6f6682e')#p2wsh ms
         # self.txin2_box.setText('527fa91b9e633cb7327c016067ac43e96a7fe1d863b334c80ec0f3aa963e5425') #p2sh
         # self.txin3_box.setText('8f4e093b1387fbe2271d9736e1457a6089701b049fccc16a4cb5f90d8393b318')#p2wsh
         # self.txin4_box.setText('5a1c0e665244869eddaf3f95a5bf6b2cd0d4ab043c334311c0a9fe7f2bf523f7')#p2sh ms
         # self.txin5_box.setText('58481f30c425233b2b61d8064489b88af7657048dcd5a5cff4b1c9b454be53df')#p2pkh
 
-        self.privkey1_box.setText('cNDaSFTQpiVuqjDwSRdSDeVvHLsFrQkpsphqr2vmcJHPfet9MssU')
+        # self.privkey1_box.setText('cNDaSFTQpiVuqjDwSRdSDeVvHLsFrQkpsphqr2vmcJHPfet9MssU')
         # self.privkey2_box.setText('cSWeJ1RrDXgiZr6LyB9NrBJFZwajnmDtu8iw5x38ps2S4oWmbmi3')
         # self.privkey3_box.setText('cTXfkz2bTQ6P2MDvBHgES1QrJCU93rLNPi1v1EcW8Lt3YZCoFMb5')
         # self.privkey4_box.setText('cP7EHQrb1Q7cYBRaLwBXsEFDwbXnxhSqAXTMNmuRQ1HeSDa1G4de, cSTzt354Ajq5fQqg7X1ukbH1CNLF46T8pmcBoZZNr1cncfqnAKD7, cVvQqayDFjp7HCAvvnvUFzc1rH73VBfvo5YW8ZydLorXTmGGb6pA, cRY1odJp9ZHnwoah9gKJShy1FqToyzmwFrPL29Hxbwc1j74Sk9hE, cQKeyaw1JpQsuM4dbuozvzqsmzZGr2F5wiNrCnZGNGWeXufrEjXi')
         # self.privkey5_box.setText('cSWeJ1RrDXgiZr6LyB9NrBJFZwajnmDtu8iw5x38ps2S4oWmbmi3')
         self.privkey6_box.setText('')
-        self.amount1_box.setText('0.00001')
+        # self.amount1_box.setText('0.00001')
         # self.amount2_box.setText('0.00001')
         self.version_box.setText('02000000')
 
@@ -871,6 +871,10 @@ def ok_button(rawtx=False):
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 917')
                 return
+
+            #this is the new line
+            witness_program.append('02')
+
             witness_program.append(result)
             data= gui_data.tx_inputs[count] 
             data.insert(2,'171600'+(gui_data.script_pubs[count])[6:-4])
@@ -884,6 +888,10 @@ def ok_button(rawtx=False):
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 934')
                 return
+            
+            #this is the new line
+            witness_program.append('02')
+
             witness_program.append(result)
             data= gui_data.tx_inputs[count] 
             data.insert(2,'00')
@@ -897,6 +905,9 @@ def ok_button(rawtx=False):
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 951')
                 return
+            #this is the new line
+            witness_program.append('02')
+
             witness_program.append(result)
             data= gui_data.tx_inputs[count] 
             data.insert(2,'00')
@@ -923,11 +934,19 @@ def ok_button(rawtx=False):
                 split_keys=gui_data.input_secrets[count].split(',')
                 wit_items=(len(split_keys)+2).to_bytes(1, byteorder='little').hex()
                 ## do these as two separate entries so can create diff colour codes in printout - just append to wintess?
-                end_result=wit_items+'00'+result
+                
+                #this was changed for new wit items experiment
+                # end_result=wit_items+'00'+result
+                end_result='00'+result
+
+            
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
                 print('error line 1009')
                 return
+            #new code
+            witness_program.append(wit_items)
+            
             witness_program.append(end_result)
             data= gui_data.tx_inputs[count] 
             data.insert(2,'00')
@@ -944,7 +963,8 @@ def ok_button(rawtx=False):
         prefix=gui_data.segwitprefix
 
         sz4_outs="".join([ui.numouts_combo.currentText(), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()])
-        outputs.insert((len(outputs)-1),"".join(witness_program) )
+        #changed for witness items experiment
+        # outputs.insert((len(outputs)-1),"".join(witness_program) )
     else:     
         print('$$ LEGACY TX')   
         prefix=gui_data.legacy_prefix
@@ -967,7 +987,7 @@ def ok_button(rawtx=False):
         sz4_values="".join(sz4_items)
         sz1_values="".join(sz1_items)
 
-        education_mode('segwit',prefix, all_inputs, outputs,sz4_values, sz1_values)
+        education_mode('segwit',prefix, all_inputs, outputs,sz4_values, sz1_values, witness_program)
 
     elif len(witness_program) == 0:
         education_mode('legacy',prefix, all_inputs, outputs)
@@ -1069,16 +1089,23 @@ def join_segwit(s_value, index):
     print('RAWTX=',rawtx)
     if s_value =='redeemscript':
          ## do these as two separate entries so can create diff colour codes in printout - just append to wintess?
-        dersig='02'+sign_tx(rawtx, index, s_value)
+        # dersig='02'+sign_tx(rawtx, index, s_value)
+        dersig=sign_tx(rawtx, index, s_value)
     elif s_value=='none':
         dersig=sign_tx(rawtx, index, s_value)
     elif s_value =='multisig_redeemscript':
         dersig=sign_tx(rawtx, index, 'redeemscript')
     elif s_value == 'public_point':
          ## do these as two separate entries so can create diff colour codes in printout - just append to wintess?
-        dersig='02'+sign_tx(rawtx, index)[2:]
-        dersigpre='02'+sign_tx(rawtx, index)
-        dersig1=dersigpre[2:]
+        
+         # this commented out to try different wintess itesm code
+        #dersig='02'+sign_tx(rawtx, index)[2:]
+        dersig=sign_tx(rawtx, index)[2:]
+
+
+        #these serv no purpose?
+        # dersigpre='02'+sign_tx(rawtx, index)
+        # dersig1=dersigpre[2:]
     elif s_value == 'rawtx':
         ui.output_box.setText(rawtx)
         return rawtx
@@ -1168,6 +1195,9 @@ def sign_tx(rawtx, index, s_value='public_point'):
     elif s_value=='redeemscript':
         dersig_s=bytes.fromhex(script_pubs[index])
         dersig_full=signature_bytes+dersig_s
+    elif s_value=='redeemscript':
+        dersig_s=bytes.fromhex(script_pubs[index])
+        dersig_full=signature_bytes+dersig_s
     elif s_value== 'public_point':
         dersig_point=private_key.point.sec()
         dersig_s=bytes([len(dersig_point)])+dersig_point
@@ -1207,7 +1237,7 @@ def scalar_from_wif(priv_key):
     num = 0
     for c in priv_key.encode('ascii'):
         num *= 58
-        num += BASE58.index(c)
+        num += BASE58.index(c)  #try except with this line 
     hex_secret=hex(num)[2:]
     try:
         combined = bytes.fromhex(hex_secret)
@@ -1390,11 +1420,11 @@ def outs_activate(total):
 
 
 def colourize(text, colour):
-    colourmap={'brown': '#de8d00', 'black':'#f000000', 'red':'#ff0000' , 'blue':'#0062ff', 'pink':'#ffa3a3', 'yellow':'#a3a600', 'purple':'#00dec0', 'green':'#007d00', 'orange':'#ff8400', 'forest':'#638f6f', 'violet':'#caa6ed'}
+    colourmap={'brown': '#de8d00', 'black':'#f000000', 'red':'#ff0000' , 'blue':'#0062ff', 'pink':'#ffa3a3', 'yellow':'#a3a600', 'aqua':'#00dec0', 'green':'#007d00', 'orange':'#ff8400', 'drkbrown':'#996633', 'purple':'#9900ff'}
     return"".join("<span style=\" font-size:12pt; font-weight:600; color:"+colourmap[colour]+";\" >"+text+"</span>")
 
 
-def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_values=None):
+def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_values=None, witness_program=None):
     outputs=[(item) for item in outputs2 if item is not ""]
     combined_inputs=[y for x in tx_inputs for y in x if x is not ""]
     tx_components=[prefix, combined_inputs, outputs]
@@ -1402,13 +1432,15 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
     signed_items=[(item) for item in input_info if item is not ""]
     tx_data=''.join(signed_items)
     tx_size=len(bytes.fromhex(tx_data))
-    edu_mode_output=[colourize('VERSION', 'brown'),  '-', colourize('SEGWIT FLAG', 'black'),'-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'violet'), '-', colourize('WITNESS PROG', 'forest'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']
+    edu_mode_output=[colourize('VERSION', 'brown'),  '-', colourize('SEGWIT FLAG', 'black'),'-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('SEQUENCE', 'aqua'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'purple'), '-', colourize('WITNESS PROG', 'drkbrown'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']
     
     if tx_type=='segwit':
         tx_id=bytes(reversed(hash256(bytes.fromhex(sz4_values)))).hex()
         tx_id_output=colourize(('TX ID='+str(tx_id)+'<br>'), 'black')
         edu_mode_output.append(tx_id_output)
-        size_data=colourize(('TX SIZE='+str(tx_size)+' BYTES'+ '<br>'), 'black')
+        size_data=colourize(('TX SIZE='+str(len(bytes.fromhex(sz4_values)))+' BYTES'+ '<br>'), 'black')
+        print('segwit core size check', tx_size)
+
         edu_mode_output.append(size_data)
         tx_weight=(len(bytes.fromhex(sz4_values))*4)+len(bytes.fromhex(sz1_values))
         weight_data=colourize(('TX WEIGHT='+str(tx_weight)+' BYTES'+ '<br>'), 'black')
@@ -1432,7 +1464,7 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
         prefix[1]=colourize(prefix[1], 'red')
     for item in tx_inputs:
         try:
-            item[3]=colourize(item[3], 'purple')
+            item[3]=colourize(item[3], 'aqua')
             item[0]=colourize(item[0], 'blue')
             item[1]=colourize(item[1], 'pink')
             item[2]=colourize(item[2], 'yellow')
@@ -1441,18 +1473,42 @@ def education_mode(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_va
     combined_inputs=[y for x in tx_inputs for y in x if x is not ""]
     outputs[0]=colourize(outputs[0], 'red')
     outputs[-1]=colourize(outputs[-1], 'black')
-    counter=1
+    # counter=1
     if tx_type=='segwit':
-        outputs[-2]=colourize(outputs[-2], 'violet')
+        wit_counter=1
+        indexes=1
+        for item in witness_program:
+            if item =='00':
+                witness_program[indexes-1]=colourize(item, 'purple')
+
+            else:
+                if wit_counter %2==0:
+                    witness_program[indexes-1]=colourize(item, 'drkbrown')
+                    wit_counter+=1
+                else:
+                # witness_program[wit_counter-1]=colourize(item, 'purple') this is what they all where before change
+                    witness_program[indexes-1]=colourize(item, 'purple')
+                    wit_counter+=1
+            indexes+=1
+        outputs.insert(len(outputs)-1, "".join(witness_program))
+        # outputs[-2]=colourize(outputs[-2], 'violet')
+        # print('did segwit items work', witness_program)
+
         outputs[-1]=colourize(outputs[-1], 'black')
-        new_list=outputs[1:-2]
+
+        #changed for new format
+        # new_list=outputs[1:-2]
+        new_list=outputs[1:-1]
+        outs_counter=1
         for item in range(1, len(new_list)+1):
-            if counter %2==0:
+
+            if outs_counter %2==0:
                 outputs[item]=colourize(outputs[item], 'orange')
             else:
                 outputs[item]=colourize(outputs[item], 'green')
-            counter+=1
+            outs_counter+=1
     elif tx_type=='legacy':
+        counter=1
         new_list=outputs[1:-1]
         for item in range(1, len(new_list)+1):
             if counter %2==0:
