@@ -128,15 +128,15 @@ A walkthrough video for each type of transaction can be found here:
 If you'd like to read up a little more about the components used in constructing a transaction here are some handy links
 
 [Transaction Data](https://learnmeabitcoin.com/glossary/transaction-data).<br>
-[Transactions- Bitcoin Wiki](https://en.bitcoin.it/wiki/Transaction).
-[Input Index](https://learnmeabitcoin.com/glossary/vout).
-[Script Pubkey](https://learnmeabitcoin.com/glossary/scriptPubKey).
-[Sequence](https://en.bitcoinwiki.org/wiki/NSequence).
-[Sighash Types](https://raghavsood.com/blog/2018/06/10/bitcoin-signature-types-sighash).
-[Locktime](https://learnmeabitcoin.com/glossary/locktime).
-[What is Segwit](https://learnmeabitcoin.com/faq/segregated-witness).
-[Mastering Bitcoin by Andreas M. Antonopoulos](https://github.com/bitcoinbook/bitcoinbook).
-[Programming Bitcoin by Jimmy Song](https://github.com/jimmysong/programmingbitcoin).
+[Transactions- Bitcoin Wiki](https://en.bitcoin.it/wiki/Transaction).<br>
+[Input Index](https://learnmeabitcoin.com/glossary/vout).<br>
+[Script Pubkey](https://learnmeabitcoin.com/glossary/scriptPubKey).<br>
+[Sequence](https://en.bitcoinwiki.org/wiki/NSequence).<br>
+[Sighash Types](https://raghavsood.com/blog/2018/06/10/bitcoin-signature-types-sighash).<br>
+[Locktime](https://learnmeabitcoin.com/glossary/locktime).<br>
+[What is Segwit](https://learnmeabitcoin.com/faq/segregated-witness).<br>
+[Mastering Bitcoin by Andreas M. Antonopoulos](https://github.com/bitcoinbook/bitcoinbook).<br>
+[Programming Bitcoin by Jimmy Song](https://github.com/jimmysong/programmingbitcoin).<br>
 
 
 
