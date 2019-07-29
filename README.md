@@ -1,8 +1,7 @@
 
 # LibreTX
----
+
   #### Create Bitcoin transactions without restrictions and better understand their contents
----
 
 
 ![](.gitbook/assets/test_splash2.png)
