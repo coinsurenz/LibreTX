@@ -1308,7 +1308,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     app.setWindowIcon(QtGui.QIcon('libre_tx_icon.png'))
-    splash_pix = QPixmap('test_splash.png')
+    splash_pix = QPixmap('splash.png')
     splash = QtWidgets.QSplashScreen(splash_pix)
     splash.setMask(splash_pix.mask())
     splash.show()
