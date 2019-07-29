@@ -1,6 +1,5 @@
 ---
-  ### Create Bitcoin transactions without restrictions and better understand their
-  contents
+  #### Create Bitcoin transactions without restrictions and better understand their contents
 ---
 
 # LibreTX
