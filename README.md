@@ -127,7 +127,7 @@ A walkthrough video for each type of transaction can be found here:
 ## Links for further reading
 If you'd like to read up a little more about the components used in constructing a transaction here are some handy links
 
-[Transaction Data](https://learnmeabitcoin.com/glossary/transaction-data).
+[Transaction Data](https://learnmeabitcoin.com/glossary/transaction-data).<br>
 [Transactions- Bitcoin Wiki](https://en.bitcoin.it/wiki/Transaction).
 [Input Index](https://learnmeabitcoin.com/glossary/vout).
 [Script Pubkey](https://learnmeabitcoin.com/glossary/scriptPubKey).
