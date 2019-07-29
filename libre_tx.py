@@ -746,7 +746,7 @@ def ok_button(rawtx=False):
                 result= join_info('public_point', count) 
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 881')
+                print('ERROR LINE 749')
                 return
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
@@ -759,7 +759,7 @@ def ok_button(rawtx=False):
                 result= join_info('p2sh_redeemscript', count)
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 899')
+                print('ERROR LINE 762')
                 return          
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
@@ -772,7 +772,7 @@ def ok_button(rawtx=False):
                 result=join_segwit('public_point', count)
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 917')
+                print('ERROR LINE 775')
                 return
             witness_program.append('02')
             witness_program.append(result)
@@ -811,7 +811,7 @@ def ok_button(rawtx=False):
                 result= join_info('multisig_redeemscript', count)
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 985')
+                print('ERROR LINE 814')
                 return
             data= gui_data.tx_inputs[count] 
             data.insert(2,result)
@@ -827,7 +827,7 @@ def ok_button(rawtx=False):
                 end_result='00'+result
             except TypeError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 1009')
+                print('ERROR LINE 830')
                 return
             witness_program.append(wit_items)
             witness_program.append(end_result)
@@ -839,7 +839,7 @@ def ok_button(rawtx=False):
         outputs=[ui.numouts_combo.currentText(), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()]
     except TypeError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again4')
-        print('ERROR ~ LINE 918')
+        print('ERROR ~ LINE 842')
         return
     if len(witness_program) != 0:
         prefix=gui_data.segwitprefix
@@ -854,7 +854,7 @@ def ok_button(rawtx=False):
         signed_tx="".join(signed_items)
     except TypeError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        print('ERROR ~ LINE 1011')
+        print('ERROR ~ LINE 857')
         return
     if len(witness_program) != 0:
         sz4_items=[gui_data.segwitprefix[0]+ gui_data.segwitprefix[2]+"".join(combined_inputs)+sz4_outs]
@@ -914,7 +914,7 @@ def join_segwit(s_value, index):
         hash_sequence=hash256(bytes.fromhex(ui.sequence1_box.text())+bytes.fromhex(ui.sequence2_box.text())+bytes.fromhex(ui.sequence3_box.text())+bytes.fromhex(ui.sequence4_box.text())+bytes.fromhex(ui.sequence5_box.text())+bytes.fromhex(ui.sequence6_box.text()))
     except ValueError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        print('ERROR ~ LINE 1178')
+        print('ERROR ~ LINE 917')
         return
     input_info=[ui.version_box.text(), hash_ins.hex(),hash_sequence.hex(),this_tx_input_infos, hash_outs.hex(),ui.nlocktime_box.text(), ui.hashtype_box.text()]
     input_list=[(item) for item in input_info if item is not ""]
@@ -940,7 +940,7 @@ def sign_tx(rawtx, index, s_value='public_point'):
         unsignedtx=bytes.fromhex(rawtx)
     except ValueError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        print('ERROR ~ LINE 1206')
+        print('ERROR ~ LINE 943')
         return
     unsigned_tx_hash = hash256(unsignedtx)
     input_secrets=gui_data.input_secrets
@@ -1043,7 +1043,7 @@ def scalar_from_wif(priv_key):
         combined = bytes.fromhex(hex_secret)
     except ValueError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        print('ERROR ~ LINE 1310')
+        print('ERROR ~ LINE 1046')
         return
     checksum = combined[-4:]
     if hash256(combined[:-4])[:4] != checksum:
@@ -1087,21 +1087,21 @@ def address_to_scriptpub(outs):
                 scriptpub='1976a914'+decode_base58(item).hex()+'88ac'
             except ValueError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 1464')
+                print('ERROR LINE 1090')
                 return
         if item[:1]=='n':
             try:
                 scriptpub='1976a914'+decode_base58(item).hex()+'88ac'
             except ValueError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 1472')
+                print('ERROR LINE 1097')
                 return
         if item[:1]=='1':
             try:
                 scriptpub='1976a914'+decode_base58(item).hex()+'88ac'
             except ValueError:
                 ui.output_box.setText('Invalid Input- Please check your input data and try again')
-                print('error line 1480')
+                print('ERROR LINE 1104')
                 return
         if item=='':
             scriptpub=''
@@ -1114,7 +1114,7 @@ def int_to_nlocktime():
         block=int(ui.currentblock_box.text())
     except ValueError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        print('error line 1494')
+        print('ERROR LINE 1117')
         return
     block_hex=bytes(reversed(block.to_bytes(4, 'big')))
     ui.nlocktime_box.setText(block_hex.hex())
@@ -1293,12 +1293,12 @@ def format_output(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_val
         try:
             edu_mode_output.append(item)
         except TypeError:
-            print('Line 1006- ** ERROR ***')
+            print('ERROR - LINE 1296')
     try:
         signed_tx="".join(edu_mode_output)
     except TypeError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
-        print('ERROR ~ LINE 1011')
+        print('ERROR - LINE 1301')
 
     edu_mode_print="".join(prefix+combined_inputs+outputs)
     ui.output_box.setText(signed_tx)
