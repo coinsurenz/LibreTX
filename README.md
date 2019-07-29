@@ -50,9 +50,12 @@ double click on LibreTX.exe
 
 ## Usage
 
-A walkthrough video for each type of transaction can be found here:
+###A walkthrough video for each type of transaction can be found here:
 
 [https://vimeo.com/350472108](https://vimeo.com/350472108)
+
+###A start to finish explaination of how to send a transaction for absolute beginners:
+[https://vimeo.com/350743738](https://vimeo.com/350743738)
 
 ![](.gitbook/assets/libreappscreenshot.png)
 
