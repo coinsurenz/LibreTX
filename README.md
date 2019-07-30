@@ -46,7 +46,7 @@ git clone the repository as above or download the zip
 
 enter the LibreTx directory, and then the executables directory
 
-double click on LibreTX.exe
+double click on libre_tx.exe
 
 ## Usage
 
