@@ -79,7 +79,7 @@ double click on libre_tx.exe
 
 ![](.gitbook/assets/wt4.png)
 
-* Enter the nSequence bytes.  The user may enter what ever values they like in this field but they must be hex values  to be accepted and 4 bytes/8 charachters \(eg- feffffff\) for the transaction to be valid.
+* Enter the nSequence bytes.  The user may enter what ever values they like in this field but they must be hex values  to be accepted and 4 bytes/8 characters \(eg- feffffff\) for the transaction to be valid.
 
 ![](.gitbook/assets/wt5.png)
 
@@ -91,7 +91,7 @@ double click on libre_tx.exe
 
 ![](.gitbook/assets/wt7.png)
 
-* Enter the output script pubkeys \(AKA the address to send to\). These can either be in regular address format eg _**'17SkEw2md5avVNyYgj6RiXuQKNwkXaxFyQ'**_  or in the scriptpubkey format they will appear as in the transaction eg _**'1976a914fd2346fefc4f96fea5acc63dabfd17bdb9bb32a688ac'**_.  The format of your chosen output format needs to be selected in the **Output Address Format** box in the top righthand corner.  My [BIP39 Key Tool app](https://github.com/coinsurenz/btc-key-gui) can also help generating the relevant information here.  
+* Enter the output script pubkeys \(AKA the address to send to\). These can either be in regular address format eg _**'17SkEw2md5avVNyYgj6RiXuQKNwkXaxFyQ'**_  or in the scriptpubkey format they will appear as in the transaction eg _**'1976a914fd2346fefc4f96fea5acc63dabfd17bdb9bb32a688ac'**_.  The format of your chosen output format needs to be selected in the **Output Address Format** box in the top righthand corner.  My [BIP39 Key GUI app](https://github.com/coinsurenz/btc-key-gui) can also help generating the relevant information here.  
 
 ![](.gitbook/assets/wt8%20%281%29.png)
 
