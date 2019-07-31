@@ -14,7 +14,7 @@ This allows a User to not only manage their UTXO set and create a transaction co
 
 With the exception of the ECDSA and address decoding functions this was coded from scratch as both a way for me to learn all the subtilties of creating and signing the various varieties of Bitcoin transactions, and also to make life a little easier for those who want to learn more about transaction creation or even manually manage their UTXO set at a granular level. 
 
-# -- This is entended as an educational tool and should not be treated as a secure tool to use for mainnet transactions--
+### -- This is entended as an educational tool and should not be treated as a secure tool to use for mainnet transactions--
 
 ## Installation
 
