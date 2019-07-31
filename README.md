@@ -67,7 +67,7 @@ double click on libre_tx.exe
 
 ![](.gitbook/assets/wt2a.png)
 
-* Enter the index of the input transaction.  All 8 digits are required in hex format- \(index0 would be 00000000, index1 01000000, index 11- 0b000000 etc.\)
+* Enter the index of the input transaction, also known as the 'Output Index' 'Prevout Index' or 'VOUT'.  All 8 digits are required in hex format- \(index0 would be 00000000, index1 01000000, index 11- 0b000000 etc.\)
 
 ![](.gitbook/assets/wt2.png)
 
