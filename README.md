@@ -44,11 +44,7 @@ python libre_tx.py
 
 ### Windows Users
 
-git clone the repository as above or download the zip
-
-enter the LibreTx directory, and then the executables directory
-
-double click on libre_tx.exe
+Windows .exe executeable is available in the releases section.  At this stage the included splash image and icon need to be located in the same directory as the exe file when run
 
 ## Usage
 
