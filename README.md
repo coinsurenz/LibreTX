@@ -44,7 +44,7 @@ python libre_tx.py
 
 ### Windows Users
 
-Windows .exe executeable is available in the releases section.  At this stage the included splash image and icon need to be located in the same directory as the exe file when run
+A Windows .EXE executable is available in the releases section.  At this stage the included splash image and icon need to be located in the same directory as the exe file when it is run
 
 ## Usage
 
