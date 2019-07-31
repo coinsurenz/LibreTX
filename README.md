@@ -10,7 +10,7 @@
 
 LibreTX is a program that allows you to create Bitcoin transactions with input data that you manually provide.  Users can select a transaction type and enter their data for version, input index, transaction ID, the scriptpubkey to be signed, sequence, output amount and scriptpubkey addresses, private keys, hashtype and locktime.
 
-This allows a user to not only manage their UTXO set and create a transaction comprising of various inputs and outputs that may be difficult with other Bitcoin software, but also allows the user to easily compare different transaction formats and better understand how the inputs translate to the final transaction.  
+This allows a User to not only manage their UTXO set and create a transaction comprising of various inputs and outputs that may be difficult with other Bitcoin software, but also allows the User to easily compare different transaction formats and better understand how the inputs translate to the final transaction.  
 
 With the exception of the ECDSA and address decoding functions this was coded from scratch as both a way for me to learn all the subtilties of creating and signing the various varieties of Bitcoin transactions, and also to make life a little easier for those who want to learn more about transaction creation or even manually manage their UTXO set at a granular level. 
 
@@ -71,7 +71,7 @@ double click on libre_tx.exe
 
 ![](.gitbook/assets/wt2.png)
 
-* Enter the txid of the transaction being spent.  This is in the big endian byte order that you will be provided in a bitcoin wallet or use in a bitcoin explorer \(eg the [coinbase transaction](https://blockstream.info/tx/4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b) from the genesis block is _**'4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b'**_ not '_**3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a**_' etc.  LibreTX will automatically convert this to the little endian format used in the final transaction.
+* Enter the txid of the transaction being spent.  This is in the big endian byte order that you will be provided in a bitcoin wallet or used in a bitcoin explorer \(eg the [coinbase transaction](https://blockstream.info/tx/4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b) from the genesis block is _**'4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b'**_ not '_**3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a**_' etc.  LibreTX will automatically convert this to the little endian format used in the final transaction.
 
 ![](.gitbook/assets/wt3.png)
 
@@ -79,15 +79,15 @@ double click on libre_tx.exe
 
 ![](.gitbook/assets/wt4.png)
 
-* Enter the nSequence bytes.  The user may enter what ever values they like in this field but they must be hex values  to be accepted and 4 bytes/8 characters \(eg- feffffff\) for the transaction to be valid.
+* Enter the nSequence bytes.  The User may enter what ever values they like in this field but they must be hex values  to be accepted and 4 bytes/8 characters \(eg- feffffff\) for the transaction to be valid.
 
 ![](.gitbook/assets/wt5.png)
 
-* The number of inputs and outputs.  The output selection box will unlock the relevant number of input fields for output information.  The input box is only used for the appropriate value when creating the transaction.  
+* The number of inputs and outputs.  The output selection box will unlock the relevant number of input fields for output information.  The input box is only used for the appropriate value when creating the transaction. Input fields are unlocked by selecting the approriate transaction type.  
 
 ![](.gitbook/assets/wt6.png)
 
-* Enter the output amount\(s\).  The amount to pay to each output address.  This is in the same format as the _**Txin Amounts**_ above. As LibreTX has no connection to the blockchain it is the users responsibility to ensure these are below the total input amount for the transaction to be valid.  As with any Bitcoin transaction the fee paid is implied by the difference between the total inputs and the total outputs.  The final transaction printout will display the transaction size, so if you wish to calculate a satoshi per byte fee you can enter a dummy amount here, calculate the size of the final transaction, ensure that the total outputs are exactly this amount less than the inputs then re-generate the transaction with the correct output amounts.
+* Enter the output amount\(s\).   input the amount you wish to pay each output scriptpubkey (more commonly known as a Bitcoin address).  This is in the same format as the **Txin Amounts** above. As LibreTX has no connection to the blockchain it is the User's responsibility to ensure these are below the total input amount for the transaction to be valid.  As with any Bitcoin transaction the fee paid is implied by the difference between the total inputs and the total outputs.  The final transaction printout will display the transaction size, so if you wish to calculate a satoshi per byte fee you can enter a dummy amount here, calculate the size of the final transaction, ensure that the total outputs are exactly this amount less than the inputs then re-generate the transaction with the correct output amounts.
 
 ![](.gitbook/assets/wt7.png)
 
@@ -97,7 +97,7 @@ double click on libre_tx.exe
 
 ![](.gitbook/assets/wt9.png)
 
-* Enter the private key\(s\).  The private key to sign the input goes here.  if the transaction is a multisig then the keys should be placed in the correct sequence \(matching the order of the public keys in the redeemscript\) and separated by commas, eg _**'cQCrEkWgrw7rXH72NQCXJkWtkoLbhNBPRmgV5uiN4oQxANAVi6MJ, cQTPWQNW82RmevvQqChTGE9p3n973pp96hPEKevb8pWoDnwbViiN, cSJf2jqqMRLpib82bTfdrCSujJdKJ6jf9fwzdK9zYeD9Mfwzu42j'**_ These keys can either be in WIF \(eg _**cQCrEkWgrw7rXH72NQCXJkWtkoLbhNBPRmgV5uiN4oQxANAVi6MJ\),**_  hexidecimal _**\(**_eg _**4e454f3db020632007d213a02f94a113b14d85e5660c45c9258bfaea7050a779**_\)  or scalar integer \( eg _**35402861538030916620638799369775481619777895860773336054543324930272908060537**_\) format.  The user should select the matching format in the _****_**Priv key format** _****_box.  This format needs to be the same for all privkeys.  
+* Enter the private key\(s\).  The private key to sign the input goes here.  if the transaction is a multisig then the keys should be placed in the correct sequence \(matching the order of the public keys in the redeemscript\) and separated by commas, eg _**'cQCrEkWgrw7rXH72NQCXJkWtkoLbhNBPRmgV5uiN4oQxANAVi6MJ, cQTPWQNW82RmevvQqChTGE9p3n973pp96hPEKevb8pWoDnwbViiN, cSJf2jqqMRLpib82bTfdrCSujJdKJ6jf9fwzdK9zYeD9Mfwzu42j'**_ These keys can either be in WIF \(eg _**cQCrEkWgrw7rXH72NQCXJkWtkoLbhNBPRmgV5uiN4oQxANAVi6MJ\),**_  hexidecimal **\(**eg _**4e454f3db020632007d213a02f94a113b14d85e5660c45c9258bfaea7050a779**\)  or scalar integer \( eg _**35402861538030916620638799369775481619777895860773336054543324930272908060537**_\) format.  The User should select the matching format in the ****Priv key format**** box.  This format needs to be the same for all privkeys.  
 
 ![](.gitbook/assets/wt10.png)
 
@@ -111,7 +111,7 @@ double click on libre_tx.exe
 
 ![](.gitbook/assets/wt17a.jpg)
 
-* Enter the Hashtype.  ****This value is 4 bytes/8 characters and will be used as entered when the transaction is being signed.  For example SIGHASH\_ALL would be '_**01000000**_' , SIGHASH\_SINGLE \| SIGHASH\_ANYONECANPAY would be _**'83000000'**_
+* Enter the Hashtype.  This value is 4 bytes/8 characters and will be used as entered when the transaction is being signed.  For example SIGHASH\_ALL would be '_**01000000**_' , SIGHASH\_SINGLE \| SIGHASH\_ANYONECANPAY would be _**'83000000'**_
 
 ![](.gitbook/assets/wt14.png)
 
