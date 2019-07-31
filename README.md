@@ -10,7 +10,7 @@
 
 LibreTX is a program that allows you to create Bitcoin transactions with input data that you manually provide.  Users can select a transaction type and enter their data for version, input index, transaction ID, the scriptpubkey to be signed, sequence, output amount and scriptpubkey addresses, private keys, hashtype and locktime.
 
-This allows a user to not only manage their UTXO set and create transaction comprising of various inputs and outputs that may be difficult with other Bitcoin software, but also allows the user to easily compare different transaction formats and better understand how the inputs translate to the final transaction.  
+This allows a user to not only manage their UTXO set and create a transaction comprising of various inputs and outputs that may be difficult with other Bitcoin software, but also allows the user to easily compare different transaction formats and better understand how the inputs translate to the final transaction.  
 
 With the exception of the ECDSA and address decoding functions this was coded from scratch as both a way for me to learn all the subtilties of creating and signing the various varieties of Bitcoin transactions, and also to make life a little easier for those who want to learn more about transaction creation or even manually manage their UTXO set at a granular level. 
 
