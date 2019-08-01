@@ -67,7 +67,7 @@ A Windows .EXE executable is available in the releases section.  At this stage t
 
 ![](.gitbook/assets/wt2a.png)
 
-* Enter the index of the input transaction that is being spent, also known as the 'Output Index' 'Prevout Index' or 'VOUT'.  All 8 digits are required in hex format- \(index0 would be 00000000, index1 01000000, index 11- 0b000000 etc.\)
+* Enter the index of the input transaction that is being spent, also known as the 'Output Index' 'Prevout Index' or 'VOUT'.  At present if you are running the windows.exe all 8 digits are required in hex format- \(index0 would be 00000000, index1 01000000, index 11- 0b000000 etc.\), if you are running from source you can simply enter the number \(index 0 would be 0, index 1 would be 1, index 11 would be 11 etc).  This will be implimented in the windows version in the next release.
 
 ![](.gitbook/assets/wt2.png)
 
