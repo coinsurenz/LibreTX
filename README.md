@@ -30,6 +30,8 @@ enter the LibreTX directory
 
 Dependencies:
 
+requires python3
+
 install the following dependecies with pip:
 
 ```text
