@@ -13,6 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 from PyQt5.QtGui import QPixmap
 import libre_tx_rc
 import time
+import struct
 
 
 class Ui_Libre_Tx(object):
@@ -722,12 +723,12 @@ def tx_data():
     tx_selection_types=[ui.txtype_combobox_1.currentText(), ui.txtype_combobox_2.currentText(), ui.txtype_combobox_3.currentText(), ui.txtype_combobox_4.currentText(), ui.txtype_combobox_5.currentText(), ui.txtype_combobox_6.currentText()]
     segwitprefix=[ui.version_box.text(),segwit_flag,ui.numins_combo.currentText()]
     legacy_prefix=[ui.version_box.text(),ui.numins_combo.currentText()]
-    tx_inputs=[[txid_endian(ui.txin1_box.text()), ui.inputindex1_box.text(),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), ui.inputindex2_box.text(),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), ui.inputindex3_box.text(),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), ui.inputindex4_box.text(),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), ui.inputindex5_box.text(),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), ui.inputindex6_box.text(),ui.sequence6_box.text()]]
+    tx_inputs=[[txid_endian(ui.txin1_box.text()), format_input_index(ui.inputindex1_box.text()),ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text()), format_input_index(ui.inputindex2_box.text()),ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text()), format_input_index(ui.inputindex3_box.text()),ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text()), format_input_index(ui.inputindex4_box.text()),ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text()), format_input_index(ui.inputindex5_box.text()),ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text()), format_input_index(ui.inputindex6_box.text()),ui.sequence6_box.text()]]
     input_secrets=[ui.privkey1_box.text(),ui.privkey2_box.text(),ui.privkey3_box.text(),ui.privkey4_box.text(),ui.privkey5_box.text(),ui.privkey6_box.text()]
     script_pubs=[ui.scriptpub1_box.text(), ui.scriptpub2_box.text(), ui.scriptpub3_box.text(), ui.scriptpub4_box.text(),ui.scriptpub5_box.text(), ui.scriptpub6_box.text()]
-    segwit_input_infos=[[txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+ui.scriptpub1_box.text()+amount_to_txhex(ui.txinamount_box1.text())+ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+ui.scriptpub2_box.text()+amount_to_txhex(ui.txinamount_box2.text())+ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+ui.scriptpub3_box.text()+amount_to_txhex(ui.txinamount_box3.text())+ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+ui.scriptpub4_box.text()+amount_to_txhex(ui.txinamount_box4.text())+ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+ui.scriptpub5_box.text()+amount_to_txhex(ui.txinamount_box5.text())+ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()+ui.scriptpub6_box.text()+amount_to_txhex(ui.txinamount_box6.text())+ui.sequence6_box.text()]]
+    segwit_input_infos=[[txid_endian(ui.txin1_box.text())+format_input_index(ui.inputindex1_box.text())+ui.scriptpub1_box.text()+amount_to_txhex(ui.txinamount_box1.text())+ui.sequence1_box.text()],[txid_endian(ui.txin2_box.text())+format_input_index(ui.inputindex2_box.text())+ui.scriptpub2_box.text()+amount_to_txhex(ui.txinamount_box2.text())+ui.sequence2_box.text()],[txid_endian(ui.txin3_box.text())+format_input_index(ui.inputindex3_box.text())+ui.scriptpub3_box.text()+amount_to_txhex(ui.txinamount_box3.text())+ui.sequence3_box.text()],[txid_endian(ui.txin4_box.text())+format_input_index(ui.inputindex4_box.text())+ui.scriptpub4_box.text()+amount_to_txhex(ui.txinamount_box4.text())+ui.sequence4_box.text()],[txid_endian(ui.txin5_box.text())+format_input_index(ui.inputindex5_box.text())+ui.scriptpub5_box.text()+amount_to_txhex(ui.txinamount_box5.text())+ui.sequence5_box.text()],[txid_endian(ui.txin6_box.text())+format_input_index(ui.inputindex6_box.text())+ui.scriptpub6_box.text()+amount_to_txhex(ui.txinamount_box6.text())+ui.sequence6_box.text()]]
     select_inputs=[ui.txtype_combobox_1,ui.txtype_combobox_2,ui.txtype_combobox_3,ui.txtype_combobox_4,ui.txtype_combobox_5,ui.txtype_combobox_6]
-    num_ins_by_index=[ui.inputindex1_box.text(),ui.inputindex2_box.text(),ui.inputindex3_box.text(),ui.inputindex4_box.text(),ui.inputindex5_box.text(),ui.inputindex6_box.text()]
+    num_ins_by_index=[format_input_index(ui.inputindex1_box.text()),format_input_index(ui.inputindex2_box.text()),format_input_index(ui.inputindex3_box.text()),format_input_index(ui.inputindex4_box.text()),format_input_index(ui.inputindex5_box.text()),format_input_index(ui.inputindex6_box.text())]
     return tx_data_obj(outs, tx_selection_types, segwitprefix, legacy_prefix, tx_inputs, input_secrets, script_pubs, segwit_input_infos, select_inputs, num_ins_by_index)
 
 
@@ -884,6 +885,7 @@ def join_info(s_value, index):
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
     input_list=[(item) for item in input_info if item is not ""]
+    print('input list', input_list)
     rawtx="".join(input_list)
     if s_value=='none':
         dersig=sign_tx(rawtx, index, s_value)
@@ -909,7 +911,7 @@ def join_segwit(s_value, index):
     try:
         hash_outs=hash256(bytes.fromhex(amount_to_txhex(ui.amount1_box.text())+outs[0]+amount_to_txhex(ui.amount2_box.text())+outs[1]+amount_to_txhex(ui.amount3_box.text())+outs[2]+amount_to_txhex(ui.amount4_box.text())+outs[3]+amount_to_txhex(ui.amount5_box.text())+outs[4]+amount_to_txhex(ui.amount6_box.text())+outs[5]))
         
-        hash_ins=hash256(bytes.fromhex(txid_endian(ui.txin1_box.text())+ui.inputindex1_box.text()+txid_endian(ui.txin2_box.text())+ui.inputindex2_box.text()+txid_endian(ui.txin3_box.text())+ui.inputindex3_box.text()+txid_endian(ui.txin4_box.text())+ui.inputindex4_box.text()+txid_endian(ui.txin5_box.text())+ui.inputindex5_box.text()+txid_endian(ui.txin6_box.text())+ui.inputindex6_box.text()))
+        hash_ins=hash256(bytes.fromhex(txid_endian(ui.txin1_box.text())+format_input_index(ui.inputindex1_box.text())+txid_endian(ui.txin2_box.text())+format_input_index(ui.inputindex2_box.text())+txid_endian(ui.txin3_box.text())+format_input_index(ui.inputindex3_box.text())+txid_endian(ui.txin4_box.text())+format_input_index(ui.inputindex4_box.text())+txid_endian(ui.txin5_box.text())+format_input_index(ui.inputindex5_box.text())+txid_endian(ui.txin6_box.text())+format_input_index(ui.inputindex6_box.text())))
     
         hash_sequence=hash256(bytes.fromhex(ui.sequence1_box.text())+bytes.fromhex(ui.sequence2_box.text())+bytes.fromhex(ui.sequence3_box.text())+bytes.fromhex(ui.sequence4_box.text())+bytes.fromhex(ui.sequence5_box.text())+bytes.fromhex(ui.sequence6_box.text()))
     except ValueError:
@@ -961,7 +963,8 @@ def sign_tx(rawtx, index, s_value='public_point'):
             signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
             
             ##
-            signature_bytes=signature.der() + bytes([int(ui.hashtype_box.text()[:2])])
+            # signature_bytes=signature.der() + bytes([int(ui.hashtype_box.text()[:2])])
+            signature_bytes=signature.der() + bytes.fromhex(ui.hashtype_box.text()[:2])
             signature_bytes_and_length=bytes([len(signature_bytes)])+signature_bytes
             signature_list.append(signature_bytes_and_length.hex())
         signature_joined="".join(signature_list)
@@ -977,7 +980,9 @@ def sign_tx(rawtx, index, s_value='public_point'):
         private_key = PrivateKey(input_secret)
         public_key_bytes = private_key.point.sec(compressed=True)
         signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
-        der_sig=signature.der() + bytes([int(ui.hashtype_box.text()[:2])])
+        # der_sig=signature.der() + bytes([int(ui.hashtype_box.text()[:2])])
+        der_sig=signature.der() + bytes.fromhex(ui.hashtype_box.text()[:2])
+        print('dersig', der_sig.hex())
         signature_bytes=bytes([len(der_sig)])+der_sig
     if s_value=='none':
         dersig_full = signature_bytes
@@ -1131,6 +1136,12 @@ def len_in_hex(item):
         return b'\xFD'+(length).to_bytes(2, byteorder='little')
     else:
         return length.to_bytes(1, byteorder='little')
+
+def format_input_index(input_idx):
+    if input_idx == "":
+        return input_idx
+    else:
+        return struct.pack("<l", int(input_idx)).hex()
 
 
 def tx_select_func(index):
