@@ -842,7 +842,7 @@ def ok_button(rawtx=False):
         ui.output_box.setText('Invalid Input- Please check your input data and try again4')
         print('ERROR ~ LINE 842')
         return
-    if len(witness_program) != 0:
+    if witness_program:
         prefix=gui_data.segwitprefix
         sz4_outs="".join([ui.numouts_combo.currentText(), amount_to_txhex(ui.amount1_box.text()),outs[0], amount_to_txhex(ui.amount2_box.text()),outs[1], amount_to_txhex(ui.amount3_box.text()),outs[2], amount_to_txhex(ui.amount4_box.text()),outs[3], amount_to_txhex(ui.amount5_box.text()),outs[4], amount_to_txhex(ui.amount6_box.text()),outs[5],ui.nlocktime_box.text()])
     else:     
@@ -850,20 +850,20 @@ def ok_button(rawtx=False):
     combined_inputs=[y for x in all_inputs for y in x]
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
-    signed_items=[(item) for item in input_info if item is not ""]
+    signed_items=[(item) for item in input_info if item != ""]
     try:
         signed_tx="".join(signed_items)
     except TypeError:
         ui.output_box.setText('Invalid Input- Please check your input data and try again')
         print('ERROR ~ LINE 857')
         return
-    if len(witness_program) != 0:
+    if witness_program:
         sz4_items=[gui_data.segwitprefix[0]+ gui_data.segwitprefix[2]+"".join(combined_inputs)+sz4_outs]
         sz1_items=gui_data.segwitprefix[1]+"".join(witness_program)
         sz4_values="".join(sz4_items)
         sz1_values="".join(sz1_items)
         format_output('segwit',prefix, all_inputs, outputs,sz4_values, sz1_values, witness_program)
-    elif len(witness_program) == 0:
+    elif not witness_program:
         format_output('legacy',prefix, all_inputs, outputs)
     return signed_tx
 
@@ -884,7 +884,7 @@ def join_info(s_value, index):
     combined_inputs=[y for x in inputs for y in x]
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
-    input_list=[(item) for item in input_info if item is not ""]
+    input_list=[(item) for item in input_info if item != ""]
     print('input list', input_list)
     rawtx="".join(input_list)
     if s_value=='none':
@@ -919,7 +919,7 @@ def join_segwit(s_value, index):
         print('ERROR ~ LINE 917')
         return
     input_info=[ui.version_box.text(), hash_ins.hex(),hash_sequence.hex(),this_tx_input_infos, hash_outs.hex(),ui.nlocktime_box.text(), ui.hashtype_box.text()]
-    input_list=[(item) for item in input_info if item is not ""]
+    input_list=[(item) for item in input_info if item != ""]
     rawtx="".join(input_list)
     if s_value =='redeemscript':
         dersig=sign_tx(rawtx, index, s_value)
@@ -961,9 +961,6 @@ def sign_tx(rawtx, index, s_value='public_point'):
             private_key = PrivateKey(input_secret)
             public_key_bytes = private_key.point.sec(compressed=True)
             signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
-            
-            ##
-            # signature_bytes=signature.der() + bytes([int(ui.hashtype_box.text()[:2])])
             signature_bytes=signature.der() + bytes.fromhex(ui.hashtype_box.text()[:2])
             signature_bytes_and_length=bytes([len(signature_bytes)])+signature_bytes
             signature_list.append(signature_bytes_and_length.hex())
@@ -980,9 +977,7 @@ def sign_tx(rawtx, index, s_value='public_point'):
         private_key = PrivateKey(input_secret)
         public_key_bytes = private_key.point.sec(compressed=True)
         signature = private_key.sign(int.from_bytes(unsigned_tx_hash, byteorder='big'))
-        # der_sig=signature.der() + bytes([int(ui.hashtype_box.text()[:2])])
         der_sig=signature.der() + bytes.fromhex(ui.hashtype_box.text()[:2])
-        print('dersig', der_sig.hex())
         signature_bytes=bytes([len(der_sig)])+der_sig
     if s_value=='none':
         dersig_full = signature_bytes
@@ -1215,11 +1210,11 @@ def colourize(text, colour):
 
 
 def format_output(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_values=None, witness_program=None):
-    outputs=[(item) for item in outputs2 if item is not ""]
-    combined_inputs=[y for x in tx_inputs for y in x if x is not ""]
+    outputs=[(item) for item in outputs2 if item != ""]
+    combined_inputs=[y for x in tx_inputs for y in x if x != ""]
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
-    signed_items=[(item) for item in input_info if item is not ""]
+    signed_items=[(item) for item in input_info if item != ""]
     tx_data=''.join(signed_items)
     tx_size=len(bytes.fromhex(tx_data))
     edu_mode_output=[colourize('VERSION', 'brown'),  '-', colourize('SEGWIT FLAG', 'black'),'-', colourize('NUM INS', 'red'), '-', colourize('TXID', 'blue'), '-', colourize('PREV INDEX', 'pink'), '-', colourize('SCRIPT SIG', 'yellow'), '-', colourize('SEQUENCE', 'aqua'), '-', colourize('NUM OUTS', 'red'), '-', colourize('AMOUNT', 'green'), '-', colourize('SCRIPT PUBKEY', 'orange') , '-', colourize('WITNESS ITEMS', 'purple'), '-', colourize('WITNESS PROG', 'drkbrown'), '-', colourize('LOCKTIME', 'black'), '<br>', '<br>']    
@@ -1228,7 +1223,7 @@ def format_output(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_val
         tx_id_output=colourize(('TX ID='+str(tx_id)+'<br>'), 'black')
         edu_mode_output.append(tx_id_output)
         size_data=colourize(('TX SIZE='+str(len(bytes.fromhex(sz4_values)))+' BYTES'+ '<br>'), 'black')
-        print('segwit core size check', tx_size)
+
 
         edu_mode_output.append(size_data)
         tx_weight=(len(bytes.fromhex(sz4_values))*4)+len(bytes.fromhex(sz1_values))
@@ -1259,7 +1254,7 @@ def format_output(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_val
             item[2]=colourize(item[2], 'yellow')
         except IndexError:
             pass
-    combined_inputs=[y for x in tx_inputs for y in x if x is not ""]
+    combined_inputs=[y for x in tx_inputs for y in x if x != ""]
     outputs[0]=colourize(outputs[0], 'red')
     outputs[-1]=colourize(outputs[-1], 'black')
     if tx_type=='segwit':
@@ -1299,7 +1294,7 @@ def format_output(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_val
             counter+=1
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
-    signed_items=[(item) for item in input_info if item is not ""]
+    signed_items=[(item) for item in input_info if item != ""]
     for item in signed_items:
         try:
             edu_mode_output.append(item)
@@ -1334,5 +1329,3 @@ if __name__ == "__main__":
     Libre_Tx.show()
     splash.finish(Libre_Tx)
     sys.exit(app.exec_())
-
-
