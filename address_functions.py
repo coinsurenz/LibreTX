@@ -47,7 +47,7 @@ class Keylevel:
 		self.testnet=testnet
 
 	def CKDpriv(self):
-		if self.hardened == True:
+		if self.hardened:
 			i= 2147483648+self.index 
 			i_str=struct.pack('>L',i)
 			child_L_MPK=b'\x00'+self.priv_key+i_str
@@ -64,7 +64,7 @@ class Keylevel:
 		return (b'\x00'*32 + int_to_string(presecret% CURVE_ORDER))[-32:]
 
 	def CKCpriv(self):
-		if self.hardened == True:
+		if self.hardened : 
 			i= 2147483648+self.index 
 			i_str=struct.pack('>L',i)
 			child_L_MPK=b'\x00'+self.priv_key+i_str
@@ -86,7 +86,7 @@ class Keylevel:
 		return bytes(identifier)
 
 	def xpriv(self):
-		if self.testnet==True:
+		if self.testnet:
 			prefix=b'\x04\x35\x83\x94'
 		else:
 			prefix=b'\x04\x88\xAD\xE4'
@@ -96,7 +96,7 @@ class Keylevel:
 		return encode_base58(xprivfull)
 
 	def xpub(self):
-		if self.testnet==True:
+		if self.testnet:
 			prefix=b'\x04\x35\x87\xCF'
 		else:
 			prefix=b'\x04\x88\xB2\x1E'
@@ -155,7 +155,7 @@ def path_gen_keylist(master_cc, master_pk,master_pubkey, index_list, hardened_li
 	return key_result
 
 def indv_priv_key(secret, testnet=True):
-	if testnet==True:
+	if testnet:
 		raw=b"\xEF"+secret+ b'\x01'
 	else:
 		raw=b"\x80"+secret+ b'\x01'
@@ -165,7 +165,7 @@ def indv_priv_key(secret, testnet=True):
 
 def indv_P2PKH_pub_key(pubkey,testnet=True):
 	h160=hash160(pubkey)
-	if testnet==True:
+	if testnet:
 		raw = b'\x6F' + h160
 	else:
 		raw = b"\x00" + h160 
@@ -176,7 +176,7 @@ def indv_P2PKH_pub_key(pubkey,testnet=True):
 def indv_P2SH_pub_key(pubkey,testnet=True):
 	h160 = hash160(pubkey)
 	redeemscript=hash160(b"\x00\x14" +h160)
-	if testnet==True:
+	if testnet:
 		raw = b'\xC4' + redeemscript
 	else:
 		raw = b'\x05'+redeemscript
@@ -186,7 +186,7 @@ def indv_P2SH_pub_key(pubkey,testnet=True):
 
 def indv_P2WPKH_pub_key(pubkey,testnet=True):
 	h160 = hash160(pubkey)
-	if testnet==True:
+	if testnet:
 		addr=encode_bech32('tb', 0, h160)
 	else:
 		addr=encode_bech32('bc', 0, h160)
@@ -196,7 +196,7 @@ def indv_P2WSH_pub_key(pubkey, testnet=True):
 	OP_CHECKSIG = b'\xac'
 	witnessscript=bytes([len(pubkey)])+pubkey+OP_CHECKSIG
 	witnessprog=hashlib.sha256(witnessscript).digest()
-	if testnet==True:
+	if testnet:
 		addr=encode_bech32('tb', 0, witnessprog)
 	else:
 		addr=encode_bech32('bc', 0, witnessprog)
@@ -316,7 +316,6 @@ def p2wsh_script(address):
 	script_pub_full=bytes([len(script_pub)])+script_pub
 	return script_pub_full.hex()
 
-#### NEW FUNCTIONS #####
 def bech32_verify_checksum(hrp, data):
 	"""Verify a checksum given HRP and converted data characters."""
 	return bech32_polymod(bech32_hrp_expand(hrp) + data) == 1
@@ -348,26 +347,19 @@ def convertbits(data, frombits, tobits, pad=True):
 	max_acc = (1 << (frombits + tobits - 1)) - 1
 	for value in data:
 		if value < 0 or (value >> frombits):
-
 			return None
-		# if value==0:
-		#     ret.append(0)
 		acc = ((acc << frombits) | value) & max_acc
-		# print('ACC',acc)
 		bits += frombits
-		# print('A NONE', acc)
 		while bits >= tobits:
 
 			bits -= tobits
 			ret.append((acc >> bits) & maxv)
-			# print('RET', ret)
 	if pad:
 		if bits:
 			ret.append((acc << (tobits - bits)) & maxv)
 	elif bits >= frombits or ((acc << (tobits - bits)) & maxv):
 		print('AA')
 		return None
-	# print('RET',ret)
 	return ret
 
 
@@ -401,10 +393,10 @@ def decode_base58(s):
 		num *= 58
 		# try:
 		num += BASE58_ALPHABET.index(c)
-		# except ValueError:
-			# ui.output_box.setText('Invalid Input- Please check your input data and try again')
-			# return
-		# num += BASE58.index(c)
+		except ValueError:
+			ui.output_box.setText('Invalid Input- Please check your input data and try again')
+			return
+		num += BASE58.index(c)
 	combined = num.to_bytes(25, byteorder='big')
 	checksum = combined[-4:]
 	if hash256(combined[:-4])[:4] != checksum:

@@ -1135,8 +1135,7 @@ def len_in_hex(item):
 def format_input_index(input_idx):
     if input_idx == "":
         return input_idx
-    else:
-        return struct.pack("<l", int(input_idx)).hex()
+    return struct.pack("<l", int(input_idx)).hex()
 
 
 def tx_select_func(index):
@@ -1329,3 +1328,4 @@ if __name__ == "__main__":
     Libre_Tx.show()
     splash.finish(Libre_Tx)
     sys.exit(app.exec_())
+    
