@@ -1,9 +1,10 @@
 
-[![CodeFactor](https://www.codefactor.io/repository/github/coinsurenz/libretx/badge/master)](https://www.codefactor.io/repository/github/coinsurenz/libretx/overview/master)
-
 # LibreTX
 
   #### Create Bitcoin transactions without restrictions and better understand their contents
+  
+[![CodeFactor](https://www.codefactor.io/repository/github/coinsurenz/libretx/badge/master)](https://www.codefactor.io/repository/github/coinsurenz/libretx/overview/master)
+
 
 
 ![](.gitbook/assets/test_splash2.png)
