@@ -18,7 +18,6 @@ class FieldElement:
 		return self.num == other.num and self.prime == other.prime
 
 	def __ne__(self, other):
-		# this should be the inverse of the == operator
 		return not (self == other)
 
 	def __repr__(self):
@@ -182,14 +181,11 @@ class Signature:
 		return 'Signature({:x},{:x})'.format(self.r, self.s)
 
 	def der(self):
-		# convert the r part to bytes
 		rbin = self.r.to_bytes(32, byteorder='big')
-		# if rbin has a high bit, add a 00
 		if rbin[0] >= 128:
 			rbin = b'\x00' + rbin
 		result = bytes([2, len(rbin)]) + rbin
 		sbin = self.s.to_bytes(32, byteorder='big')
-		# if sbin has a high bit, add a 00
 		if sbin[0] >= 128:
 			sbin = b'\x00' + sbin
 		result += bytes([2, len(sbin)]) + sbin
@@ -228,18 +224,12 @@ class PrivateKey:
 		return '{:x}'.format(self.secret).zfill(64)
 
 	def sign(self, z):
-		# we need use deterministic k
 		k = self.deterministic_k(z)
-		# r is the x coordinate of the resulting point k*G
 		r = (k * G).x.num
-		# remember 1/k = pow(k, N-2, N)
 		k_inv = pow(k, N - 2, N)
-		# s = (z+r*secret) / k
 		s = (z + r * self.secret) * k_inv % N
 		if s > N / 2:
 			s = N - s
-		# return an instance of Signature:
-		# Signature(r, s)
 		return Signature(r, s)
 
 	def deterministic_k(self, z):
