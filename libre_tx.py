@@ -885,7 +885,6 @@ def join_info(s_value, index):
     tx_components=[prefix, combined_inputs, outputs]
     input_info=[y for x in tx_components for y in x]
     input_list=[(item) for item in input_info if item != ""]
-    print('input list', input_list)
     rawtx="".join(input_list)
     if s_value=='none':
         dersig=sign_tx(rawtx, index, s_value)

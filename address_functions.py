@@ -391,12 +391,11 @@ def decode_base58(s):
 	num = 0
 	for c in s:
 		num *= 58
-		# try:
-		num += BASE58_ALPHABET.index(c)
+		try:
+			num += BASE58_ALPHABET.index(c)
 		except ValueError:
 			ui.output_box.setText('Invalid Input- Please check your input data and try again')
 			return
-		num += BASE58.index(c)
 	combined = num.to_bytes(25, byteorder='big')
 	checksum = combined[-4:]
 	if hash256(combined[:-4])[:4] != checksum:
