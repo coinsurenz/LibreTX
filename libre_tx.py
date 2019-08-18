@@ -693,7 +693,7 @@ class Ui_Libre_Tx(object):
 
 
 segwit_flag='0001'
-
+BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 
 
 
@@ -1306,6 +1306,22 @@ def format_output(tx_type, prefix, tx_inputs, outputs2, sz4_values=None, sz1_val
 
     edu_mode_print="".join(prefix+combined_inputs+outputs)
     ui.output_box.setText(signed_tx)
+
+
+def decode_base58(s):
+    num = 0
+    for c in s:
+        num *= 58
+        try:
+            num += BASE58_ALPHABET.index(c)
+        except ValueError:
+            ui.output_box.setText('Invalid Input- Please check your input data and try again')
+            return
+    combined = num.to_bytes(25, byteorder='big')
+    checksum = combined[-4:]
+    if hash256(combined[:-4])[:4] != checksum:
+        raise RuntimeError('bad address: {} {}'.format(checksum, hash256(combined)[:4]))
+    return combined[1:-4]
 
 
 if __name__ == "__main__":
