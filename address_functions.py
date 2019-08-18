@@ -380,24 +380,3 @@ def decode(hrp, addr):
 		return (None, None)
 
 	return (data[0], decoded)
-
-
-
-
-
-# BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-
-# def decode_base58(s):
-# 	num = 0
-# 	for c in s:
-# 		num *= 58
-# 		try:
-# 			num += BASE58_ALPHABET.index(c)
-# 		except ValueError:
-# 			ui.output_box.setText('Invalid Input- Please check your input data and try again')
-# 			return
-# 	combined = num.to_bytes(25, byteorder='big')
-# 	checksum = combined[-4:]
-# 	if hash256(combined[:-4])[:4] != checksum:
-# 		raise RuntimeError('bad address: {} {}'.format(checksum, hash256(combined)[:4]))
-# 	return combined[1:-4]
