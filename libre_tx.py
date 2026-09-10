@@ -14,6 +14,8 @@ from PyQt5.QtGui import QPixmap
 import libre_tx_rc
 import time
 import struct
+import traceback
+from validation import InputFields, OutputFields, collect_errors, format_errors
 
 
 class Ui_Libre_Tx(object):
@@ -732,7 +734,71 @@ def tx_data():
     return tx_data_obj(outs, tx_selection_types, segwitprefix, legacy_prefix, tx_inputs, input_secrets, script_pubs, segwit_input_infos, select_inputs, num_ins_by_index)
 
 
+def validate_gui_inputs():
+    """Read the GUI fields and return a list of human-readable validation errors.
+
+    Only active inputs (Tx Type not "N/A") and active outputs (per Num Outs) are
+    checked. Field text is read exactly as typed so validation sees the same
+    values the builder will use.
+    """
+    txtypes = [ui.txtype_combobox_1, ui.txtype_combobox_2, ui.txtype_combobox_3,
+               ui.txtype_combobox_4, ui.txtype_combobox_5, ui.txtype_combobox_6]
+    txids = [ui.txin1_box, ui.txin2_box, ui.txin3_box, ui.txin4_box, ui.txin5_box, ui.txin6_box]
+    indexes = [ui.inputindex1_box, ui.inputindex2_box, ui.inputindex3_box,
+               ui.inputindex4_box, ui.inputindex5_box, ui.inputindex6_box]
+    scriptpubs = [ui.scriptpub1_box, ui.scriptpub2_box, ui.scriptpub3_box,
+                  ui.scriptpub4_box, ui.scriptpub5_box, ui.scriptpub6_box]
+    sequences = [ui.sequence1_box, ui.sequence2_box, ui.sequence3_box,
+                 ui.sequence4_box, ui.sequence5_box, ui.sequence6_box]
+    txinamounts = [ui.txinamount_box1, ui.txinamount_box2, ui.txinamount_box3,
+                   ui.txinamount_box4, ui.txinamount_box5, ui.txinamount_box6]
+    privkeys = [ui.privkey1_box, ui.privkey2_box, ui.privkey3_box,
+                ui.privkey4_box, ui.privkey5_box, ui.privkey6_box]
+    inputs = [InputFields(number=i + 1, tx_type=txtypes[i].currentText(),
+                          txid=txids[i].text(), index=indexes[i].text(),
+                          script_pub=scriptpubs[i].text(), sequence=sequences[i].text(),
+                          txin_amount=txinamounts[i].text(), privkey=privkeys[i].text())
+              for i in range(6)]
+
+    amounts = [ui.amount1_box, ui.amount2_box, ui.amount3_box,
+               ui.amount4_box, ui.amount5_box, ui.amount6_box]
+    targets = [ui.scriptout1_box, ui.scriptout2_box, ui.scriptout3_box,
+               ui.scriptout4_box, ui.scriptout5_box, ui.scriptout6_box]
+    try:
+        num_outs = int(ui.numouts_combo.currentText())
+    except ValueError:
+        num_outs = 6
+    outputs = [OutputFields(number=i + 1, amount=amounts[i].text(), target=targets[i].text())
+               for i in range(num_outs)]
+
+    outputs_are_addresses = ui.outputformat_combobox.currentText() == 'Address'
+    return collect_errors(inputs, outputs, outputs_are_addresses,
+                          ui.version_box.text(), ui.hashtype_box.text())
+
+
 def ok_button(rawtx=False):
+    """Validate the GUI input, then build the signed transaction.
+
+    On any validation failure (or unexpected build error) a human-readable
+    message is written to the output box, replacing whatever was shown before,
+    instead of crashing the application.
+    """
+    errors = validate_gui_inputs()
+    if errors:
+        ui.output_box.setPlainText(format_errors(errors))
+        return
+    try:
+        return _build_signed_tx(rawtx)
+    except Exception:
+        traceback.print_exc()
+        ui.output_box.setPlainText(
+            "An unexpected error occurred while building the transaction.\n"
+            "Please double-check your input values and try again.\n"
+            "(Technical details were printed to the console.)")
+        return
+
+
+def _build_signed_tx(rawtx=False):
     gui_data=tx_data()
     witness_program=[]
     all_inputs=[]
@@ -1059,6 +1125,7 @@ def scalar_from_hex(hexstring):
 def address_to_scriptpub(outs):
     scriptpub_list=[]
     for item in outs:
+        scriptpub=None
         if item[:2]=='tb':
             hex_chars=decode(item[:2], item)[1]
             hex_chars_list=[]
@@ -1104,6 +1171,8 @@ def address_to_scriptpub(outs):
                 return
         if item=='':
             scriptpub=''
+        if scriptpub is None:
+            raise ValueError('Unrecognised output address: {}'.format(item))
         scriptpub_list.append(scriptpub)
     return scriptpub_list
 
@@ -1340,7 +1409,18 @@ if __name__ == "__main__":
     ui = Ui_Libre_Tx()
     ui.setupUi(Libre_Tx)
     time.sleep(3)
-    Libre_Tx.show()
-    splash.finish(Libre_Tx)
+
+    # Present the form inside a scroll area so the window opens at the current
+    # screen size (maximised) and provides horizontal/vertical scrollbars
+    # whenever the full UI is larger than the available screen space.
+    scroll_area = QtWidgets.QScrollArea()
+    scroll_area.setWindowTitle(Libre_Tx.windowTitle())
+    scroll_area.setWidget(Libre_Tx)
+    scroll_area.setWidgetResizable(False)
+    scroll_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+    scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+    scroll_area.showMaximized()
+
+    splash.finish(scroll_area)
     sys.exit(app.exec_())
     
